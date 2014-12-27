@@ -1,0 +1,4 @@
+Priority features
+=================
+
+The human player has a simple computer opponent. The game is initialized by giving cards to both players and determining the trump suit and the player who starts attacking. 
