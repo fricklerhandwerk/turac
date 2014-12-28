@@ -9,8 +9,8 @@ Command line view
 
 SDL view
 ========
-# Table
-# Hand
+## Table
+## Hand
 
 Command line control
 ====================
@@ -23,6 +23,6 @@ Computer opponent
 
 Game loop
 =========
-# Game
-# Round
-# Move
+## Game 
+## Round
+## Move
