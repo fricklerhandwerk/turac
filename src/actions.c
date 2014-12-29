@@ -8,6 +8,13 @@ int pop() {
 
 int push();
 
+
+//shuffels the deck at the beginning of a game
+//we take a 36 card deck for granted because it's the most used verion
+//	http://en.wikipedia.org/wiki/Durak
+//The represent all cards of six and higher (includeing aces) (colors: hearts, diamonds, clubs and Spades)
+//	http://en.wikipedia.org/wiki/Suit_%28cards%29 
+
 int shuffle(){
 	int deck_order[36], counter_i = 0, random_num = 0;
 	for (int counter_i = 0; counter_i < 36; ++counter_i)
