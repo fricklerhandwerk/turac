@@ -12,6 +12,32 @@ struct cards deck[36];
 
 char trumpcolor = 'n';
 
+
+
+
+//function to draw cards in any case - it still exists in old verion at the gamestart.c
+
+int draw(struct cards *player_hand, struct cards *deck_struct, int startnumber, int amount)
+{
+	int counter;
+	for (counter = startnumber; counter < (counter + amount); ++counter)
+	{
+		if (counter < 36)
+		{
+			for (int i = 0; i < 36; ++i)
+			{
+				if (player_hand[i].value == 0)
+				{
+					player_hand[i] = deck_struct[counter];
+					break; // if card is taken do not to insert it again
+				}
+			}
+		}
+	}
+	return startnumber + amount;
+
+}
+
 int pop() {
 	return 0;
 }
@@ -110,7 +136,7 @@ int sortSuit(){
 
 
 int main (){
-	srand(time(NULL));
+	srand(time(NULL)); 
 	shuffle();
 	return 0;
 }
