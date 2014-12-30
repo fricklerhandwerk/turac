@@ -12,12 +12,13 @@ int draw(int *player_hand, int *deck_int, int startnumber, int amount){
 			{
 				if (player_hand[i] == -1)
 				{
-					player_hand[i] == deck_int[counter]
+					player_hand[i] == deck_int[counter];
 					break; // if card is taken do not to insert it again
 				}
 			}
 		}
 	}
+	return startnumber + amount;
 
 }
 
@@ -26,13 +27,16 @@ int first_draw(int *deck_int, int player_number, int *player_hand_1, int *player
 	
 	int counter_player;
 	int counter_card = 0;
+	int *player_hand[] = {player_hand_1, player_hand_2, player_hand_3, player_hand_4};
 	
+
+	//clearing hands of players
 	for (counter_card = 0; counter_card < 36; ++counter_card)
 	{
-		player_hand_1[counter_card] = -1
-		player_hand_2[counter_card] = -1
-		player_hand_3[counter_card] = -1
-		player_hand_4[counter_card] = -1
+		for (counter_player = 0; counter_player < player_number; ++counter_player)
+		{
+			player_hand[counter_player][counter_card] = -1;
+		}
 	}
 
 
@@ -48,6 +52,8 @@ int first_draw(int *deck_int, int player_number, int *player_hand_1, int *player
 			draw(player_hand_4, deck_int, 18, 6);
 
 	}
+
+
 
 	//returns currunt card number
 	return counter_player * 6;
