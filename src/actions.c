@@ -12,7 +12,17 @@ struct cards deck[36];
 
 char trumpcolor = 'n';
 
+int print_cards(struct cards *printcard) 
+{
+	int counter_i;
+	printf("\n");
 
+	for (counter_i = 0; counter_i < 36; ++counter_i)
+	{
+		printf("%d%c ", printcard[counter_i].value, printcard[counter_i].color);
+	}
+	return 0;
+}
 
 
 //function to draw cards in any case - it still exists in old verion at the gamestart.c
@@ -100,12 +110,12 @@ int shuffle(){
 		}
 	} 
 
-	printf("\n");
+/*	printf("\n");
 
 	for (counter_i = 0; counter_i < 36; ++counter_i)
 	{
 		printf("%d%c ", deck[counter_i].value, deck[counter_i].color);
-	}
+	}*/
 
 	trumpcolor = deck[35].color;
 
@@ -130,7 +140,22 @@ int sortRank(){
 	return 0;
 }
 
-int sortSuit(){
+int sortSuit(struct cards *player_hand){
+	struct cards temp;
+	int outer_counter, inner_counter;
+	for (outer_counter = 0; outer_counter < 36 - 1; ++outer_counter)
+	{
+		for (inner_counter = 0; inner_counter < 36 - 1 - outer_counter; ++inner_counter)
+		{
+			if (player_hand[inner_counter].color > player_hand[inner_counter + 1].color)
+			{
+				temp = player_hand[inner_counter];
+				player_hand[inner_counter] = player_hand[inner_counter + 1];
+				player_hand[inner_counter + 1] = temp;
+			}
+		}
+	}
+
 	return 0;
 }
 
@@ -138,5 +163,8 @@ int sortSuit(){
 int main (){
 	srand(time(NULL)); 
 	shuffle();
+	print_cards(deck);
+	sortSuit(deck);
+	print_cards(deck);
 	return 0;
 }
