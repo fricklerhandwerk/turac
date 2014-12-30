@@ -4,9 +4,11 @@
 
 struct cards
 {
-	int value;
-	char color; //hearts = h, diamonds = d, clubs = s, spades = s
+	int value;  // 0 = no card
+	char color; //hearts = h, diamonds = d, clubs = s, spades = s, n = none
 };
+
+struct cards deck[36];
 
 int pop() {
 	return 0;
@@ -42,6 +44,42 @@ int shuffle(){
 	{
 		printf("%d ", deck_order[counter_i]);
 	}
+	for (counter_i = 0; counter_i < 36; ++counter_i)
+	{
+		if (deck_order[counter_i] == -1)
+		{
+			deck[counter_i].color = 'n';
+			deck[counter_i].value = 0;
+		}else if (deck_order[counter_i] > -1 && deck_order[counter_i] < 9)
+		{
+			deck[counter_i].color = 'h';
+			deck[counter_i].value = (deck_order[counter_i] + 6);
+		}else if (deck_order[counter_i] > 8 && deck_order[counter_i] < 18)
+		{
+			deck[counter_i].color = 'd';
+			deck[counter_i].value = (deck_order[counter_i] - 3);
+		}else if (deck_order[counter_i] > 17 && deck_order[counter_i] < 27)
+		{
+			deck[counter_i].color = 'c';
+			deck[counter_i].value = (deck_order[counter_i] - 12);
+		}else if (deck_order[counter_i] > 26 && deck_order[counter_i] < 36)
+		{
+			deck[counter_i].color = 's';
+			deck[counter_i].value = (deck_order[counter_i] - 21);
+		}else
+		{
+			return -1;
+		}
+	} 
+
+	printf("\n");
+
+	for (counter_i = 0; counter_i < 36; ++counter_i)
+	{
+		printf("%d%c ", deck[counter_i].value, deck[counter_i].color);
+	}
+
+
 
 	return 0;
 
@@ -52,5 +90,11 @@ int sortRank(){
 }
 
 int sortSuit(){
+	return 0;
+}
+
+
+int main (){
+	shuffle();
 	return 0;
 }
