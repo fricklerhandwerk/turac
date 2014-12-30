@@ -10,6 +10,8 @@ struct cards
 
 struct cards deck[36];
 
+char trumpcolor = 'n';
+
 int pop() {
 	return 0;
 }
@@ -79,6 +81,19 @@ int shuffle(){
 		printf("%d%c ", deck[counter_i].value, deck[counter_i].color);
 	}
 
+	trumpcolor = deck[35].color;
+
+	if (trumpcolor == 'h')
+		printf("\nThe trumpcolor is hearts\n");
+	else if (trumpcolor == 'd')
+		printf("\nThe trumpcolor is diamonds\n");
+	else if (trumpcolor == 'c')
+		printf("\nThe trumpcolor is clubs\n");
+	else if (trumpcolor == 's')
+		printf("\nThe trumpcolor is spades\n");
+	else
+		printf("something somewhere went terribly wrong\n");
+
 
 
 	return 0;
@@ -95,6 +110,7 @@ int sortSuit(){
 
 
 int main (){
+	srand(time(NULL));
 	shuffle();
 	return 0;
 }
