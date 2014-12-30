@@ -2,6 +2,12 @@
 #include <time.h>
 #include <stdlib.h>
 
+struct cards
+{
+	int value;
+	char color; //hearts = h, diamonds = d, clubs = s, spades = s
+};
+
 int pop() {
 	return 0;
 }
