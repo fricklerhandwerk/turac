@@ -136,10 +136,42 @@ int shuffle(){
 
 }
 
-int sortRank(){
+int sortRank(struct cards *player_hand, int startnumber){
+	struct cards temp;
+	char sort_color = player_hand[startnumber].color;
+	int counter;
+	int outer_counter, inner_counter;
+	
+	if (startnumber >= 36)
+	{
+		return 0;
+	}
+
+	for (counter = startnumber; player_hand[counter].color == player_hand[counter + 1].color && counter < 36; ++counter)
+	{
+		//just count
+	}
+
+
+	for (outer_counter = startnumber; outer_counter < counter; ++outer_counter)
+	{
+		for (inner_counter = startnumber; inner_counter < counter - outer_counter; ++inner_counter)
+		{
+			if (player_hand[inner_counter].value > player_hand[inner_counter + 1].value)
+			{
+				temp = player_hand[inner_counter];
+				player_hand[inner_counter] = player_hand[inner_counter + 1];
+				player_hand[inner_counter + 1] = temp;
+			}
+		}
+	}
+
+	sortRank(player_hand, counter +1 );
+
 	return 0;
 }
 
+//simple sorting algorithm (so it should be used as outer sort)
 int sortSuit(struct cards *player_hand){
 	struct cards temp;
 	int outer_counter, inner_counter;
@@ -165,6 +197,8 @@ int main (){
 	shuffle();
 	print_cards(deck);
 	sortSuit(deck);
+	print_cards(deck);
+	sortRank(deck, 0);
 	print_cards(deck);
 	return 0;
 }
