@@ -8,8 +8,6 @@ struct cards
 	char color; //hearts = h, diamonds = d, clubs = s, spades = s, n = none
 };
 
-struct cards deck[36];
-
 char trumpcolor = 'n';
 
 int print_cards(struct cards *printcard) 
@@ -64,7 +62,7 @@ int push(){
 //	http://en.wikipedia.org/wiki/Suit_%28cards%29
 
 
-int shuffle(){
+int shuffle(struct cards * deck){
 	int deck_order[36], counter_i = 0, random_num = 0;
 	for (int counter_i = 0; counter_i < 36; ++counter_i)
 	{
@@ -153,15 +151,12 @@ int sortRank(struct cards *player_hand, int startnumber){
 	}
 
 
-	printf("\n");
-	
 	for (outer_counter = startnumber; outer_counter < color_end; ++outer_counter)
 	{
-		for (inner_counter = startnumber; inner_counter < color_end - outer_counter; ++inner_counter)
+		for (inner_counter = startnumber; inner_counter < color_end; ++inner_counter)
 		{
 			if (player_hand[inner_counter].value > player_hand[inner_counter + 1].value)
 			{
-				printf("counter:counter+1\t%d\t%d\n", inner_counter, inner_counter + 1);
 				temp = player_hand[inner_counter];
 				player_hand[inner_counter] = player_hand[inner_counter + 1];
 				player_hand[inner_counter + 1] = temp;
@@ -196,8 +191,9 @@ int sortSuit(struct cards *player_hand){
 
 
 int main (){
+	struct cards deck[36];
 	srand(time(NULL)); 
-	shuffle();
+	shuffle(deck);
 	print_cards(deck);
 	sortSuit(deck);
 	print_cards(deck);
