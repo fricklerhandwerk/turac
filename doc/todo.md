@@ -8,8 +8,8 @@
 
 ##other stuff to do!
 
-- [x] implement struct type
-- [x] implement shuffle
-- [x] implement sorting
+- [x] ~~implement struct type~~
+- [x] ~~implement shuffle~~
+- [x] ~~implement sorting~~
 - [ ] implement attack
 - [ ] implement gamestart 
