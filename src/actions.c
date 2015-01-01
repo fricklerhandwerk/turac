@@ -139,7 +139,7 @@ int shuffle(){
 int sortRank(struct cards *player_hand, int startnumber){
 	struct cards temp;
 	char sort_color = player_hand[startnumber].color;
-	int counter;
+	int color_end;
 	int outer_counter, inner_counter;
 	
 	if (startnumber >= 36)
@@ -147,18 +147,21 @@ int sortRank(struct cards *player_hand, int startnumber){
 		return 0;
 	}
 
-	for (counter = startnumber; player_hand[counter].color == player_hand[counter + 1].color && counter < 36; ++counter)
+	for (color_end = startnumber; player_hand[color_end].color == player_hand[color_end + 1].color && color_end < 36; ++color_end)
 	{
 		//just count
 	}
 
 
-	for (outer_counter = startnumber; outer_counter < counter; ++outer_counter)
+	printf("\n");
+	
+	for (outer_counter = startnumber; outer_counter < color_end; ++outer_counter)
 	{
-		for (inner_counter = startnumber; inner_counter < counter - outer_counter; ++inner_counter)
+		for (inner_counter = startnumber; inner_counter < color_end - outer_counter; ++inner_counter)
 		{
 			if (player_hand[inner_counter].value > player_hand[inner_counter + 1].value)
 			{
+				printf("counter:counter+1\t%d\t%d\n", inner_counter, inner_counter + 1);
 				temp = player_hand[inner_counter];
 				player_hand[inner_counter] = player_hand[inner_counter + 1];
 				player_hand[inner_counter + 1] = temp;
@@ -166,7 +169,7 @@ int sortRank(struct cards *player_hand, int startnumber){
 		}
 	}
 
-	sortRank(player_hand, counter +1 );
+	sortRank(player_hand, color_end +1 );
 
 	return 0;
 }
