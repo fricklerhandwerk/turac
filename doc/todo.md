@@ -1,9 +1,18 @@
 #TODO
 
-##most important
+##Week 1
+- [x] Write specification
+- [x] Define ca. 8 key features
+- [x] Define program structure
+- [ ] Define key functions and their signatures
+- [ ] Define most important data types
+- [x] Define coding conventions
+- [ ] Agree on definitions
 
-- [ ] constructiong a makefile for efficent tasksplitting
-- [ ] compelting TODOlist
+##Week 2
+- [ ] Split tasks
+- [ ] Construct makefile
+- [ ] Create test suites for modules
 
 
 ##other stuff to do!
