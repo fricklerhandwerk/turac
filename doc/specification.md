@@ -1,8 +1,9 @@
 Game content
 ============
 
-The human player has a simple computer opponent. The game is initialized by giving cards to both players and determining the trump suit and the player who starts attacking.
-Each round, the player has either to attack or to defend by dragging cards from his hand onto the table with the mouse. Only actions according to the game rules are carried out. The opponent attacks, defends or takes cards based on a set of simple decision rules. If the attacker is done, if there are six cards on the table and all of them are beaten or if the defender has taken the cards, all beaten cards are discarded and the next round starts. Then, after each round players with less than six cards on their hands are given cards from the deck until the deck is empty.
+The human player has a simple computer opponent. The game is initialized by giving cards to both players and determining the trump suit and the player who starts attacking.  
+Each round, the player has either to attack or to defend by dragging cards from his hand onto the table with the mouse. Only actions according to the game rules are carried out. The opponent attacks, defends or takes cards based on a set of simple decision rules.  
+If the attacker is done, if there are six cards on the table and all of them are beaten or if the defender has taken the cards, all beaten cards are discarded and the next round starts. Then, after each round players with less than six cards on their hands are given cards from the deck until the deck is empty.  
 The game ends when the deck is empty and one of the players has no more cards on his hands.
 
 Key features
