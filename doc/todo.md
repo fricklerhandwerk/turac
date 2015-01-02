@@ -4,8 +4,8 @@
 - [x] Write specification
 - [x] Define ca. 8 key features
 - [x] Define program structure
-- [ ] Define key functions and their signatures
-- [ ] Define most important data types
+- [x] Define key functions and their signatures
+- [x] Define most important data types
 - [x] Define coding conventions
 - [ ] Agree on definitions
 
