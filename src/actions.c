@@ -133,7 +133,7 @@ int shuffle(struct cards * deck){
 	return 0;
 
 }
-
+// ??? why not use qsort: http://www.anyexample.com/programming/c/qsort__sorting_array_of_strings__integers_and_structs.xml
 int sortRank(struct cards *player_hand, int startnumber){
 	struct cards temp;
 	char sort_color = player_hand[startnumber].color;
