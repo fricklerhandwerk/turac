@@ -16,6 +16,7 @@ const char *listSuit[] = {"H","T","C","S",NULL};
 // List of ranks used, in order of value
 const char *listRank[] = {"6","7","8","9","10","J","Q","K","A",NULL};
 
+#define HAND_SIZE 6
 
 
 /* GAME FUNCTIONS */
