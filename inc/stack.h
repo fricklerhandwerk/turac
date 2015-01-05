@@ -20,4 +20,13 @@ cardT stackPop(stackT *stackP);
 int stackEmpty(stackT *stackP);
 int stackFull(stackT *stackP);
 
+
+// Shuffle stack
+int stackShuffle(stackt *stackP);
+
+// Sort stack by suit/rank according to lists
+int stackSortSuit(stackT *stackP,char **listSuit);
+int stackSortRank(stackT *stackP,char **listRank);
+
+
 #endif // STACK_H
