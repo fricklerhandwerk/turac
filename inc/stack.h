@@ -6,20 +6,27 @@
 #ifndef STACK_H
 #define STACK_H
 
+
+typedef struct stackT
+{
+  cardT *cards;
+  int size;
+  int top;
+};
+
 // Allocate memory for an array of cards of given size
-void stackInit(stackT *stackP, int size);
+int stackInit(stackT *stackP, int size);
 // Deallocate memory, reset member variables
-void stackDestroy(stackT *stackP);
+int stackDestroy(stackT *stackP);
 
 // Push card on stack
-void stackPush(stackT *stackP, cardT card);
+int stackPush(stackT *stackP, cardT card);
 // Return card from top of stack
 cardT stackPop(stackT *stackP);
 
 // Check if stack is full/empty
 int stackEmpty(stackT *stackP);
 int stackFull(stackT *stackP);
-
 
 // Shuffle stack
 int stackShuffle(stackt *stackP);

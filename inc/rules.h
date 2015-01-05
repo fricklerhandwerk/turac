@@ -7,11 +7,7 @@
 // according to this post: http://stackoverflow.com/a/13583763
 
 // List of suits used
-// 	H = Hearts
-//	T = Tiles
-//	C = Clubs
-//	S = Spades
-const char *listSuit[] = {"H","T","C","S",NULL};
+const char *listSuit[] = {"Hearts","Tiles","Clubs","Spades",NULL};
 
 // List of ranks used, in order of value
 const char *listRank[] = {"6","7","8","9","10","J","Q","K","A",NULL};
