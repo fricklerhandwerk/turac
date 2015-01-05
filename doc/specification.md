@@ -12,14 +12,15 @@ Key features
 0. Card game engine/library with actions on cards and decks
 0. Implementation of traditional game rules
 0. Command line game control (though without fancy input validation)
-0. Drag&Drop game control using SDL
 0. Command line view
-0. Graphical view using SDL
-0. Choice of input and view model at compile time
+0. Two players at one computer
 0. Simple computer opponent
 
 Wishlist
 ==============
+* Graphical view using SDL
+* Drag&Drop game control using SDL
+* Choice of input and view model at compile time
 * Additional rule variants
 * Multiple games in one session
 * Additional game mode: two players on one computer
