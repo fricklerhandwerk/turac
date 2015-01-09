@@ -6,11 +6,30 @@
 // Lists are terminated with NULL to have "portable" bound checking
 // according to this post: http://stackoverflow.com/a/13583763
 
-// List of suits used
-const char *listSuit[] = {"Hearts","Tiles","Clubs","Spades",NULL};
+// Suits used
+enum SUIT
+{
+	HEARTS,
+	TILES,
+	CLUBS,
+	SPADES,
+};
+//const char *listSuit[] = {"Hearts","Tiles","Clubs","Spades",NULL};
 
-// List of ranks used, in order of value
-const char *listRank[] = {"6","7","8","9","10","J","Q","K","A",NULL};
+// Ranks used
+enum RANK
+{
+	SIX,
+	SEVEN,
+	EIGHT,
+	NINE,
+	TEN,
+	JACK,
+	QUEEN,
+	KING,
+	ACE,
+};
+// const char *listRank[] = {"6","7","8","9","10","J","Q","K","A",NULL};
 
 #define HAND_SIZE 6
 
@@ -20,7 +39,7 @@ const char *listRank[] = {"6","7","8","9","10","J","Q","K","A",NULL};
 // Create playing deck using rank and suit lists
 // NOTE: Automatically shuffles and finds a trump suit
 // by uncovering the card at the bottom.
-int deckCreate(stackT *deckP, char **listSuit, char **listRank);
+int deckCreate(stackT *deckP);
 
 // Hand cards to players in party Order until HAND_SIZE is reached for each player
 // Reduce stack size on the way

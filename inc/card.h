@@ -24,21 +24,27 @@
 
 typedef struct cardT
 {
-	char* rank;
-	char* suit;
+	int rank;
+	int suit;
 	int face;
 };
 
 /* BASIC CARD FUNCTIONS */
 
+// Allocate memory for and create card with given rank and suit, face down
+// Return memory size of card, 0 if error
+int cardInit(cardT *cardP, int rank, int suit);
+
+int cardDestroy(cardT *cardP);
+
 // Set card facing
-int cardFaceUp(cardT *card);
-int cardFaceDown(cardT *card);
+int cardFaceUp(cardT *cardP);
+int cardFaceDown(cardT *cardP);
 
 // Compare two cards by rank/suit
 // Takes a list of ranks/suits from the rules file to determine rank/suit values
 // Return values: a == b : 0; a > b : 1; a < b : -1;
-int cardCompareRank(cardT *a, cardT *b, char **listRank);
-int cardCompareSuit(cardT *a, cardT *b, char **listSuit);
+int cardCompareRank(cardT *aP, cardT *bP, char **listRank);
+int cardCompareSuit(cardT *aP, cardT *bP, char **listSuit);
 
 #endif // CARD_H

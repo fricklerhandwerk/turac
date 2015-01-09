@@ -17,7 +17,13 @@
 	- [ ]
 - Valentin
 	- [ ] Finalize interfaces (table, player party)
-	- [ ] 
+	- [ ] Card
+		- [ ] cardInit
+		- [ ] cardDestroy
+		- [ ] cardFaceUp
+		- [ ] cardFaceDown
+		- [ ] cardCompareRank
+		- [ ] cardCompareSuit
 
 
 ## Pile of stuff
@@ -28,13 +34,7 @@
 	- [ ] viewHand
 	- [ ] viewStackFaceDown
 	- [ ] viewStackFaceUp
-- [ ] Card
-	- [ ] cardInit
-	- [ ] cardDestroy
-	- [ ] cardFaceUp
-	- [ ] cardFaceDown
-	- [ ] cardCompareRank
-	- [ ] cardCompareSuit
+
 - [ ] Stack
 	- [ ] stackInit
 	- [ ] stackDestroy
