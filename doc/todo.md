@@ -23,6 +23,7 @@
 		- [x] cardFaceDown
 		- [x] cardCompareRank
 		- [x] cardCompareSuit
+	- [x] Card tests
 
 
 ## Pile of stuff

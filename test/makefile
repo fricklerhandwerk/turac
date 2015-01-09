@@ -1,22 +1,16 @@
 CC = gcc
-COMPILER_FLAGS = -std=c99 -Wall -Wextra -I$(INCLUDE_DIR) 
 
 INCLUDE_DIR = ../inc
-OBJECT_DIR  = ../obj
+SOURCE_DIR = ../src
 
-OBJS = cardTest.o
+COMPILER_FLAGS = -I$(INCLUDE_DIR) -std=c99 -Wall -Wextra 
 
+# local
+LOC = cardTest.c
 
-_DEPS = card.h
-DEPS  = $(patsubst %,$(INCLUDE_DIR)/%,$(_DEPS))
+# dependencies
+_SRC = card.c
+SRC = $(addprefix $(SOURCE_DIR)/,$(_SRC))
 
-
-# compile all dependencies separately
-$(OBJECT_DIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-cardTest: $(OBJ)
-	gcc -o $@ $^ $(CFLAGS)
-
-clean:
-	rm -f $(OBJECT_DIR)/*.o *~ core $(INCLUDE_DIR)/*~ 
+cardTest: $(LOC) $(SRC)
+	gcc -o $@ $^ $(COMPILER_FLAGS)
