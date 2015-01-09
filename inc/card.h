@@ -32,7 +32,7 @@ typedef struct
 cardT *cardNew(int rank, int suit, int face);
 
 // Set card facing
-void cardFace(cardT *cardP, int face);
+void cardSetFace(cardT *cardP, int face);
 
 // Compare two cards by rank/suit
 // Return values: a == b : 0; a > b : 1; a < b : -1;

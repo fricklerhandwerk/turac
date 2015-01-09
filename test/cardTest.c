@@ -31,16 +31,16 @@ int testCreateCard(void)
 	return(EXIT_SUCCESS);
 }
 
-int testFaceSet(void)
+int testSetFace(void)
 {
 	// test setting facing
 	cardT *card = cardNew(ACE,SPADES,DOWN);
 	printCard(card);
 	printf("Setting card face up...\n");
-	cardFace(card,UP);
+	cardSetFace(card,UP);
 	printCard(card);
 	printf("Setting card face down...\n");
-	cardFace(card,DOWN);
+	cardSetFace(card,DOWN);
 	printCard(card);
 
 	if(card->face != DOWN)
@@ -107,7 +107,7 @@ int main()
 {
 	#define NUM_TESTS 4
 	// create array of all test functions
-	int (*tests[NUM_TESTS])() = {&testCreateCard,&testFaceSet,&testCompareRank,&testCompareSuit};
+	int (*tests[NUM_TESTS])() = {&testCreateCard,&testSetFace,&testCompareRank,&testCompareSuit};
 	// create array for result values
 	int results[NUM_TESTS];
 	int total = 0;

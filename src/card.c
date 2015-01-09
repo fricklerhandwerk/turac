@@ -27,7 +27,7 @@ cardT *cardNew(int rank, int suit, int face)
 }
 
 // Set card facing
-void cardFace(cardT *cardP, int face)
+void cardSetFace(cardT *cardP, int face)
 {
   // NOTE: rule-agnostic - sets whatever value it gets!
   cardP->face = face;

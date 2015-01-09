@@ -24,6 +24,7 @@
 		- [x] cardCompareRank
 		- [x] cardCompareSuit
 	- [x] Card tests
+	- [x] Clumsy makefile (it's something)
 
 
 ## Pile of stuff
