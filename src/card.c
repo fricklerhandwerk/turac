@@ -6,57 +6,43 @@
 
 #include "../inc/card.h"       
 
-#define UP 1
-#define DN 0
-
-typedef struct cardT
+// Create card with given rank and suit and facing
+cardT *cardNew(int rank, int suit, int face)
 {
-  int rank;
-  int suit;
-  int face;
-};
-
-
-// Allocate memory for and create card with given rank and suit, face down
-// Return memory size of card, 0 if error
-int cardInit(cardT *cardP,char *rankString, char *suitString)
-{
-  int lenRank = strlen(rankString);
-  int lenSuit = strlen(suitString);
-
-  // allocate memory for rank and suit names
-  cardP->rank = (char *) malloc(sizeof(char)*(lenRank+1));
-  cardP->suit = (char *) malloc(sizeof(char)*(lenSuit+1));
+  // allocate memory for card struct
+  cardT *cardP = malloc(sizeof(*cardP));
 
   // handle allocation errors
-  if (cardP->rank == NULL || cardP->suit == NULL)
+  if (cardP == NULL)
   {
-    return(0);
+    return(NULL);
   }
 
   // write values
-  strcpy(cardP->rank,rankString);
-  strcpy(cardP->suit,suitString);
-  cardP->face = DN;
+  cardP->rank = rank;
+  cardP->suit = suit;
+  cardP->face = face;
 
-  // compute memory size of card
-  int memSize = lenRank + lenSuit + sizeof(int);
-
-  return(memSize)
-}
-
-int cardDestroy(cardT *cardP);
-{
-
-  return(0);
+  return(cardP);
 }
 
 // Set card facing
-int cardFaceUp(cardT *card);
-int cardFaceDown(cardT *card);
+void cardFace(cardT *cardP, int face)
+{
+  // NOTE: rule-agnostic - sets whatever value it gets!
+  cardP->face = face;
+}
 
 // Compare two cards by rank/suit
-// Takes a list of ranks/suits from the rules file to determine rank/suit values
 // Return values: a == b : 0; a > b : 1; a < b : -1;
-int cardCompareRank(cardT *a, cardT *b, char **listRank);
-int cardCompareSuit(cardT *a, cardT *b, char **listSuit);
+int cardCompareRank(cardT *a, cardT *b)
+{
+  // using this method (lots of street cred attached):
+  // http://stackoverflow.com/a/10997428
+  return (a->rank > b->rank) - (a->rank < b->rank);
+}
+
+int cardCompareSuit(cardT *a, cardT *b)
+{
+  return (a->suit > b->suit) - (a->suit < b->suit);
+}

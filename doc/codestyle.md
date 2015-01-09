@@ -10,8 +10,5 @@ Since C is awfully untyped, in addition to always using telling variable and fun
 #Indentation
 Use [Allman style] (http://en.wikipedia.org/wiki/Indent_style#Allman_style) with tab indentation.
 
-#Returns
-Do not return void, return at least 0 by default.
-
 #Testing
 Test each implemented function at least with some hard coded data. As soon as dynamic data structures are available, try to write at least one more sophisticated test.

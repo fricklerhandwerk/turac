@@ -19,32 +19,24 @@
  + and keep the data structure more human-readble.
 */
 
-#define UP 1
-#define DN 0
-
-typedef struct cardT
+typedef struct
 {
 	int rank;
 	int suit;
 	int face;
-};
+} cardT;
 
 /* BASIC CARD FUNCTIONS */
 
-// Allocate memory for and create card with given rank and suit, face down
-// Return memory size of card, 0 if error
-int cardInit(cardT *cardP, int rank, int suit);
-
-int cardDestroy(cardT *cardP);
+// Create card with given rank and suit and facing
+cardT *cardNew(int rank, int suit, int face);
 
 // Set card facing
-int cardFaceUp(cardT *cardP);
-int cardFaceDown(cardT *cardP);
+void cardFace(cardT *cardP, int face);
 
 // Compare two cards by rank/suit
-// Takes a list of ranks/suits from the rules file to determine rank/suit values
 // Return values: a == b : 0; a > b : 1; a < b : -1;
-int cardCompareRank(cardT *aP, cardT *bP, char **listRank);
-int cardCompareSuit(cardT *aP, cardT *bP, char **listSuit);
+int cardCompareRank(cardT *a, cardT *b);
+int cardCompareSuit(cardT *a, cardT *b);
 
 #endif // CARD_H
