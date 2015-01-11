@@ -24,28 +24,29 @@
 		- [x] cardCompareRank
 		- [x] cardCompareSuit
 	- [x] Card tests
+	- [ ] Stack
+		- [x] stackInit
+		- [x] stackDestroy
+		- [x] stackPush
+		- [x] stackPop
+		- [x] stackEmpty
+		- [x] stackFull
+		- [x] stackShuffle
+		- [x] stackSortSuit
+		- [x] stackSortRank
+	- [x] Stack tests
 	- [x] Clumsy makefile (it's something)
 	- [ ] Commandline view
-		- [ ] Header file
+		- [x] Header file
 		- [x] viewCard
-		- [ ] viewHand
+		- [x] viewCardLn
+		- [x] viewHand
 		- [ ] viewStackFaceDown
 		- [ ] viewStackFaceUp
 
 
 ## Pile of stuff
 - [ ] Makefile for handling modules (when set up, add your own compile option)
-
-- [ ] Stack
-	- [ ] stackInit
-	- [ ] stackDestroy
-	- [ ] stackPush
-	- [ ] stackPop
-	- [ ] stackEmpty
-	- [ ] stackFull
-	- [ ] stackShuffle
-	- [ ] stackSortSuit
-	- [ ] stackSortRank
 - [ ] Player
 	- [ ] playerInit
 	- [ ] playerDestroy

@@ -19,4 +19,4 @@ void viewCardLn(cardT *cardP, const char **listRank, const char **listSuit);
 void viewHand(stackT *handP, const char **listRank, const char **listSuit);
 
 
-#endif // CMD_VIEW_H 
+#endif // CMD_VIEW_H
