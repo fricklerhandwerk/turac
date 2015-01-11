@@ -81,7 +81,7 @@ void stackShuffle(stackT *stackP)
 {
 	// throw dice
 	srand(time(NULL));
-	
+
 	// base case
 	if (stackP->top <= 1)
 	{
