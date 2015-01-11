@@ -36,7 +36,7 @@ void cardSetFace(cardT *cardP, int face);
 
 // Compare two cards by rank/suit
 // Return values: a == b : 0; a > b : 1; a < b : -1;
-int cardCompareRank(cardT *a, cardT *b);
-int cardCompareSuit(cardT *a, cardT *b);
+int cardCompareRank(const void *a, const void *b);
+int cardCompareSuit(const void *aP, const void *bP);
 
 #endif // CARD_H

@@ -32,7 +32,7 @@ void viewHand(stackT *handP, const char **listRank, const char **listSuit)
 {
 	for (int i = 0; i <= handP->top; ++i)
 	{
-		viewCard(handP->cards[i],listRank,listSuit);
+		viewCard(&handP->cards[i],listRank,listSuit);
 	}
 	printf("\n");
 }

@@ -10,7 +10,7 @@
 
 typedef struct
 {
-	cardT **cards;
+	cardT *cards;
 	int size;
 	int top;
 } stackT;
@@ -36,10 +36,10 @@ int stackFull(stackT *stackP);
 // Shuffle stack
 void stackShuffle(stackT *stackP);
 
-/*
-// Sort stack by suit/rank according to lists
-void stackSortSuit(stackT *stackP,char **listSuit);
-void stackSortRank(stackT *stackP,char **listRank);
-*/
+
+// Sort stack by suit/rank
+void stackSortRank(stackT *stackP);
+void stackSortSuit(stackT *stackP);
+
 
 #endif // STACK_H

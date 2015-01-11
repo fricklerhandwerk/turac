@@ -9,8 +9,8 @@
 stackT *stackInit(int size)
 {
 	// allocate memory for array of cards
-	cardT **cards;
-	cards = malloc(sizeof(cards) * size);
+	cardT *cards;
+	cards = malloc(sizeof(cardT) * size);
 
 	// handle allocation errors
 	if (cards == NULL)
@@ -49,7 +49,7 @@ int stackPush(stackT *stackP, cardT *cardP)
 	}
 	// put given card pointer on top of element
 	// increase top counter
-	stackP->cards[++stackP->top] = cardP;
+	stackP->cards[++stackP->top] = *cardP;
 
 	return(EXIT_SUCCESS);
 }
@@ -62,7 +62,7 @@ cardT *stackPop(stackT *stackP)
 	}
 	// return card pointer from top of stack
 	// decrease top counter
-	return stackP->cards[stackP->top--];
+	return &stackP->cards[stackP->top--];
 }
 
 int stackEmpty(stackT *stackP)
@@ -93,7 +93,7 @@ void stackShuffle(stackT *stackP)
 	int top = stackP->top;
 	int r = rand () % top;
 	
-	cardT *temp = stackP->cards[top];
+	cardT temp = stackP->cards[top];
 	stackP->cards[top] = stackP->cards[r];
 	stackP->cards[r] = temp;
 	
@@ -108,12 +108,19 @@ void stackShuffle(stackT *stackP)
 }
 
 
+// Sort stack by rank/siut
+void stackSortRank(stackT *stackP)
+{
+	qsort(stackP->cards,stackP->top+1,sizeof(cardT),&cardCompareRank);
+}
 
-/*
-// Sort stack by suit/rank according to lists
-void stackSortSuit(stackT *stackP,char **listSuit);
-void stackSortRank(stackT *stackP,char **listRank);
-*/
+void stackSortSuit(stackT *stackP)
+{
+	qsort(stackP->cards,stackP->top+1,sizeof(cardT),&cardCompareSuit);
+}
+
+
+
 
 
 

@@ -95,7 +95,7 @@ int testStackBasicOps(void)
 	return(EXIT_SUCCESS);
 }
 
-void testStackShuffle(void)
+int testStackShuffle(void)
 {
 	// create some cards
 	cardT *card1 = cardNew(ACE,SPADES,UP);
@@ -122,13 +122,117 @@ void testStackShuffle(void)
 	printf("Compare results by hand.\n");
 	
 	
-	return;
-	
+	return(EXIT_SUCCESS);
 }
+
+int stackSorted(stackT *stackP)
+{
+	for(int i = 0; i < stackP->top; i++)
+	{
+		if (stackP->cards[i].rank > stackP->cards[i+1].rank)
+		{
+			return(EXIT_FAILURE);
+		}
+	}
+	return(EXIT_SUCCESS);
+}
+
+int testStackSortRank(void)
+{
+	// create some unsorted cards
+	cardT *card1 = cardNew(ACE,SPADES,UP);
+	cardT *card2 = cardNew(TEN,HEARTS,UP);
+	cardT *card3 = cardNew(KING,CLUBS,UP);
+	cardT *card4 = cardNew(QUEEN,TILES,UP);
+	
+	// create stack und push cards inside
+	stackT *stack = stackInit(4);
+	stackPush(stack,card1);
+	stackPush(stack,card2);
+	stackPush(stack,card3);
+	stackPush(stack,card4);
+	
+	
+	printf("Sorting stack by rank...\n");
+	viewHand(stack,listRank,listSuit);
+	stackSortRank(stack);
+	if (stackSorted(stack))
+	{
+		viewHand(stack,listRank,listSuit);
+		printf("OK.\n");
+		return(EXIT_SUCCESS);
+	}
+	viewHand(stack,listRank,listSuit);
+	printf("stackSortRank() failed!\n");
+	return(EXIT_FAILURE);
+}
+
+
+int testStackSortSuit(void)
+{
+	// create some unsorted cards
+	cardT *card1 = cardNew(ACE,SPADES,UP);
+	cardT *card2 = cardNew(TEN,HEARTS,UP);
+	cardT *card3 = cardNew(KING,HEARTS,UP);
+	cardT *card4 = cardNew(QUEEN,TILES,UP);
+	
+	// create stack und push cards inside
+	stackT *stack = stackInit(4);
+	stackPush(stack,card1);
+	stackPush(stack,card2);
+	stackPush(stack,card3);
+	stackPush(stack,card4);
+	
+	
+	printf("Sorting stack by suit...\n");
+	viewHand(stack,listRank,listSuit);
+	stackSortSuit(stack);
+	if (stackSorted(stack))
+	{
+		viewHand(stack,listRank,listSuit);
+		printf("OK.\n");
+		return(EXIT_SUCCESS);
+	}
+	viewHand(stack,listRank,listSuit);
+	printf("stackSortSuit() failed!\n");
+	return(EXIT_FAILURE);
+}
+
 int main()
 {
-	//testStackInitDestroy();
-	//testStackBasicOps();
-	testStackShuffle();
+
+	#define NUM_TESTS 5
+	// create array of all test functions
+	int (*tests[NUM_TESTS])() = {&testStackInitDestroy,&testStackBasicOps,&testStackShuffle,&testStackSortRank,&testStackSortSuit};
+	
+	// create array for result values
+	int results[NUM_TESTS];
+	int total = 0;
+	
+	// execute all functions in the tests array
+	for (int i = 0; i < NUM_TESTS; ++i)
+	{
+		printf("TEST NO. %d\n\n",i+1);
+		
+		// write results to results array
+		results[i] = (tests[i]());
+		
+		// print test results
+		printf("\nTEST %d ",i+1);
+		if (results[i] == EXIT_SUCCESS)
+		{
+			printf("SUCCESSFUL.\n\n\n");
+			// add to total
+			total++;
+		}
+		else
+		{
+			printf("FAILED!\n\n\n");
+		}
+	}
+	
+	printf("%d/%d TESTS SUCCESSFUL.\n\n",total,NUM_TESTS);
+	
+	
 	return(0);
 }
