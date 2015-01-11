@@ -16,7 +16,10 @@ enum SUIT
 	SPADES,
 };
 
-const char *listSuit[] = {"Hearts","Tiles","Clubs","Spades",NULL};
+//const char *listSuit[] = {"Hearts","Tiles","Clubs","Spades",NULL};
+#define KNRM "\x1B[0m"
+#define KRED "\x1B[31m"
+const char *listSuit[] = {KRED"\u2665"KNRM,KRED"\u2666"KNRM,"\u2663","\u2660",NULL};
 
 // Ranks used
 
@@ -33,7 +36,7 @@ enum RANK
 	ACE,
 };
 
-const char *listRank[] = {"6","7","8","9","10","Jack","Queen","King","Ace",NULL};
+const char *listRank[] = {"6","7","8","9","10","J","Q","K","A",NULL};
 
 enum FACE
 {

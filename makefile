@@ -6,7 +6,7 @@ OBJS = turac.c
 
 INCLUDE_DIR = src
 
-_DEPS = card.c
+_DEPS = card.c cmd_view.c
 DEPS = $(patsubst %,$(INCLUDE_DIR)/%,$(_DEPS))
 
 OBJ_NAME = turac

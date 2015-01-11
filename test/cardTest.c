@@ -4,20 +4,9 @@
 
 #include "../inc/card.h"
 #include "../inc/rules.h"
+#include "../inc/cmd_view.h"
 
-
-void printCard(cardT *cardP)
-{
-	// point local char* to char* in rank/suit lists
-	// => AFAIK no additional memory use
-	const char *rank = listRank[cardP->rank];
-	const char *suit = listSuit[cardP->suit];
-	const char *face = listFace[cardP->face];
-
-	printf("Rank: %s\nSuit: %s\nFace: %s\n\n",rank,suit,face);
-}
-
-int testCreateCard(void)
+int testCardNew(void)
 {
 	// test card creation
 	printf("Creating card...\n");
@@ -27,23 +16,23 @@ int testCreateCard(void)
 		printf("MEMORY FAIL\n");
 		return(EXIT_FAILURE);
 	}
-	printCard(card);
+	viewCardLn(card,listRank,listSuit);
 	return(EXIT_SUCCESS);
 }
 
 int testSetFace(void)
 {
 	// test setting facing
-	cardT *card = cardNew(ACE,SPADES,DOWN);
-	printCard(card);
-	printf("Setting card face up...\n");
-	cardSetFace(card,UP);
-	printCard(card);
+	cardT *card = cardNew(ACE,SPADES,UP);
+	viewCardLn(card,listRank,listSuit);
 	printf("Setting card face down...\n");
 	cardSetFace(card,DOWN);
-	printCard(card);
+	viewCardLn(card,listRank,listSuit);
+	printf("Setting card face up...\n");
+	cardSetFace(card,UP);
+	viewCardLn(card,listRank,listSuit);
 
-	if(card->face != DOWN)
+	if(card->face != UP)
 	{
 		return(EXIT_FAILURE);
 	}
@@ -56,12 +45,12 @@ int testSetFace(void)
 int testCompareRank(void)
 {
 	// compare rank
-	cardT *card1 = cardNew(ACE,SPADES,DOWN);
-	cardT *card2 = cardNew(TEN,HEARTS,DOWN);
-	cardT *card3 = cardNew(TEN,SPADES,DOWN);
-	printCard(card1);
-	printCard(card2);
-	printCard(card3);
+	cardT *card1 = cardNew(ACE,SPADES,UP);
+	cardT *card2 = cardNew(TEN,HEARTS,UP);
+	cardT *card3 = cardNew(TEN,SPADES,UP);
+	viewCardLn(card1,listRank,listSuit);
+	viewCardLn(card2,listRank,listSuit);
+	viewCardLn(card3,listRank,listSuit);
 	int cmp1 = cardCompareRank(card1,card2);
 	printf("Comparing 1, 2: %2d\n",cmp1);
 	int cmp2 = cardCompareRank(card2,card3);
@@ -81,12 +70,12 @@ int testCompareRank(void)
 int testCompareSuit(void)
 {
 	// compare rank
-	cardT *card1 = cardNew(ACE,SPADES,DOWN);
-	cardT *card2 = cardNew(TEN,HEARTS,DOWN);
-	cardT *card3 = cardNew(TEN,SPADES,DOWN);
-	printCard(card1);
-	printCard(card2);
-	printCard(card3);
+	cardT *card1 = cardNew(ACE,SPADES,UP);
+	cardT *card2 = cardNew(TEN,HEARTS,UP);
+	cardT *card3 = cardNew(TEN,SPADES,UP);
+	viewCardLn(card1,listRank,listSuit);
+	viewCardLn(card2,listRank,listSuit);
+	viewCardLn(card3,listRank,listSuit);
 	int cmp1 = cardCompareSuit(card1,card2);
 	printf("Comparing 1, 2: %2d\n",cmp1);
 	int cmp2 = cardCompareSuit(card2,card3);
@@ -107,7 +96,7 @@ int main()
 {
 	#define NUM_TESTS 4
 	// create array of all test functions
-	int (*tests[NUM_TESTS])() = {&testCreateCard,&testSetFace,&testCompareRank,&testCompareSuit};
+	int (*tests[NUM_TESTS])() = {&testCardNew,&testSetFace,&testCompareRank,&testCompareSuit};
 	// create array for result values
 	int results[NUM_TESTS];
 	int total = 0;
@@ -136,13 +125,6 @@ int main()
 
 	printf("%d/%d TESTS SUCCESSFUL.\n\n",total,NUM_TESTS);
 
-	
-
-
-
-
-
 
 	return(0);
-
 }

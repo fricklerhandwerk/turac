@@ -25,16 +25,17 @@
 		- [x] cardCompareSuit
 	- [x] Card tests
 	- [x] Clumsy makefile (it's something)
+	- [ ] Commandline view
+		- [ ] Header file
+		- [x] viewCard
+		- [ ] viewHand
+		- [ ] viewStackFaceDown
+		- [ ] viewStackFaceUp
 
 
 ## Pile of stuff
 - [ ] Makefile for handling modules (when set up, add your own compile option)
-- [ ] Commandline view
-	- [ ] Header file
-	- [ ] viewCard
-	- [ ] viewHand
-	- [ ] viewStackFaceDown
-	- [ ] viewStackFaceUp
+
 - [ ] Stack
 	- [ ] stackInit
 	- [ ] stackDestroy

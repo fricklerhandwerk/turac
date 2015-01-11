@@ -1,8 +1,6 @@
 /* Implementation of basic card functions */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "../inc/card.h"       
 
@@ -10,7 +8,7 @@
 cardT *cardNew(int rank, int suit, int face)
 {
   // allocate memory for card struct
-  cardT *cardP = malloc(sizeof(*cardP));
+  cardT *cardP = malloc(sizeof(cardT));
 
   // handle allocation errors
   if (cardP == NULL)
