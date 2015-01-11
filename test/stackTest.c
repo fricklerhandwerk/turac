@@ -125,11 +125,29 @@ int testStackShuffle(void)
 	return(EXIT_SUCCESS);
 }
 
-int stackSorted(stackT *stackP)
+int stackSortedRank(stackT *stackP)
 {
 	for(int i = 0; i < stackP->top; i++)
 	{
 		if (stackP->cards[i].rank > stackP->cards[i+1].rank)
+		{
+			printf("Rank of\n");
+			
+			viewCardLn(&stackP->cards[i],listRank,listSuit);
+			printf("is greater than\n");
+			viewCardLn(&stackP->cards[i+1],listRank,listSuit);
+			
+			return(EXIT_FAILURE);
+		}
+	}
+	return(EXIT_SUCCESS);
+}
+
+int stackSortedSuit(stackT *stackP)
+{
+	for(int i = 0; i < stackP->top; i++)
+	{
+		if (stackP->cards[i].suit > stackP->cards[i+1].suit)
 		{
 			return(EXIT_FAILURE);
 		}
@@ -156,7 +174,7 @@ int testStackSortRank(void)
 	printf("Sorting stack by rank...\n");
 	viewHand(stack,listRank,listSuit);
 	stackSortRank(stack);
-	if (stackSorted(stack))
+	if (!stackSortedRank(stack))
 	{
 		viewHand(stack,listRank,listSuit);
 		printf("OK.\n");
@@ -187,7 +205,7 @@ int testStackSortSuit(void)
 	printf("Sorting stack by suit...\n");
 	viewHand(stack,listRank,listSuit);
 	stackSortSuit(stack);
-	if (stackSorted(stack))
+	if (!stackSortedSuit(stack))
 	{
 		viewHand(stack,listRank,listSuit);
 		printf("OK.\n");
