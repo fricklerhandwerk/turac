@@ -10,8 +10,11 @@ COMPILER_FLAGS = -I$(INCLUDE_DIR) -std=c99 -Wall -Wextra
 _SRC = card.c stack.c cmd_view.c
 SRC = $(addprefix $(SOURCE_DIR)/,$(_SRC))
 
-cardTest: $(SRC) cardTestc
+cardTest: $(SRC) cardTest.c
 	gcc -o $(BIN_DIR)/$@ $^ $(COMPILER_FLAGS)
 
 printTest: $(SRC) printTest.c
+	gcc -o $(BIN_DIR)/$@ $^ $(COMPILER_FLAGS)
+	
+stackTest: $(SRC) stackTest.c
 	gcc -o $(BIN_DIR)/$@ $^ $(COMPILER_FLAGS)

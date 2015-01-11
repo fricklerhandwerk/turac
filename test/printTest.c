@@ -9,18 +9,13 @@ int main(void)
 {
 	cardT *card1 = cardNew(ACE,SPADES,UP);
 	cardT *card2 = cardNew(TEN,HEARTS,UP);
-	cardT *card3 = cardNew(ACE,SPADES,UP);
-	
+	cardT *card3 = cardNew(KING,CLUBS,UP);
 
 	stackT *stack = stackInit(3);
-	stack->cards[0] = card1;
-	stack->cards[1] = card2;
-	stack->cards[2] = card3;
-	stack->top = 2;
-	printf("%d",card3->rank);
-	//viewCard(card3,listRank,listSuit);
-	//viewCardLn(card3,listRank,listSuit);
+	stackPush(stack,card1);
+	stackPush(stack,card2);
+	stackPush(stack,card3);
 
-	//viewHand(stack,listRank,listSuit);
+	viewHand(stack,listRank,listSuit);
 	return 0;
 }

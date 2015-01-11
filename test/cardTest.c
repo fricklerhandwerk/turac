@@ -10,14 +10,14 @@ int testCardNew(void)
 {
 	// test card creation
 	printf("Creating card...\n");
-	cardT *card = cardNew(ACE,SPADES,DOWN);
-	if (card == NULL)
+	cardT *card = cardNew(ACE,SPADES,UP);
+	if (card != NULL)
 	{
-		printf("MEMORY FAIL\n");
-		return(EXIT_FAILURE);
+		viewCardLn(card,listRank,listSuit);
+		return(EXIT_SUCCESS);
 	}
-	viewCardLn(card,listRank,listSuit);
-	return(EXIT_SUCCESS);
+	printf("MEMORY FAIL\n");
+	return(EXIT_FAILURE);
 }
 
 int testSetFace(void)
@@ -32,14 +32,11 @@ int testSetFace(void)
 	cardSetFace(card,UP);
 	viewCardLn(card,listRank,listSuit);
 
-	if(card->face != UP)
-	{
-		return(EXIT_FAILURE);
-	}
-	else
+	if(card->face == UP)
 	{
 		return(EXIT_SUCCESS);
 	}
+	return(EXIT_FAILURE);
 }
 
 int testCompareRank(void)
@@ -57,14 +54,12 @@ int testCompareRank(void)
 	printf("Comparing 2, 3: %2d\n",cmp2);
 	int cmp3 = cardCompareRank(card2,card1);
 	printf("Comparing 2, 1: %2d\n",cmp3);
-	if (cmp1 < 0 || cmp2 != 0 || cmp3 > 0)
-	{
-		return(EXIT_FAILURE);
-	}
-	else
+	if (cmp1 > 0 && cmp2 == 0 && cmp3 < 0)
 	{
 		return(EXIT_SUCCESS);
 	}
+	return(EXIT_FAILURE);
+	
 }
 
 int testCompareSuit(void)
@@ -82,14 +77,11 @@ int testCompareSuit(void)
 	printf("Comparing 2, 3: %2d\n",cmp2);
 	int cmp3 = cardCompareSuit(card1,card3);
 	printf("Comparing 1, 3: %2d\n",cmp3);
-	if (cmp1 == 0 || cmp2 == 0 || cmp3 != 0)
-	{
-		return(EXIT_FAILURE);
-	}
-	else
+	if (cmp1 != 0 &&  cmp2 != 0 &&  cmp3 == 0)
 	{
 		return(EXIT_SUCCESS);
 	}
+	return(EXIT_FAILURE);
 }
 
 int main()
@@ -111,7 +103,7 @@ int main()
 
 		// print test results
 		printf("\nTEST %d ",i+1);
-		if (!results[i])
+		if (results[i] == EXIT_SUCCESS)
 		{
 			printf("SUCCESSFUL.\n\n\n");
 			// add to total
