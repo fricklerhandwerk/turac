@@ -14,10 +14,12 @@
 - [x] Implement some stuff
 
 ##Week 3
-- [ ] Implement more stuff (in any way)
+- [ ] Implement more stuff (in any barely working way)
 	- [ ] Players
 	- [ ] Rules
+	- [ ] Cmd view
 	- [ ] Cmd control
+	- [ ] Game loop
 	- [ ] Bot
   
 
@@ -28,6 +30,8 @@
 	- [ ] playerStart
 	- [ ] playerStop
 	- [ ] playerDone
+	- [ ] playerNext
+	- [ ] playCard(player, numCard)
 - Tom
 	- [ ] Rules
 		- [ ] Complete interface
@@ -36,8 +40,8 @@
 		- [ ] isTrump
 		- [ ] cardBeats
 		- [ ] cardFits
+		- [ ] roundEnded // tells us when to switch player roles
 		- [ ] gameEnded
-
 - Valentin
 	- [ ] Finalize interfaces (table, player)
 	- [x] Card
@@ -67,12 +71,15 @@
 		- [x] viewHand
 
 
-
 ## Pile of stuff
 - [ ] Makefile for handling modules (when set up, add your own compile option)
-- [ ] Table view
-- [ ] viewStackFaceDown
-- [ ] viewStackFaceUp
+- [ ] Rules
+	- [ ] table struct // two card stacks and a mapping array to know which card beats which
+	- [ ] tableInit
+	- [ ] tableDestroy
+- [ ] Commandline view
+	- [ ] viewDeck // maybe with number of cards inside
+	- [ ] viewTable // use table info to get card alignment
 - [ ] Commandline control
 	- [ ] Header file
 	- [ ] moveCursor // cursor to choose card from hand
@@ -80,6 +87,5 @@
 	- [ ] setDone // take cards or stop attacking
 - [ ] Game loop
 	- [ ] Header file
-	- [ ] 
 - [ ] Bot
 	- [ ]
