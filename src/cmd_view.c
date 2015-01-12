@@ -6,14 +6,9 @@
 
 void viewCard(cardT *cardP, const char **listRank, const char **listSuit)
 {
-	// point local char* to char* in rank/suit lists
-	// => AFAIK no additional memory use
-	const char *rank = listRank[cardP->rank];
-	const char *suit = listSuit[cardP->suit];
-
 	if (cardP->face)
 	{
-		printf("[%2s%s]",rank,suit);
+		printf("[%2s%s]",listRank[cardP->rank],listSuit[cardP->suit]);
 	}
 	else
 	{

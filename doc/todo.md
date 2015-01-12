@@ -10,13 +10,36 @@
 - [x] Agree on definitions
 
 ##Week 2
-- [ ] Split tasks
+- [x] Split tasks
+- [x] Implement some stuff
+
+##Week 3
+- [ ] Implement more stuff (in any way)
+	- [ ] Players
+	- [ ] Rules
+	- [ ] Cmd control
+	- [ ] Bot
+  
+
 - Vincent
-	- [ ] 
+	- [ ] Player
+	- [ ] playerInit
+	- [ ] playerDestroy
+	- [ ] playerStart
+	- [ ] playerStop
+	- [ ] playerDone
 - Tom
-	- [ ]
+	- [ ] Rules
+		- [ ] Complete interface
+		- [ ] deckCreate
+		- [ ] handCards
+		- [ ] isTrump
+		- [ ] cardBeats
+		- [ ] cardFits
+		- [ ] gameEnded
+
 - Valentin
-	- [ ] Finalize interfaces (table, player party)
+	- [ ] Finalize interfaces (table, player)
 	- [x] Card
 		- [x] cardNew
 		- [x] cardFaceUp
@@ -29,6 +52,7 @@
 		- [x] stackDestroy
 		- [x] stackPush
 		- [x] stackPop
+		- [ ] stackNumElem
 		- [x] stackEmpty
 		- [x] stackFull
 		- [x] stackShuffle
@@ -41,34 +65,21 @@
 		- [x] viewCard
 		- [x] viewCardLn
 		- [x] viewHand
-		- [ ] viewStackFaceDown
-		- [ ] viewStackFaceUp
+
 
 
 ## Pile of stuff
 - [ ] Makefile for handling modules (when set up, add your own compile option)
-- [ ] Player
-	- [ ] playerInit
-	- [ ] playerDestroy
-	- [ ] playerStart
-	- [ ] playerStop
-	- [ ] playerDone
-- [ ] Rules
-	- [ ] deckCreate
-	- [ ] handCards
-	- [ ] cardBeats
-	- [ ] cardFits
-	- [ ] gameEnded
+- [ ] Table view
+- [ ] viewStackFaceDown
+- [ ] viewStackFaceUp
 - [ ] Commandline control
-	- [ ]
+	- [ ] Header file
+	- [ ] moveCursor // cursor to choose card from hand
+	- [ ] putCard // puts card on table
+	- [ ] setDone // take cards or stop attacking
 - [ ] Game loop
-	- [ ]
+	- [ ] Header file
+	- [ ] 
 - [ ] Bot
 	- [ ]
- 
-
-- [x] ~~implement struct type~~
-- [x] ~~implement shuffle~~
-- [x] ~~implement sorting~~
-- [ ] implement attack
-- [ ] implement gamestart 
