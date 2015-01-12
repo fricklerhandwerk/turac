@@ -5,31 +5,37 @@
 
 /* PARTY DATA TYPE
  *
- * Holds player array and its length as well as the current active player.
+ * Holds a linked list of players and its length.
+ * The linked list points to the current player.
  */
 
 typedef struct partyT
 {
-	playerT *players;
+	playerT *currentPlayer;
 	int numPlayers;
-	int currentPlayer;
 };
 
-// Allocate memory for party
-// Takes a list of player Names,
-// terminated with some special player entry (e.g. empty name)
-int partyInit(partyT *partyP, char **listPlayers);
+// Allocate memory for an empty party
+partyT *partyInit(void);
 
 // Free memory for party
-int partyDestroy(partyT *partyP);
+int partyDestroy(partyT **partyP);
 
-// Shuffle player seats
-int partyShuffle(partyT *partyP);
+// Add player to linked list and update numPlayers
+void partyAddPlayer(partyT *partyP, playerT *playerP);
+
+// Remove player from linked list
+// Update currentPlayer pointer if necessary
+void partyRemovePlayer(partyT *partyP, playerT *playerP);
 
 // Switch player roles such that the next player attacks
-// Wraps around at array end and
-// checks if next player is still in the game and skips accordingly
-int partyNextPlayer(partyT *partyP);
+// Check if next player is still in the game and skip accordingly
+void partyNextPlayer(partyT *partyP);
 
-
+/* not important right now
+// Shuffle player seats
+// Use something like this method:
+// http://stackoverflow.com/a/11309261
+int partyShuffle(partyT *partyP);
+*/
 #endif // PARTY_H

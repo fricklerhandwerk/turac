@@ -3,7 +3,7 @@
 
 /* PLAYER DATA TYPE
  *
- * Holds all properties of a player.
+ * Holds all properties of a player as well as a pointer to the next player.
  *
  * EXAMPLE
  * (attacking player "Foo", who didn't yet stop)
@@ -25,25 +25,39 @@
  #define TRUE 1
  #define FALSE 0
 
-typedef struct playerT
+struct playerT
 {
 	char *name;
 	stackT *hand;
 	int stopF;
 	int doneF;
+	playerT *next;
 };
+
+typedef struct playerT playerT;
 
 /* PLAYER FUNCTIONS */
 
 // Allocate memory for player with empty hand
-int playerInit(playerT *playerP);
+int playerInit(playerT *playerP, char *name);
 
 // Deallocate member variables where possible
 int playerDestroy(playerT *playerP);
 
 // Set player state
-int playerStart(playerT *playerP);
-int playerStop(playerT *playerP);
-int playerDone(playerT *playerP);
+void playerStart(playerT *playerP);
+void playerStop(playerT *playerP);
+void playerDone(playerT *playerP);
+
+// Play a given cards from a players hand
+// Where exactly it is put is decided by player status and table contents
+void playCard(playerT *playerP, int numCard, tableT *tableP);
+
+// Put given card in player's hand
+void takeCard(playerT *playerP, cardT *cardP);
+
+// Pick up all cards from the table
+void pickUpCards(playerT *playerP, tableT *tableP);
+
 
 #endif // PLAYER_H

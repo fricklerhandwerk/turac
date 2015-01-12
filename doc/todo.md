@@ -30,20 +30,21 @@
 	- [ ] playerStart
 	- [ ] playerStop
 	- [ ] playerDone
-	- [ ] playerNext
-	- [ ] playCard(player, numCard)
+	- [ ] playCard
+	- [ ] takeCard
+	- [ ] pickUpCards
 - Tom
 	- [ ] Rules
-		- [ ] Complete interface
 		- [ ] deckCreate
 		- [ ] handCards
 		- [ ] isTrump
 		- [ ] cardBeats
 		- [ ] cardFits
-		- [ ] roundEnded // tells us when to switch player roles
-		- [ ] gameEnded
+		- [ ] roundOver // tells us when to switch player roles
+		- [ ] gameOver
 - Valentin
-	- [ ] Finalize interfaces (table, player)
+	- [x] Party interface
+	- [x] Player interface
 	- [x] Card
 		- [x] cardNew
 		- [x] cardFaceUp
@@ -73,10 +74,19 @@
 
 ## Pile of stuff
 - [ ] Makefile for handling modules (when set up, add your own compile option)
+- [ ] Party
+	- [ ] partyInit
+	- [ ] partyDestroy
+	- [ ] partyAddPlayer
+	- [ ] partyRemovePlayer
+	- [ ] partyNextPlayer
 - [ ] Rules
 	- [ ] table struct // two card stacks and a mapping array to know which card beats which
 	- [ ] tableInit
 	- [ ] tableDestroy
+	- [ ] tableFull
+	- [ ] tableBeaten
+	- [ ] tableEmpty
 - [ ] Commandline view
 	- [ ] viewDeck // maybe with number of cards inside
 	- [ ] viewTable // use table info to get card alignment
