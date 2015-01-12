@@ -24,7 +24,7 @@
 		- [x] cardCompareRank
 		- [x] cardCompareSuit
 	- [x] Card tests
-	- [ ] Stack
+	- [x] Stack
 		- [x] stackInit
 		- [x] stackDestroy
 		- [x] stackPush

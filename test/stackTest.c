@@ -200,7 +200,8 @@ int testStackSortSuit(void)
 
 int main()
 {
-
+	// throw dice
+	srand(time(NULL));
 	#define NUM_TESTS 5
 	// create array of all test functions
 	int (*tests[NUM_TESTS])() = {&testStackInitDestroy,&testStackBasicOps,&testStackShuffle,&testStackSortRank,&testStackSortSuit};

@@ -25,25 +25,33 @@
  #define TRUE 1
  #define FALSE 0
 
-typedef struct playerT
+typedef struct
 {
 	char *name;
 	stackT *hand;
+	int currentF;
 	int stopF;
 	int doneF;
-};
+	playerT *next;
+} playerT;
 
 /* PLAYER FUNCTIONS */
 
 // Allocate memory for player with empty hand
-int playerInit(playerT *playerP);
+playerT *playerNew(char *name);
 
-// Deallocate member variables where possible
-int playerDestroy(playerT *playerP);
+// Free member and player memory
+void playerDestroy(playerT **playerP);
+
+// Add player to party
+void playerAdd(playerT *partyP, playerT *playerP);
 
 // Set player state
-int playerStart(playerT *playerP);
-int playerStop(playerT *playerP);
-int playerDone(playerT *playerP);
+void playerStart(playerT *playerP);
+void playerStop(playerT *playerP);
+void playerDone(playerT *playerP);
+
+// Return next active player
+playerT *playerNext(playerT *playerP);
 
 #endif // PLAYER_H
