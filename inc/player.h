@@ -29,6 +29,7 @@ struct playerT
 {
 	char *name;
 	stackT *hand;
+	int currentF;
 	int stopF;
 	int doneF;
 	playerT *next;
@@ -39,10 +40,13 @@ typedef struct playerT playerT;
 /* PLAYER FUNCTIONS */
 
 // Allocate memory for player with empty hand
-int playerInit(playerT *playerP, char *name);
+playerT *playerNew(char *name);
 
-// Deallocate member variables where possible
-int playerDestroy(playerT *playerP);
+// Free member and player memory
+void playerDestroy(playerT **playerP);
+
+// Add player to party
+void playerAdd(playerT *partyP, playerT *playerP);
 
 // Set player state
 void playerStart(playerT *playerP);
@@ -58,6 +62,5 @@ void takeCard(playerT *playerP, cardT *cardP);
 
 // Pick up all cards from the table
 void pickUpCards(playerT *playerP, tableT *tableP);
-
 
 #endif // PLAYER_H
