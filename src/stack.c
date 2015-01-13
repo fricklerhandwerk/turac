@@ -65,6 +65,11 @@ cardT *stackPop(stackT *stackP)
 	return &stackP->cards[stackP->top--];
 }
 
+int stackNumElem(stackT *stackP)
+{
+	return stackP->top + 1;
+}
+
 int stackEmpty(stackT *stackP)
 {
 	return stackP->top < 0;

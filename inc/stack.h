@@ -28,6 +28,9 @@ int stackPush(stackT *stackP, cardT *card);
 // Return card pointer from top of stack, decrease top
 cardT *stackPop(stackT *stackP);
 
+// Return number of elements currently in stack
+int stackNumElem(stackT *stackP);
+
 // Check if stack is full/empty
 int stackEmpty(stackT *stackP);
 int stackFull(stackT *stackP);
