@@ -2,7 +2,7 @@
 
 #include "../inc/card.h"
 #include "../inc/stack.h"
-#include "../inc/rules.h"
+#include "../inc/constants.h"
 #include "../inc/cmd_view.h"
 
 int main(void)

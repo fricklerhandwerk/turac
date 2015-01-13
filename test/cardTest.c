@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "../inc/card.h"
-#include "../inc/rules.h"
+#include "../inc/constants.h"
 #include "../inc/cmd_view.h"
 
 int testCardNew(void)
