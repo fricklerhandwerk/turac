@@ -32,6 +32,12 @@ tableT *tableInit(int sizeTable)
 	tableP->def = defP;
 	tableP->beats = beatsP;
 
+	// initialize `beats` array with values
+	for (int i = 0; i < sizeTable; ++i)
+	{
+		tableP->beats[i] = -1;
+	}
+
 	return(tableP);
 }
 
@@ -53,16 +59,18 @@ void tableDestroy(tableT **tableP)
 // Put card on attack or defend stack
 int tablePutAtt(tableT *tableP, cardT *cardP)
 {
-	if(stackPush(tableP->att,cardP) == EXIT_FAILURE);
+	if(stackPush(tableP->att,cardP) == EXIT_FAILURE)
 	{
 		return(EXIT_FAILURE);
 	}
 	return(EXIT_SUCCESS);
 }
 
-int tablePutDef(tableT *tableP, cardT *cardDefP, int beatPos)
+int tablePutDef(tableT *tableP, cardT *cardP, int beatPos)
 {
-	if(stackPush(tableP->def,cardAttP) == EXIT_FAILURE);
+	// check validity of defense assignment
+	// exit with error if pushing not possible for some reason
+	if(beatPos < 0 || beatPos > stackTop(tableP->att) || stackPush(tableP->def,cardP) == EXIT_FAILURE)
 	{
 		return(EXIT_FAILURE);
 	}
@@ -70,7 +78,7 @@ int tablePutDef(tableT *tableP, cardT *cardDefP, int beatPos)
 	// mark the position in `beats` array
 	// which corresponds to the position of cardDef on the def stack (topmost)
 	// with the position of the card to beat on the att stack (given)
-	tableP->beats[stackNumElem(tableP->def)-1] = beatPos;
+	tableP->beats[stackTop(tableP->def)] = beatPos;
 
 	return(EXIT_SUCCESS);
 }
@@ -98,6 +106,7 @@ int tableClean(tableT *tableP, stackT *destP)
 			return(EXIT_FAILURE);
 		}
 	}
+	
 	// clean defend stack
 	while (!stackEmpty(tableP->def))
 	{

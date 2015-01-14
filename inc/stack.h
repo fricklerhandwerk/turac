@@ -29,7 +29,7 @@ int stackPush(stackT *stackP, cardT *card);
 cardT *stackPop(stackT *stackP);
 
 // Return number of elements currently in stack
-int stackNumElem(stackT *stackP);
+int stackTop(stackT *stackP);
 
 // Return size of stack
 int stackSize(stackT *stackP);
