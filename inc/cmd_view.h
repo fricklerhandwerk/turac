@@ -19,8 +19,6 @@ void viewCardLn(cardT *cardP, const char **listRank, const char **listSuit);
 
 // Shows cards of a stack next to each other
 void viewHandRow(stackT *handP, const char **listRank, const char **listSuit);
-
-// Shows cards of a stack next to each other
 void viewHandCol(stackT *handP, const char **listRank, const char **listSuit);
 
 // Shows deck of cards with total number of elements and the flipped ones next to it
@@ -28,7 +26,8 @@ void viewHandCol(stackT *handP, const char **listRank, const char **listSuit);
 void viewDeck(stackT *deckP, const char **listRank, const char **listSuit);
 
 // Show table
-void viewTable(tableT *tableP, const char **listRank, const char **listSuit);
+void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit);
+void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit);
 
 
 #endif // CMD_VIEW_H

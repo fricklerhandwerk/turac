@@ -75,6 +75,10 @@ void testTable(void)
 		}
 	}
 
+	printf("hands:\n");
+
+	viewHandRow(att,listRank,listSuit);
+	viewHandRow(def,listRank,listSuit);
 
 	// create table
 	tableT *table = tableInit(size);
@@ -82,24 +86,39 @@ void testTable(void)
 	for (int i = 0; i < size; ++i)
 	{
 		tablePutAtt(table,stackPop(att));
-		/*
-		if(tablePutDef(table,stackPop(def),i))
-		{
-			printf("fail\n");
-		}
-		*/
 	}
 
+	// put all defend cards on table
 
-	tablePutDef(table,stackPop(def),0);
-	tablePutDef(table,stackPop(def),1);
 	tablePutDef(table,stackPop(def),2);
+	tablePutDef(table,stackPop(def),0);
 
 
-	printf("viewTable()\n");
-	viewTable(table,listRank,listSuit);
+	printf("beat:\n[");
+	for (int i = 0; i < size; ++i)
+	{
+		printf("%d,",table->beats[i]);
+	}
+	printf("]\n");
 
+
+	printf("viewTableRow()\n");
+	viewTableRow(table,listRank,listSuit);
+	printf("Put new card...\n");
+	viewCardLn(&def->cards[def->top],listRank,listSuit);
+	tablePutDef(table,stackPop(def),3);
+
+	printf("beat:\n[");
+	for (int i = 0; i < size; ++i)
+	{
+		printf("%d,",table->beats[i]);
+	}
+	printf("]\n");
+
+	printf("viewTableCol()\n");
+	viewTableCol(table,listRank,listSuit);
 }
+
 int main(void)
 {	
 	// throw dice
@@ -107,8 +126,6 @@ int main(void)
 	//testHand();
 	//testDeck();
 	testTable();
-
-
 
 	return 0;
 }

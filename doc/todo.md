@@ -79,9 +79,12 @@
 		- [x] Header file
 		- [x] viewCard
 		- [x] viewCardLn
-		- [x] viewHand
-		- [x] viewDeck // maybe with number of cards inside
-		- [ ] viewTable // use table info to get card alignment
+		- [x] viewHandRow
+		- [x] viewHandCol
+		- [x] viewDeck
+		- [x] viewTableRow
+		- [x] viewTableCol
+
 
 
 ## Pile of stuff

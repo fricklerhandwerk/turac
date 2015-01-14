@@ -59,7 +59,7 @@ void tableDestroy(tableT **tableP)
 // Put card on attack or defend stack
 int tablePutAtt(tableT *tableP, cardT *cardP)
 {
-	if(stackPush(tableP->att,cardP) == EXIT_FAILURE)
+	if(cardP == NULL || stackPush(tableP->att,cardP) == EXIT_FAILURE)
 	{
 		return(EXIT_FAILURE);
 	}
@@ -70,8 +70,19 @@ int tablePutDef(tableT *tableP, cardT *cardP, int beatPos)
 {
 	// check validity of defense assignment
 	// exit with error if pushing not possible for some reason
-	if(beatPos < 0 || beatPos > stackTop(tableP->att) || stackPush(tableP->def,cardP) == EXIT_FAILURE)
+	if(cardP == NULL || beatPos < 0 || beatPos > stackTop(tableP->att) || stackPush(tableP->def,cardP) == EXIT_FAILURE)
 	{
+		/*
+		printf("FIAL\n");
+		if(cardP == NULL)
+		{
+			printf("CardPointer NULL!\n");
+		}
+		if(beatPos < 0 || beatPos > stackTop(tableP->att))
+		{
+			printf("beatPos off range (%d/%d)!\n",beatPos,stackTop(tableP->att));
+		}
+		*/
 		return(EXIT_FAILURE);
 	}
 

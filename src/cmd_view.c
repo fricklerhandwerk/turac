@@ -4,6 +4,12 @@
 
 #include "../inc/cmd_view.h"
 
+// cursor movement to skip cards
+#define CUR_UP "\033[1A"
+#define CUR_DN "\033[1B"
+#define CUR_RT "\033[5C"
+#define CUR_LT "\033[5D"
+
 void viewCard(cardT *cardP, const char **listRank, const char **listSuit)
 {
 	if (cardP->face)
@@ -25,7 +31,7 @@ void viewCardLn(cardT *cardP, const char **listRank, const char **listSuit)
 
 void viewHandRow(stackT *handP, const char **listRank, const char **listSuit)
 {
-	for (int i = 0; i <= handP->top; ++i)
+	for (int i = 0; i <= stackTop(handP); ++i)
 	{
 		viewCard(&handP->cards[i],listRank,listSuit);
 	}
@@ -34,7 +40,7 @@ void viewHandRow(stackT *handP, const char **listRank, const char **listSuit)
 
 void viewHandCol(stackT *handP, const char **listRank, const char **listSuit)
 {
-	for (int i = 0; i <= handP->top; ++i)
+	for (int i = 0; i <= stackTop(handP); ++i)
 	{
 		viewCardLn(&handP->cards[i],listRank,listSuit);
 	}
@@ -83,9 +89,81 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit)
 	printf("\n");
 }
 
-void viewTable(tableT *tableP, const char **listRank, const char **listSuit)
-{
-	viewHandRow(tableP->att,listRank,listSuit);
-	viewHandRow(tableP->def,listRank,listSuit);
 
+
+void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit)
+{
+	// print attacking cards
+	viewHandRow(tableP->att,listRank,listSuit);
+
+	// print defending cards
+	// get maximum of cards to print
+	int range = stackTop(tableP->def)+1;
+
+	// walk through `beats` array
+	for (int i = 0; i < range; ++i)
+	{
+		int beats = tableP->beats[i];
+		// depending on beat position, move cursor
+		for (int j = 0; j < beats; ++j)
+		{
+			printf(CUR_RT);
+		}
+
+		viewCard(&tableP->def->cards[i],listRank,listSuit);
+
+		// move cursor back
+		for (int j = 0; j <= beats; ++j)
+		{
+			printf(CUR_LT);
+		}
+	}
+	printf("\n");
+}
+
+void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit)
+{
+	// print attacking cards
+	viewHandCol(tableP->att,listRank,listSuit);
+	int height = stackTop(tableP->att)+1;
+
+	// move cursor back to top left
+	for (int i = 0; i <= height; ++i)
+	{
+		printf(CUR_UP);
+	}
+	// next column
+	printf(CUR_RT);
+
+	// print defending cards
+	// get maximum of cards to print
+	int range = stackTop(tableP->def)+1;
+
+	// walk through `beats` array
+	for (int i = 0; i < range; ++i)
+	{
+		int beats = tableP->beats[i];
+		// depending on beat position, move cursor down
+		for (int j = 0; j < beats; ++j)
+		{
+			printf(CUR_DN);
+		}
+
+		viewCard(&tableP->def->cards[i],listRank,listSuit);
+
+		// move cursor back up
+		for (int j = 0; j < beats; ++j)
+		{
+			printf(CUR_UP);
+		}
+		// back to left side
+		printf(CUR_LT);
+	}
+	// move down to end of column
+	for (int i = 0; i < height-1; ++i)
+	{
+		printf(CUR_DN);
+	}
+	printf(CUR_LT);
+	printf("\n");
 }
