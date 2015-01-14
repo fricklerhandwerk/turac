@@ -73,13 +73,15 @@
 		- [x] tableFull
 		- [x] tableBeaten
 		- [x] tableClean
-	- [ ] Table tests
+	- [x] Table tests
 	- [x] Clumsy makefile (it's something)
 	- [ ] Commandline view
 		- [x] Header file
 		- [x] viewCard
 		- [x] viewCardLn
 		- [x] viewHand
+		- [ ] viewDeck // maybe with number of cards inside
+		- [ ] viewTable // use table info to get card alignment
 
 
 ## Pile of stuff
@@ -91,8 +93,6 @@
 	- [ ] partyRemovePlayer
 	- [ ] partyNextPlayer
 - [ ] Commandline view
-	- [ ] viewDeck // maybe with number of cards inside
-	- [ ] viewTable // use table info to get card alignment
 - [ ] Commandline control
 	- [ ] Header file
 	- [ ] moveCursor // cursor to choose card from hand
