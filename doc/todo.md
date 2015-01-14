@@ -80,7 +80,7 @@
 		- [x] viewCard
 		- [x] viewCardLn
 		- [x] viewHand
-		- [ ] viewDeck // maybe with number of cards inside
+		- [x] viewDeck // maybe with number of cards inside
 		- [ ] viewTable // use table info to get card alignment
 
 

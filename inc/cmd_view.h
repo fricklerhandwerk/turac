@@ -7,16 +7,28 @@
 
 #include "card.h"
 #include "stack.h"
+#include "table.h"
+
 
 // Print card without linebreak
 // Takes card and rank/suit lists from rules file
 void viewCard(cardT *cardP, const char **listRank, const char **listSuit);
 
-// Print card with  linebreak
+// Print card with linebreak
 void viewCardLn(cardT *cardP, const char **listRank, const char **listSuit);
 
 // Shows cards of a stack next to each other
-void viewHand(stackT *handP, const char **listRank, const char **listSuit);
+void viewHandRow(stackT *handP, const char **listRank, const char **listSuit);
+
+// Shows cards of a stack next to each other
+void viewHandCol(stackT *handP, const char **listRank, const char **listSuit);
+
+// Shows deck of cards with total number of elements and the flipped ones next to it
+// this is quite game specific, but in durak the flipped trump is part of the deck, not the table
+void viewDeck(stackT *deckP, const char **listRank, const char **listSuit);
+
+// Show table
+void viewTable(tableT *tableP, const char **listRank, const char **listSuit);
 
 
 #endif // CMD_VIEW_H
