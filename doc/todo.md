@@ -66,17 +66,22 @@
 	- [x] Stack tests
 	- [ ] Table
 		- [x] table struct // two card stacks and a mapping array to know which card beats which
-		- [ ] tableInit
-		- [ ] tableDestroy
-		- [ ] tableFull
-		- [ ] tableBeaten
-		- [ ] tableEmpty
+		- [x] tableInit
+		- [x] tableDestroy
+		- [x] tablePutAtt
+		- [x] tablePutDef
+		- [x] tableFull
+		- [x] tableBeaten
+		- [x] tableClean
+	- [x] Table tests
 	- [x] Clumsy makefile (it's something)
 	- [ ] Commandline view
 		- [x] Header file
 		- [x] viewCard
 		- [x] viewCardLn
 		- [x] viewHand
+		- [ ] viewDeck // maybe with number of cards inside
+		- [ ] viewTable // use table info to get card alignment
 
 
 ## Pile of stuff
@@ -88,8 +93,6 @@
 	- [ ] partyRemovePlayer
 	- [ ] partyNextPlayer
 - [ ] Commandline view
-	- [ ] viewDeck // maybe with number of cards inside
-	- [ ] viewTable // use table info to get card alignment
 - [ ] Commandline control
 	- [ ] Header file
 	- [ ] moveCursor // cursor to choose card from hand

@@ -4,7 +4,6 @@
 #include <time.h>
 #include "stack.h"
 
-
 stackT *stackInit(int size)
 {
 	// allocate memory for array of cards
@@ -20,6 +19,12 @@ stackT *stackInit(int size)
 	// create new stack
 	stackT *stackP;
 	stackP = malloc(sizeof(stackT));
+
+	// handle allocation errors
+	if (stackP == NULL)
+	{
+		return(NULL);
+	}
 
 	// write initial values
 	stackP->cards = cards;
@@ -64,9 +69,14 @@ cardT *stackPop(stackT *stackP)
 	return &stackP->cards[stackP->top--];
 }
 
-int stackNumElem(stackT *stackP)
+int stackTop(stackT *stackP)
 {
-	return stackP->top + 1;
+	return stackP->top;
+}
+
+int stackSize(stackT *stackP)
+{
+	return stackP->size;
 }
 
 int stackEmpty(stackT *stackP)
@@ -78,7 +88,6 @@ int stackFull(stackT *stackP)
 {
 	return stackP->top >= stackP->size - 1;
 }
-
 
 // Shuffle stack
 void stackShuffle(stackT *stackP)
@@ -110,7 +119,6 @@ void stackShuffle(stackT *stackP)
 	
 	return;
 }
-
 
 // Sort stack by rank/siut
 void stackSortRank(stackT *stackP)

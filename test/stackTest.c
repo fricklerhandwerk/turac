@@ -28,7 +28,6 @@ int testStackInitDestroy(void)
 	printf("Deallocating stack again...\n");
 	stackDestroy(&stack);
 	
-	//printf("stack size: %d\n",stack->size);
 	if (stack == NULL)
 	{
 		printf("OK.\n");
@@ -51,7 +50,7 @@ int testStackBasicOps(void)
 	}
 	else
 	{
-		printf("isEmpty() failed!\n");
+		printf("stackEmpty() failed!\n");
 		return(EXIT_FAILURE);
 	}
 	
@@ -75,7 +74,7 @@ int testStackBasicOps(void)
 	}
 	else
 	{
-		printf("isFull() failed!\n");
+		printf("stackFull() failed!\n");
 		return(EXIT_FAILURE);
 	}
 	
