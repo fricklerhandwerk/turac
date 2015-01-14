@@ -1,6 +1,5 @@
 /* Card stack implementation with arrays */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "stack.h"
@@ -123,10 +122,3 @@ void stackSortSuit(stackT *stackP)
 {
 	qsort(stackP->cards,stackP->top+1,sizeof(cardT),&cardCompareSuit);
 }
-
-
-
-
-
-
-

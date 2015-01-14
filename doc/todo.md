@@ -64,6 +64,13 @@
 		- [x] stackSortSuit
 		- [x] stackSortRank
 	- [x] Stack tests
+	- [ ] Table
+		- [x] table struct // two card stacks and a mapping array to know which card beats which
+		- [ ] tableInit
+		- [ ] tableDestroy
+		- [ ] tableFull
+		- [ ] tableBeaten
+		- [ ] tableEmpty
 	- [x] Clumsy makefile (it's something)
 	- [ ] Commandline view
 		- [x] Header file
@@ -80,13 +87,6 @@
 	- [ ] partyAddPlayer
 	- [ ] partyRemovePlayer
 	- [ ] partyNextPlayer
-- [ ] Rules
-	- [ ] table struct // two card stacks and a mapping array to know which card beats which
-	- [ ] tableInit
-	- [ ] tableDestroy
-	- [ ] tableFull
-	- [ ] tableBeaten
-	- [ ] tableEmpty
 - [ ] Commandline view
 	- [ ] viewDeck // maybe with number of cards inside
 	- [ ] viewTable // use table info to get card alignment

@@ -3,6 +3,8 @@
 #ifndef PARTY_H
 #define PARTY_H
 
+#include "player.h"
+
 /* PARTY DATA TYPE
  *
  * Holds a linked list of players and its length.

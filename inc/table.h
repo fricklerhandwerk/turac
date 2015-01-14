@@ -1,22 +1,26 @@
-/* Table interface */
+/* Durak game table interface */
 
 #ifndef TABLE_H
 #define TABLE_H
+
+#include "stack.h"
 
 /* TABLE DATA TYPE
  *
  * Holds two equally sized stacks of cards,
  + one for the attacking cards which have to be beaten,
  + one for the defending cards, which beat the attacking ones.
- * The `beats[2]` array is a mapping of cards in def to cards in att
- + that tells us which card beats which. Ex: [[0,2][1,4]]
+ * The `beats array is a mapping of cards in def to cards in att
+ + that tells us which card beats which.
+ * Ex: [1,4] => def->cards[0] beats att->cards[1]
+ *              def->cards[1] beats att->cards[4]
  */
 
 typedef struct
 {
 	stackT *att;
 	stackT *def;
-	int *beats[2];
+	int *beats;
 } tableT;
 
 // Allocate memory for table of given size and initialize member variables
