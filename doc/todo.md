@@ -66,11 +66,14 @@
 	- [x] Stack tests
 	- [ ] Table
 		- [x] table struct // two card stacks and a mapping array to know which card beats which
-		- [ ] tableInit
-		- [ ] tableDestroy
-		- [ ] tableFull
-		- [ ] tableBeaten
-		- [ ] tableEmpty
+		- [x] tableInit
+		- [x] tableDestroy
+		- [x] tablePutAtt
+		- [x] tablePutDef
+		- [x] tableFull
+		- [x] tableBeaten
+		- [x] tableClean
+	- [ ] Table tests
 	- [x] Clumsy makefile (it's something)
 	- [ ] Commandline view
 		- [x] Header file

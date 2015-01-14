@@ -30,14 +30,20 @@ tableT *tableInit(int sizeTable);
 // Double pointer do get rid of the pointer itself as well
 void tableDestroy(tableT **tableP);
 
+// Put card on attack stack
+int tablePutAtt(tableT *tableP, cardT *cardAttP);
+// Put defending card "on top of" attacking card
+// using the attacking card's position on the att stack
+int tablePutDef(tableT *tableP, cardT *cardDefP, int beatPos);
+
 // Check if table is full so no more attacking can be made
 int tableFull(tableT *tableP);
 
 // Check if all attacking cards on the table are beaten
 int tableBeaten(tableT *tableP);
 
-// Put all cards from the table to the stack with discarded cards
+// Put all cards from the table to a destination stack (pick up or discard)
 // Reset beating map
-void tableClean(tableT *tableP, stackT *discardP);
+void tableClean(tableT *tableP, stackT *destP);
 
 #endif // TABLE_H

@@ -50,6 +50,31 @@ void tableDestroy(tableT **tableP)
 	*tableP = NULL;
 }
 
+// Put card on attack or defend stack
+int tablePutAtt(tableT *tableP, cardT *cardP)
+{
+	if(stackPush(tableP->att,cardP) == EXIT_FAILURE);
+	{
+		return(EXIT_FAILURE);
+	}
+	return(EXIT_SUCCESS);
+}
+
+int tablePutDef(tableT *tableP, cardT *cardDefP, int beatPos)
+{
+	if(stackPush(tableP->def,cardAttP) == EXIT_FAILURE);
+	{
+		return(EXIT_FAILURE);
+	}
+
+	// mark the position in `beats` array
+	// which corresponds to the position of cardDef on the def stack (topmost)
+	// with the position of the card to beat on the att stack (given)
+	tableP->beats[stackNumElem(tableP->def)-1] = beatPos;
+
+	return(EXIT_SUCCESS);
+}
+
 // Check if table is full so no more attacking can be made
 int tableFull(tableT *tableP)
 {
@@ -62,13 +87,13 @@ int tableBeaten(tableT *tableP)
 	return (stackFull(tableP->def));
 }
 
-int tableClean(tableT *tableP, stackT *discardP)
+int tableClean(tableT *tableP, stackT *destP)
 {
 	// clean attack stack
 	while (!stackEmpty(tableP->att))
 	{
 		// take care of memory errors, just in case
-		if (stackPush(discardP,stackPop(tableP->att)) == EXIT_FAILURE)
+		if (stackPush(destP,stackPop(tableP->att)) == EXIT_FAILURE)
 		{
 			return(EXIT_FAILURE);
 		}
@@ -76,13 +101,13 @@ int tableClean(tableT *tableP, stackT *discardP)
 	// clean defend stack
 	while (!stackEmpty(tableP->def))
 	{
-		if (stackPush(discardP,stackPop(tableP->def)) == EXIT_FAILURE)
+		if (stackPush(destP,stackPop(tableP->def)) == EXIT_FAILURE)
 		{
 			return(EXIT_FAILURE);
 		}
 	}
 
-	// reset beats array
+	// reset `beats` array
 	int size = stackSize(tableP->att);
 	for (int i = 0; i < size; ++i)
 	{
