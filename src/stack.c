@@ -21,6 +21,12 @@ stackT *stackInit(int size)
 	stackT *stackP;
 	stackP = malloc(sizeof(stackT));
 
+	// handle allocation errors
+	if (stack == NULL)
+	{
+		return(NULL);
+	}
+
 	// write initial values
 	stackP->cards = cards;
 	stackP->top = -1;
@@ -67,6 +73,11 @@ cardT *stackPop(stackT *stackP)
 int stackNumElem(stackT *stackP)
 {
 	return stackP->top + 1;
+}
+
+int stackSize(stackT *stackP)
+{
+	return stackP->size;
 }
 
 int stackEmpty(stackT *stackP)

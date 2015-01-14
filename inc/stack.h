@@ -31,18 +31,18 @@ cardT *stackPop(stackT *stackP);
 // Return number of elements currently in stack
 int stackNumElem(stackT *stackP);
 
+// Return size of stack
+int stackSize(stackT *stackP);
+
 // Check if stack is full/empty
 int stackEmpty(stackT *stackP);
 int stackFull(stackT *stackP);
 
-
 // Shuffle stack
 void stackShuffle(stackT *stackP);
-
 
 // Sort stack by suit/rank
 void stackSortRank(stackT *stackP);
 void stackSortSuit(stackT *stackP);
-
 
 #endif // STACK_H

@@ -36,7 +36,8 @@ int tableFull(tableT *tableP);
 // Check if all attacking cards on the table are beaten
 int tableBeaten(tableT *tableP);
 
+// Put all cards from the table to the stack with discarded cards
 // Reset beating map
-void tableEmpty(tableT *tableP);
+void tableClean(tableT *tableP, stackT *discardP);
 
 #endif // TABLE_H
