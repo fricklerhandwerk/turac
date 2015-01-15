@@ -24,6 +24,15 @@ cardT *cardNew(int rank, int suit, int face)
 	return(cardP);
 }
 
+// Free memory reserved for card struct
+void cardDestroy(cardT **cardP)
+{
+	// free card memory
+	free(*cardP);
+	// reset pointer
+	*cardP = NULL;
+}
+
 // Set card facing
 void cardSetFace(cardT *cardP, int face)
 {

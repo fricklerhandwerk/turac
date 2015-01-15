@@ -21,14 +21,14 @@ typedef struct partyT
 partyT *partyInit(void);
 
 // Free memory for party
-int partyDestroy(partyT **partyP);
+void partyDestroy(partyT **partyP);
 
 // Add player to linked list and update numPlayers
-void partyAddPlayer(partyT *partyP, playerT *playerP);
+int partyAddPlayer(partyT *partyP, playerT *playerP);
 
 // Remove player from linked list
 // Update currentPlayer pointer if necessary
-void partyRemovePlayer(partyT *partyP, playerT *playerP);
+int partyRemovePlayer(partyT *partyP, playerT *playerP);
 
 // Switch player roles such that the next player attacks
 // Check if next player is still in the game and skip accordingly

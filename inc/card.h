@@ -31,6 +31,9 @@ typedef struct
 // Create card with given rank and suit and facing
 cardT *cardNew(int rank, int suit, int face);
 
+// Free memory reserved for card struct
+void cardDestory(cardT **cardP);
+
 // Set card facing
 void cardSetFace(cardT *cardP, int face);
 

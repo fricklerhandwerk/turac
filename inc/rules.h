@@ -6,6 +6,8 @@
 // Create playing deck using rank and suit lists
 // NOTE: Automatically shuffles and finds a trump suit
 // by uncovering the card at the bottom.
+// WARNING: Must destroy newly created cards
+// after pushing them onto the stack, otherwise memory leaks
 stackT *deckInit(int &trumpSuit);
 
 // Hand cards to players in party Order until HAND_SIZE is reached for each player

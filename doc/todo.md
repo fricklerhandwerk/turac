@@ -74,6 +74,12 @@
 		- [x] tableBeaten
 		- [x] tableClean
 	- [x] Table tests
+	- [ ] Party
+		- [ ] partyInit
+		- [ ] partyDestroy
+		- [ ] partyAddPlayer
+		- [ ] partyRemovePlayer
+		- [ ] partyNextPlayer
 	- [x] Clumsy makefile (it's something)
 	- [ ] Commandline view
 		- [x] Header file
@@ -89,12 +95,7 @@
 
 ## Pile of stuff
 - [ ] Makefile for handling modules (when set up, add your own compile option)
-- [ ] Party
-	- [ ] partyInit
-	- [ ] partyDestroy
-	- [ ] partyAddPlayer
-	- [ ] partyRemovePlayer
-	- [ ] partyNextPlayer
+
 - [ ] Commandline view
 - [ ] Commandline control
 	- [ ] Header file

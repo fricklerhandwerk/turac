@@ -29,7 +29,6 @@ struct playerT
 {
 	char *name;
 	stackT *hand;
-	int currentF;
 	int stopF;
 	int doneF;
 	playerT *next;
@@ -54,8 +53,8 @@ void playerStop(playerT *playerP);
 void playerDone(playerT *playerP);
 
 // Play a given cards from a players hand
-// Where exactly it is put is decided by player status and table contents
-void playCard(playerT *playerP, int numCard, tableT *tableP);
+// Just return a card
+cardT *playCard(playerT *playerP, int numCard);
 
 // Put given card in player's hand
 void takeCard(playerT *playerP, cardT *cardP);
