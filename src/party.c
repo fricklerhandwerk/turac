@@ -56,7 +56,7 @@ int partyAddPlayer(partyT *partyP, playerT *playerP)
 // Update currentPlayer pointer if necessary
 int partyRemovePlayer(partyT *partyP, playerT *playerP)
 {
-
+	
 }
 
 // Switch player roles such that the next player attacks
