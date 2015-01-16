@@ -4,9 +4,10 @@
 
 #include "../inc/card.h"
 
+playerT list = NULL;
 
 // Allocate memory for player with empty hand
-playerT *playerNew(char *name, *anfang){
+playerT *playerNew(char *name){
 
   // allocate memory for array of player
   playerT *player;
@@ -20,24 +21,51 @@ playerT *playerNew(char *name, *anfang){
 
   player->name = name;
   player->hand = NULL;
-  player->currentF = 0;
-  player->stopF = 0;
+  //player->currentF = 0;
+  player->stopF = 1;
   player->doneF = 0;
-  player->next = NULL;
+  player->next = list->next;
+  list->next = player;
 
   return(player);
 }
 
 // Free member and player memory
-void playerDestroy(playerT **playerP);
+void playerDestroy(playerT **playerP){
+  playerT tmp = playerP->next;
+  playerP->next = playerP->next->next;
+  free(*playerP);
+  *playerP = NULL;
+}
 
 // Add player to party
-void playerAdd(playerT *partyP, playerT *playerP);
+void playerAdd(playerT *partyP, playerT *playerP){
+  for (int i = 0; i < partyP.numPlayers; i++){
+    playerP = playerP.next;
+    partyP.currentPlayer = partyP.currentPlayer.next;
+  }
+  while(playerP != NULL){
+    if(partyP.currentPlayer == NULL){
+      partyP.currentPlayer = playerP;
+      partyP.currentPlayer = partyP.currentPlayer.next;
+    }
+    playerP = playerP.next;
+
+  }
+}
 
 // Set player state
-void playerStart(playerT *playerP);
-void playerStop(playerT *playerP);
-void playerDone(playerT *playerP);
+void playerStart(playerT *playerP){
+  playerT.stopF = 0;
+  playerT.doneF = 0;
+}
+void playerStop(playerT *playerP){
+  playerT.stopF = 1;
+}
+void playerDone(playerT *playerP){
+  playerT.stopF = 1;
+  playerT.doneF = 1;
+}
 
 // Play a given cards from a players hand
 // Where exactly it is put is decided by player status and table contents
