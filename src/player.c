@@ -48,6 +48,7 @@ void playerAdd(playerT *partyP, playerT *playerP){
     if(partyP.currentPlayer == NULL){
       partyP.currentPlayer = playerP;
       partyP.currentPlayer = partyP.currentPlayer.next;
+      partyP.numPlayers ++;
     }
     playerP = playerP.next;
 
@@ -69,10 +70,24 @@ void playerDone(playerT *playerP){
 
 // Play a given cards from a players hand
 // Where exactly it is put is decided by player status and table contents
-void playCard(playerT *playerP, int numCard, tableT *tableP);
+void playCard(playerT *playerP, int numCard, tableT *tableP){
+}
 
 // Put given card in player's hand
-void takeCard(playerT *playerP, cardT *cardP);
+void takeCard(playerT *playerP, cardT *cardP){
+  stackPush(playerP.hand, cardP);
+}
 
 // Pick up all cards from the table
-void pickUpCards(playerT *playerP, tableT *tableP);
+void pickUpCards(playerT *playerP, tableT *tableP){
+  for (int i = 0; i < tableP.att.size; i++){
+    takeCard(playerP, tableP.att.cards);
+    tableP.att.cards = tableP.att.cards.next;
+  }
+  for (int i = 0; i < tableP.def.size; i++){
+    takeCard(playerP, tableP.def.cards);
+    tableP.def.cards = tableP.def.cards.next;
+  }
+  //destory table
+  //stack sort
+}
