@@ -15,9 +15,12 @@
 // after pushing them onto the stack, otherwise memory leaks
 stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit);
 
-// Hand cards to players in party Order until HAND_SIZE is reached for each player
-// Reduce stack size on the way
-void handCards(partyT *partyP, stackT *stackP, int sizeHand);
+
+// Hand cards to player until `sizeHand` is reached or deck is empty (or player hand is full, just to be sure)
+void handCardsPlayer(playerT *playerP, stackT *deckP, int sizeHand);
+
+// Hand cards to each player in party according to traditional rules
+void handCardsParty(partyT *partyP, stackT *deckP, int sizeHand);
 
 // Determine if a card has trump suit
 int isTrump(cardT *cardP, int trumpSuit);

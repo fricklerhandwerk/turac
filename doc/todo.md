@@ -89,8 +89,8 @@
 	- [x] Player tests
 	- [x] Party tests
 	- [ ] Rules
-		- [ ] deckCreate
-		- [ ] handCards
+		- [x] deckCreate
+		- [x] handCards
 
 
 
