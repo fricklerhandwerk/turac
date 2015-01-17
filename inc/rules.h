@@ -3,12 +3,17 @@
 
 /* GAME FUNCTIONS AND RULES */
 
+#include "constants.h"
+#include "party.h"
+#include "table.h"
+
+
 // Create playing deck using rank and suit lists
 // NOTE: Automatically shuffles and finds a trump suit
 // by uncovering the card at the bottom.
 // WARNING: Must destroy newly created cards
 // after pushing them onto the stack, otherwise memory leaks
-stackT *deckInit(int &trumpSuit);
+stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit);
 
 // Hand cards to players in party Order until HAND_SIZE is reached for each player
 // Reduce stack size on the way
