@@ -3,10 +3,8 @@
 
 /* GAME FUNCTIONS AND RULES */
 
-#include "constants.h"
 #include "party.h"
 #include "table.h"
-
 
 // Create playing deck using rank and suit lists
 // NOTE: Automatically shuffles and finds a trump suit
@@ -46,4 +44,4 @@ int gameOver(partyT *partyP, stackT *deckP);
 
 
 /* TODO: Add more functions for rule-checking */
-#define RULES_H
+#endif // RULES_H

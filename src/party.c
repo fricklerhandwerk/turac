@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-#include "party.h"
+#include "../inc/party.h"
 
 // Allocate memory for an empty party
 partyT *partyInit(void)

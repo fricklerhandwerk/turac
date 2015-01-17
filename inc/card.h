@@ -32,7 +32,7 @@ typedef struct
 cardT *cardNew(int rank, int suit, int face);
 
 // Free memory reserved for card struct
-void cardDestory(cardT **cardP);
+void cardDestroy(cardT **cardP);
 
 // Set card facing
 void cardSetFace(cardT *cardP, int face);

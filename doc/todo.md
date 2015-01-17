@@ -92,6 +92,7 @@
 		- [x] roundOver
 		- [ ] gameStart
 		- [x] gameOver
+	- [ ] Rules tests
 
 
 
