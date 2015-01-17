@@ -28,8 +28,11 @@ int stackPush(stackT *stackP, cardT *card);
 // Return card pointer from top of stack, decrease top
 cardT *stackPop(stackT *stackP);
 
-// Return number of elements currently in stack
+// Return top position in stack
 int stackTop(stackT *stackP);
+
+// Swap element at given position with top element
+int stackSwap(stackT *stackP, int pos);
 
 // Return size of stack
 int stackSize(stackT *stackP);

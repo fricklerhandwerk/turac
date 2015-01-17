@@ -6,7 +6,8 @@
 partyT *partyInit(void)
 {
 	partyT *partyP = malloc(sizeof(partyT));
-	partyP->currentPlayer = NULL;
+	partyP->first = NULL;
+	partyP->current = NULL;
 	partyP->numPlayers = 0;
 	return partyP;
 }
@@ -15,13 +16,17 @@ partyT *partyInit(void)
 void partyDestroy(partyT **partyP)
 {
 	// destroy all remaining players
-	playerT *nextPlayer;
-	while ((*partyP)->currentPlayer != NULL)
+	playerT *current = (*partyP)->first;
+	playerT *next = current->next;
+	while (current != NULL)
 	{
-		nextPlayer = (*partyP)->currentPlayer->next;
 		// if implemented correctly, should set currentPlayer pointer to NULL
-		playerDestroy(&(*partyP)->currentPlayer); // may need be double pointer to currentPlayer
-		(*partyP)->currentPlayer = nextPlayer;
+		playerDestroy(&current);
+		current = next;
+		if (next != NULL)
+		{
+			next = next->next;
+		}
 	}
 	free(*partyP);
 	*partyP = NULL;
@@ -31,37 +36,46 @@ void partyDestroy(partyT **partyP)
 int partyAddPlayer(partyT *partyP, playerT *playerP)
 {
 	// don't add empty players
-	// last player already points to NULL
+	// last player already points first
 	if (playerP != NULL)
 	{
-		if (partyP->currentPlayer != NULL)
+		// if player list non-empty
+		if (partyP->current != NULL)
 		{
 			// just insert new one after current player
-			// O(1) instead of O(n) for appending
-			playerP->next = partyP->currentPlayer->next;
-			partyP->currentPlayer->next = playerP;
-			partyP->numPlayers++;
+			// O(1) instead of O(n) for appending to single-linked list
+			// NOTE: semantically, this may not always be a good idea
+			playerP->next = partyP->current->next;
+			partyP->current->next = playerP;
 		}
 		else
 		{
 			// otherwise make it the first (and current) player
-			partyP->currentPlayer = playerP;
+			playerP->next = playerP;
+			partyP->first = playerP;
+			partyP->current = playerP;
 		}
+		partyP->numPlayers++;
 		return(EXIT_SUCCESS);
 	}
 	return(EXIT_FAILURE);
 }
 
+/*
 // Remove player from linked list
 // Update currentPlayer pointer if necessary
 int partyRemovePlayer(partyT *partyP, playerT *playerP)
 {
-	
+
 }
+*/
 
 // Switch player roles such that the next player attacks
 // Check if next player is still in the game and skip accordingly
-void partyNextPlayer(partyT *partyP);
+void partyNextPlayer(partyT *partyP)
+{
+	partyP->current = partyP->current->next;
+}
 
 /* not important right now
 // Shuffle player seats

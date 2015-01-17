@@ -74,6 +74,21 @@ int stackTop(stackT *stackP)
 	return stackP->top;
 }
 
+int stackSwap(stackT *stackP, int pos)
+{
+	// refuse to work on illegal positions
+	if (pos < 0 || pos > stackP->top)
+	{
+		return(EXIT_FAILURE);
+	}
+
+	cardT temp = stackP->cards[pos];
+	stackP->cards[pos] = stackP->cards[stackP->top];
+	stackP->cards[stackP->top] = temp;
+
+	return(EXIT_SUCCESS);
+}
+
 int stackSize(stackT *stackP)
 {
 	return stackP->size;

@@ -7,13 +7,16 @@
 
 /* PARTY DATA TYPE
  *
- * Holds a linked list of players and its length.
+ * Holds a circular linked list of players and its length.
  * The linked list points to the current player.
  */
 
 typedef struct partyT
 {
-	playerT *currentPlayer;
+	// beginning of linked list
+	playerT *first;
+	// attacking player
+	playerT *current;
 	int numPlayers;
 };
 
@@ -26,9 +29,11 @@ void partyDestroy(partyT **partyP);
 // Add player to linked list and update numPlayers
 int partyAddPlayer(partyT *partyP, playerT *playerP);
 
+/* Will not be used in first demo
 // Remove player from linked list
 // Update currentPlayer pointer if necessary
 int partyRemovePlayer(partyT *partyP, playerT *playerP);
+*/
 
 // Switch player roles such that the next player attacks
 // Check if next player is still in the game and skip accordingly

@@ -38,6 +38,7 @@ void playerDestroy(playerT **playerP){
   *playerP = NULL;
 }
 
+/* your intface was deprecated, this is a party.h function
 // Add player to party
 void playerAdd(playerT *partyP, playerT *playerP){
   for (int i = 0; i < partyP.numPlayers; i++){
@@ -54,6 +55,7 @@ void playerAdd(playerT *partyP, playerT *playerP){
 
   }
 }
+*/
 
 // Set player state
 void playerStart(playerT *playerP){
