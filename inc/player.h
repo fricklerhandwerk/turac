@@ -61,6 +61,6 @@ int playerHandSize(playerT *playerP);
 cardT *playCard(playerT *playerP, int numCard);
 
 // Put given card in player's hand
-void takeCard(playerT *playerP, cardT *cardP);
+int takeCard(playerT *playerP, cardT *cardP);
 
 #endif // PLAYER_H

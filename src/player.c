@@ -109,13 +109,12 @@ int playerHandSize(playerT *playerP)
   return stackSize(playerP->hand);
 }
 
-
 // Play a given cards from a players hand
 // Where exactly it is put is decided by player status and table contents
 cardT *playCard(playerT *playerP, int numCard)
 {
   // refuse to operate on illegal values
-  if (playerP == NULL || numCard < 0 || numCard >= stackSize(playerP->hand))
+  if (playerP == NULL || numCard < 0 || numCard > stackSize(playerP->hand)-1)
   {
     return(NULL);
   }
@@ -126,9 +125,9 @@ cardT *playCard(playerT *playerP, int numCard)
 }
 
 // Put given card in player's hand
-void takeCard(playerT *playerP, cardT *cardP)
+int takeCard(playerT *playerP, cardT *cardP)
 {
-  stackPush(playerP->hand,cardP);
+  return stackPush(playerP->hand,cardP);
 }
 
 /* this is now done by the table, which throws out its contents on some stack

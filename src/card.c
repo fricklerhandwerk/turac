@@ -43,7 +43,12 @@ void cardSetFace(cardT *cardP, int face)
 // Compare two cards by rank/suit
 // Return values: a == b : 0; a > b : 1; a < b : -1;
 int cardCompareRank(const void *aP, const void *bP)
-{
+{	
+	// don't try to access NULL, will segfault
+	if (aP == NULL || bP == NULL)
+	{
+		return(0);
+	}
 	// casting generic pointers to what we need here using this method
 	// http://www.anyexample.com/programming/c/qsort__sorting_array_of_strings__integers_and_structs.xml
 	
@@ -57,6 +62,11 @@ int cardCompareRank(const void *aP, const void *bP)
 
 int cardCompareSuit(const void *aP, const void *bP)
 {
+	if (aP == NULL || bP == NULL)
+	{
+		return(0);
+	}
+	
 	cardT const *a = (cardT const *)aP;
 	cardT const *b = (cardT const *)bP;
 	
