@@ -90,6 +90,7 @@
 		- [x] cardFits
 		- [x] attackStopped // all attackers stopped adding cards
 		- [x] roundOver
+		- [ ] gameStart
 		- [x] gameOver
 
 

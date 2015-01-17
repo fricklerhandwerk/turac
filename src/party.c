@@ -39,6 +39,12 @@ void partyDestroy(partyT **partyP)
 		playerDestroy(&current);
 		current = next;
 	}
+
+	// reset pointers
+	(*partyP)->first = NULL;
+	(*partyP)->attacker = NULL;
+	(*partyP)->defender = NULL;
+
 	free(*partyP);
 	*partyP = NULL;
 }
@@ -92,10 +98,12 @@ void nextPlayer(partyT *partyP)
 {
 	partyP->attacker = partyP->defender;
 	playerT *current = partyP->defender;
+	// look for next defender until either an active player is found
+	// or we hit the defender again
 	while(1)
 	{
 		current = current->next;
-		if (playerInGame(current))
+		if (playerInGame(current) || current == partyP->defender)
 		{
 			partyP->defender = current;
 			return;
@@ -112,7 +120,9 @@ void nextPlayerSkip(partyT *partyP)
 	while(1)
 	{
 		current = current->next;
-		if (playerInGame(current))
+		// look for next attacker until either we found the next best active player
+		// or it's the defender again
+		if (playerInGame(current) || current == partyP->defender)
 		{
 			partyP->attacker = current;
 			break;
@@ -122,7 +132,7 @@ void nextPlayerSkip(partyT *partyP)
 	while(1)
 	{
 		current = current->next;
-		if (playerInGame(current))
+		if (playerInGame(current) || current == partyP->defender)
 		{
 			partyP->defender = current;
 			return;

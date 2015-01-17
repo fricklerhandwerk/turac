@@ -15,8 +15,8 @@
 typedef struct
 {
 	playerT *first;
-	playerT *att;
-	playerT *def;
+	playerT *attacker;
+	playerT *defender;
 	int numPlayers;
 } partyT;
 
