@@ -70,7 +70,7 @@ int tablePutDef(tableT *tableP, cardT *cardP, int beatPos)
 {
 	// check validity of defense assignment
 	// exit with error if pushing not possible for some reason
-	if(cardP == NULL || beatPos < 0 || beatPos > stackTop(tableP->att) || stackPush(tableP->def,cardP) == EXIT_FAILURE)
+	if(cardP == NULL || beatPos < 0 || beatPos >= stackSize(tableP->att) || stackPush(tableP->def,cardP) == EXIT_FAILURE)
 	{
 		/* some debugging
 		printf("FIAL\n");
@@ -78,9 +78,9 @@ int tablePutDef(tableT *tableP, cardT *cardP, int beatPos)
 		{
 			printf("CardPointer NULL!\n");
 		}
-		if(beatPos < 0 || beatPos > stackTop(tableP->att))
+		if(beatPos < 0 || beatPos >= stackSize(tableP->att))
 		{
-			printf("beatPos off range (%d/%d)!\n",beatPos,stackTop(tableP->att));
+			printf("beatPos off range (%d/%d)!\n",beatPos,stackSize(tableP->att)-1);
 		}
 		*/
 		return(EXIT_FAILURE);
@@ -89,7 +89,7 @@ int tablePutDef(tableT *tableP, cardT *cardP, int beatPos)
 	// mark the position in `beats` array
 	// which corresponds to the position of cardDef on the def stack (topmost)
 	// with the position of the card to beat on the att stack (given)
-	tableP->beats[stackTop(tableP->def)] = beatPos;
+	tableP->beats[stackSize(tableP->def)-1] = beatPos;
 
 	return(EXIT_SUCCESS);
 }

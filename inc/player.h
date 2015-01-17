@@ -7,15 +7,16 @@
  *
  * EXAMPLE
  * (attacking player "Foo", who didn't yet stop)
- * playerT playerFoo = {"Foo",&hand,FALSE,FALSE};
+ * playerT playerFoo = {"Foo",&hand,TRUE,TRUE};
  *
  * NOTE
- * `stopF` has two meanings depending on the player's current role:
+ * `roundF` denotes if a player is still active in the current round.
+ * It has two meanings depending on the player's current role:
  * If a player is attacking or spectating,
- + `stopF == TRUE` means, he won't add any cards.
- * If a player is defending, `stopF == TRUE` means,
+ + `roundF == FALSE` means, he won't add any cards.
+ * If a player is defending, `roundF == FALSE` means,
  + he gives up and takes all cards from the table.
- * `doneF` denotes if a player has finished the game.
+ * `gameF` denotes if a player is still in the game.
  */
 
  #define ATT 1
@@ -29,9 +30,9 @@ struct playerT
 {
 	char *name;
 	stackT *hand;
-	int stopF;
-	int doneF;
-	playerT *next;
+	int roundF;
+	int gameF;
+	struct playerT *next;
 };
 
 typedef struct playerT playerT;
@@ -45,9 +46,15 @@ playerT *playerNew(char *name, int sizeHand);
 void playerDestroy(playerT **playerP);
 
 // Set player state
-void playerStart(playerT *playerP);
-void playerStop(playerT *playerP);
-void playerDone(playerT *playerP);
+void playerStartRound(playerT *playerP);
+void playerEndRound(playerT *playerP);
+void playerStartGame(playerT *playerP);
+void playerEndGame(playerT *playerP);
+
+// Retrieve player State
+int playerInRound(playerT *playerP);
+int playerInGame(playerT *playerP);
+int playerHandSize(playerT *playerP);
 
 // Play a given cards from a players hand
 // Just return a card

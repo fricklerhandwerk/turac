@@ -69,15 +69,15 @@ cardT *stackPop(stackT *stackP)
 	return &stackP->cards[stackP->top--];
 }
 
-int stackTop(stackT *stackP)
+int stackSize(stackT *stackP)
 {
-	return stackP->top;
+	return stackP->top+1;
 }
 
 int stackSwap(stackT *stackP, int pos)
 {
 	// refuse to work on illegal positions
-	if (pos < 0 || pos > stackP->top)
+	if (pos < 0 || pos > stackP->top)
 	{
 		return(EXIT_FAILURE);
 	}
@@ -87,11 +87,6 @@ int stackSwap(stackT *stackP, int pos)
 	stackP->cards[stackP->top] = temp;
 
 	return(EXIT_SUCCESS);
-}
-
-int stackSize(stackT *stackP)
-{
-	return stackP->size;
 }
 
 int stackEmpty(stackT *stackP)

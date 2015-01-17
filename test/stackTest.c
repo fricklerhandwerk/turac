@@ -59,7 +59,7 @@ int testStackBasicOps(void)
 	if (stack->size == 1 && stack->top == 0)
 	{
 		printf("Updated stack: ");
-		viewHand(stack,listRank,listSuit);
+		viewHandRow(stack,listRank,listSuit);
 	}
 	else
 	{
@@ -110,12 +110,12 @@ int testStackShuffle(void)
 	stackPush(stack,card4);
 	
 	printf("Shuffling stack, please wait 5s...\n   ");
-	viewHand(stack,listRank,listSuit);
+	viewHandRow(stack,listRank,listSuit);
 	for(int i = 0; i < 5; i++)
 	{
 		printf("%d: ",i);
 		stackShuffle(stack);
-		viewHand(stack,listRank,listSuit);
+		viewHandRow(stack,listRank,listSuit);
 		sleep(1);
 	}
 	printf("Compare results by hand.\n");
@@ -171,15 +171,15 @@ int testStackSortRank(void)
 	
 	
 	printf("Sorting stack by rank...\n");
-	viewHand(stack,listRank,listSuit);
+	viewHandRow(stack,listRank,listSuit);
 	stackSortRank(stack);
 	if (!stackSortedRank(stack))
 	{
-		viewHand(stack,listRank,listSuit);
+		viewHandRow(stack,listRank,listSuit);
 		printf("OK.\n");
 		return(EXIT_SUCCESS);
 	}
-	viewHand(stack,listRank,listSuit);
+	viewHandRow(stack,listRank,listSuit);
 	printf("stackSortRank() failed!\n");
 	return(EXIT_FAILURE);
 }
@@ -202,15 +202,15 @@ int testStackSortSuit(void)
 	
 	
 	printf("Sorting stack by suit...\n");
-	viewHand(stack,listRank,listSuit);
+	viewHandRow(stack,listRank,listSuit);
 	stackSortSuit(stack);
 	if (!stackSortedSuit(stack))
 	{
-		viewHand(stack,listRank,listSuit);
+		viewHandRow(stack,listRank,listSuit);
 		printf("OK.\n");
 		return(EXIT_SUCCESS);
 	}
-	viewHand(stack,listRank,listSuit);
+	viewHandRow(stack,listRank,listSuit);
 	printf("stackSortSuit() failed!\n");
 	return(EXIT_FAILURE);
 }

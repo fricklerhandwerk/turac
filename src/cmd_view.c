@@ -31,7 +31,7 @@ void viewCardLn(cardT *cardP, const char **listRank, const char **listSuit)
 
 void viewHandRow(stackT *handP, const char **listRank, const char **listSuit)
 {
-	for (int i = 0; i <= stackTop(handP); ++i)
+	for (int i = 0; i < stackSize(handP); ++i)
 	{
 		viewCard(&handP->cards[i],listRank,listSuit);
 	}
@@ -40,7 +40,7 @@ void viewHandRow(stackT *handP, const char **listRank, const char **listSuit)
 
 void viewHandCol(stackT *handP, const char **listRank, const char **listSuit)
 {
-	for (int i = 0; i <= stackTop(handP); ++i)
+	for (int i = 0; i < stackSize(handP); ++i)
 	{
 		viewCardLn(&handP->cards[i],listRank,listSuit);
 	}
@@ -52,15 +52,15 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit)
 	// NOTE: game-specific implementation!
 
 	// topmost position
-	int top = stackTop(deckP);
+	int top = stackSize(deckP);
 
 	// print number of elements
-	printf("%d ",top+1);
+	printf("%d ",top);
 
 	// cards that face up
 	int up = 0;
 	{
-		for (int i = 0; i <= top; ++i)
+		for (int i = 0; i < top; ++i)
 		{
 			// assuming only up/down binary
 			if(deckP->cards[i].face)
@@ -80,7 +80,7 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit)
 
 	// print card face down
 	cardT *down = cardNew(0,0,0);
-	if (top-up >= 0 )
+	if (top-up > 0 )
 	{
 		viewCardLn(down,listRank,listSuit);
 	}
@@ -98,7 +98,7 @@ void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit)
 
 	// print defending cards
 	// get maximum of cards to print
-	int range = stackTop(tableP->def)+1;
+	int range = stackSize(tableP->def);
 
 	// walk through `beats` array
 	for (int i = 0; i < range; ++i)
@@ -125,10 +125,10 @@ void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit)
 {
 	// print attacking cards
 	viewHandCol(tableP->att,listRank,listSuit);
-	int height = stackTop(tableP->att)+1;
+	int height = stackSize(tableP->att);
 
 	// move cursor back to top left
-	for (int i = 0; i <= height; ++i)
+	for (int i = 0; i < height; ++i)
 	{
 		printf(CUR_UP);
 	}
@@ -137,7 +137,7 @@ void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit)
 
 	// print defending cards
 	// get maximum of cards to print
-	int range = stackTop(tableP->def)+1;
+	int range = stackSize(tableP->def);
 
 	// walk through `beats` array
 	for (int i = 0; i < range; ++i)

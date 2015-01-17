@@ -2,9 +2,8 @@
 
 #include <stdlib.h>
 
-#include "../inc/card.h"
-
-playerT list = NULL;
+#include "../inc/stack.h"
+#include "../inc/player.h"
 
 // Allocate memory for player with empty hand
 playerT *playerNew(char *name, int sizeHand)
@@ -20,7 +19,7 @@ playerT *playerNew(char *name, int sizeHand)
   playerP = malloc(sizeof(playerT));
 
   // allocate stack for player hand
-  playerP->hand = stackInit(int sizeHand);
+  playerP->hand = stackInit(sizeHand);
 
   // handle allocation errors
   if (playerP == NULL || playerP->hand == NULL)
@@ -30,8 +29,8 @@ playerT *playerNew(char *name, int sizeHand)
 
   // write values
   playerP->name = name;
-  playerP->stopF = 0 ;
-  playerP->doneF = 0;
+  playerP->roundF = 0 ;
+  playerP->gameF = 0;
   playerP->next = NULL;
 
   return(playerP);
@@ -42,8 +41,8 @@ void playerDestroy(playerT **playerP)
 {
   // destroy name string
   // NOTE: it's not intended to be used anywhere else
-  free((*playerP)->hand);
-  (*playerP)->hand = NULL;
+  free((*playerP)->name);
+  (*playerP)->name = NULL;
 
   // destroy hand
   stackDestroy(&(*playerP)->hand);
@@ -74,28 +73,49 @@ void playerAdd(playerT *partyP, playerT *playerP){
 */
 
 // Set player state
-void playerStart(playerT *playerP)
+void playerStartRound(playerT *playerP)
 {
-  playerT->stopF = 0;
-  playerT->doneF = 0;
+  playerP->roundF = TRUE;
 }
 
-void playerStop(playerT *playerP)
+void playerEndRound(playerT *playerP)
 {
-  playerT->stopF = 1;
+  playerP->roundF = FALSE;
 }
-void playerDone(playerT *playerP)
+
+void playerStartGame(playerT *playerP)
 {
-  playerT->stopF = 1;
-  playerT->doneF = 1;
+  playerP->gameF = TRUE;
 }
+
+void playerEndGame(playerT *playerP)
+{
+  playerP->gameF = FALSE;
+}
+
+
+int playerInRound(playerT *playerP)
+{
+  return playerP->roundF;
+}
+
+int playerInGame(playerT *playerP)
+{
+  return playerP->gameF;
+}
+
+int playerHandSize(playerT *playerP)
+{
+  return stackSize(playerP->hand);
+}
+
 
 // Play a given cards from a players hand
 // Where exactly it is put is decided by player status and table contents
 cardT *playCard(playerT *playerP, int numCard)
 {
   // refuse to operate on illegal values
-  if (playerP == NULL || numCard < 0 || numCard > stackTop(playerP->hand))
+  if (playerP == NULL || numCard < 0 || numCard >= stackSize(playerP->hand))
   {
     return(NULL);
   }
