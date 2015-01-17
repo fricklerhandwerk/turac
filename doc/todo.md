@@ -24,14 +24,14 @@
   
 
 - Vincent
-	- [ ] Player
-		- [ ] playerInit
-		- [ ] playerDestroy
-		- [ ] playerStart
-		- [ ] playerStop
-		- [ ] playerDone
-		- [ ] playCard
-		- [ ] takeCard
+	- [x] Player
+		- [x] playerInit
+		- [x] playerDestroy
+		- [x] playerStart
+		- [x] playerStop
+		- [x] playerDone
+		- [x] playCard
+		- [x] takeCard
 - Tom
 	- [ ] Rules
 		- [ ] deckCreate
@@ -63,7 +63,7 @@
 		- [x] stackSortSuit
 		- [x] stackSortRank
 	- [x] Stack tests
-	- [ ] Table
+	- [x] Table
 		- [x] table struct // two card stacks and a mapping array to know which card beats which
 		- [x] tableInit
 		- [x] tableDestroy
@@ -73,13 +73,15 @@
 		- [x] tableBeaten
 		- [x] tableClean
 	- [x] Table tests
-	- [ ] Party
+	- [x] Party
 		- [x] partyInit
 		- [x] partyDestroy
 		- [x] partyAddPlayer
 		- [x] partyNextPlayer
+	- [ ] Party tests
+	- [ ] Player tests
 	- [x] Clumsy makefile (it's something)
-	- [ ] Commandline view
+	- [x] Commandline view
 		- [x] Header file
 		- [x] viewCard
 		- [x] viewCardLn

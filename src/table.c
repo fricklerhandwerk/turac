@@ -72,7 +72,7 @@ int tablePutDef(tableT *tableP, cardT *cardP, int beatPos)
 	// exit with error if pushing not possible for some reason
 	if(cardP == NULL || beatPos < 0 || beatPos > stackTop(tableP->att) || stackPush(tableP->def,cardP) == EXIT_FAILURE)
 	{
-		/*
+		/* some debugging
 		printf("FIAL\n");
 		if(cardP == NULL)
 		{
