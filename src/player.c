@@ -80,6 +80,7 @@ void takeCard(playerT *playerP, cardT *cardP){
   stackPush(playerP.hand, cardP);
 }
 
+/* this is now done by the table, which throws out its contents on some stack
 // Pick up all cards from the table
 void pickUpCards(playerT *playerP, tableT *tableP){
   for (int i = 0; i < tableP.att.size; i++){
@@ -93,3 +94,4 @@ void pickUpCards(playerT *playerP, tableT *tableP){
   //destory table
   //stack sort
 }
+*/

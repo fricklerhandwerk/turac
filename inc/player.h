@@ -44,9 +44,6 @@ playerT *playerNew(char *name);
 // Free member and player memory
 void playerDestroy(playerT **playerP);
 
-// Add player to party
-void playerAdd(playerT *partyP, playerT *playerP);
-
 // Set player state
 void playerStart(playerT *playerP);
 void playerStop(playerT *playerP);
@@ -58,8 +55,5 @@ cardT *playCard(playerT *playerP, int numCard);
 
 // Put given card in player's hand
 void takeCard(playerT *playerP, cardT *cardP);
-
-// Pick up all cards from the table
-void pickUpCards(playerT *playerP, tableT *tableP);
 
 #endif // PLAYER_H
