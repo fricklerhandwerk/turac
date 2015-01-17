@@ -34,8 +34,6 @@
 		- [x] takeCard
 - Tom
 	- [ ] Rules
-		- [ ] deckCreate
-		- [ ] handCards
 		- [ ] isTrump
 		- [ ] cardBeats
 		- [ ] cardFits
@@ -51,6 +49,16 @@
 		- [x] cardCompareRank
 		- [x] cardCompareSuit
 	- [x] Card tests
+	- [x] Makefile
+	- [x] Commandline view
+		- [x] Header file
+		- [x] viewCard
+		- [x] viewCardLn
+		- [x] viewHandRow
+		- [x] viewHandCol
+		- [x] viewDeck
+		- [x] viewTableRow
+		- [x] viewTableCol
 	- [x] Stack
 		- [x] stackInit
 		- [x] stackDestroy
@@ -64,7 +72,7 @@
 		- [x] stackSortRank
 	- [x] Stack tests
 	- [x] Table
-		- [x] table struct // two card stacks and a mapping array to know which card beats which
+		- [x] table struct
 		- [x] tableInit
 		- [x] tableDestroy
 		- [x] tablePutAtt
@@ -78,23 +86,16 @@
 		- [x] partyDestroy
 		- [x] partyAddPlayer
 		- [x] partyNextPlayer
-	- [ ] Party tests
 	- [x] Player tests
-	- [x] Clumsy makefile (it's something)
-	- [x] Commandline view
-		- [x] Header file
-		- [x] viewCard
-		- [x] viewCardLn
-		- [x] viewHandRow
-		- [x] viewHandCol
-		- [x] viewDeck
-		- [x] viewTableRow
-		- [x] viewTableCol
+	- [x] Party tests
+	- [ ] Rules
+		- [ ] deckCreate
+		- [ ] handCards
+
 
 
 
 ## Pile of stuff
-- [ ] Makefile for handling modules (when set up, add your own compile option)
 - [ ] Party
 	- [ ] partyRemovePlayer // only necessary for multiplayer
 - [ ] Commandline view
