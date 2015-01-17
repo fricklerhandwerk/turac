@@ -28,8 +28,6 @@ int stackPush(stackT *stackP, cardT *card);
 // Return card pointer from top of stack, decrease top
 cardT *stackPop(stackT *stackP);
 
-
-
 // Swap element at given position with top element
 int stackSwap(stackT *stackP, int pos);
 

@@ -15,7 +15,6 @@
 // after pushing them onto the stack, otherwise memory leaks
 stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit);
 
-
 // Hand cards to player until `sizeHand` is reached or deck is empty (or player hand is full, just to be sure)
 void handCardsPlayer(playerT *playerP, stackT *deckP, int sizeHand);
 
@@ -30,6 +29,9 @@ int cardBeats(cardT *aP, cardT *bP, int trumpSuit);
 
 // Determine if a chosen card can be added to the table for the defender to beat
 int cardFits(cardT *cardP, tableT *tableP);
+
+// Determine if all attackers have stopped adding cards
+int attackStopped(partyT *partyP);
 
 // Determine if current round is over
 // check if one of the conditions is true:

@@ -7,14 +7,16 @@
 
 /* PARTY DATA TYPE
  *
- * Holds a circular linked list of players with its beginning and the current player
- + as well as its length.
+ * Holds a circular linked list of players with its beginning,
+ + the current attacking and defending players
+ + as well as the total number of players.
  */
 
 typedef struct
 {
 	playerT *first;
-	playerT *current;
+	playerT *att;
+	playerT *def;
 	int numPlayers;
 } partyT;
 
@@ -25,7 +27,7 @@ partyT *partyInit(void);
 void partyDestroy(partyT **partyP);
 
 // Add player to linked list and update numPlayers
-int partyAddPlayer(partyT *partyP, playerT *playerP);
+int addPlayer(partyT *partyP, playerT *playerP);
 
 /* Will not be used in first demo
 // Remove player from linked list
@@ -33,9 +35,18 @@ int partyAddPlayer(partyT *partyP, playerT *playerP);
 int partyRemovePlayer(partyT *partyP, playerT *playerP);
 */
 
-// Switch player roles such that the next player attacks
+// Switch player roles such that the last defender attacks
 // Check if next player is still in the game and skip accordingly
-void partyNextPlayer(partyT *partyP);
+void nextPlayer(partyT *partyP);
+
+// Switch to next player, skipping defender
+// (because defender took cards)
+void nextPlayerSkip(partyT *partyP);
+
+
+// return who is attacking and defending
+playerT *partyDefender(partyT *partyP);
+playerT *partyAttacker(partyT *partyP);
 
 /* not important right now
 // Shuffle player seats

@@ -9,7 +9,8 @@ partyT *partyInit(void)
 {
 	partyT *partyP = malloc(sizeof(partyT));
 	partyP->first = NULL;
-	partyP->current = NULL;
+	partyP->attacker = NULL;
+	partyP->defender = NULL;
 	partyP->numPlayers = 0;
 	return partyP;
 }
@@ -43,27 +44,31 @@ void partyDestroy(partyT **partyP)
 }
 
 // Add player to linked list and update numPlayers
-int partyAddPlayer(partyT *partyP, playerT *playerP)
+int addPlayer(partyT *partyP, playerT *playerP)
 {
 	// don't add empty players
-	// last player already points first
+	// last player already points to first
 	if (playerP != NULL)
 	{
 		// if player list non-empty
-		if (partyP->current != NULL)
+		if (partyP->first != NULL)
 		{
-			// just insert new one after current player
-			// O(1) instead of O(n) for appending to single-linked list
-			// NOTE: semantically, this may not always be a good idea
-			playerP->next = partyP->current->next;
-			partyP->current->next = playerP;
+			playerT *current = partyP->first->next;
+			// add player at the end of the list
+			// we should never hit a NULL player here, since the list is circular
+			while(current->next != partyP->first)
+			{
+				current = current->next;
+			}
+			// reroute pointers appropriately
+			current->next = playerP;
+			playerP->next = partyP->first;
 		}
 		else
 		{
-			// otherwise make it the first (and current) player
+			// otherwise make it the first player
 			partyP->first = playerP;
 			playerP->next = partyP->first;
-			partyP->current = partyP->first;
 		}
 		// increase number of players
 		partyP->numPlayers++;
@@ -81,12 +86,62 @@ int partyRemovePlayer(partyT *partyP, playerT *playerP)
 }
 */
 
-// Switch player roles such that the next player attacks
+// Switch player roles such that the last defender attacks
 // Check if next player is still in the game and skip accordingly
-void partyNextPlayer(partyT *partyP)
+void nextPlayer(partyT *partyP)
 {
-	partyP->current = partyP->current->next;
+	partyP->attacker = partyP->defender;
+	playerT *current = partyP->defender;
+	while(1)
+	{
+		current = current->next;
+		if (playerInGame(current))
+		{
+			partyP->defender = current;
+			return;
+		}
+	}
 }
+
+
+void nextPlayerSkip(partyT *partyP)
+{
+	// skip defender
+	playerT *current = partyP->defender;
+	// find next attacker
+	while(1)
+	{
+		current = current->next;
+		if (playerInGame(current))
+		{
+			partyP->attacker = current;
+			break;
+		}
+	}
+	// find next defender
+	while(1)
+	{
+		current = current->next;
+		if (playerInGame(current))
+		{
+			partyP->defender = current;
+			return;
+		}
+	}
+}
+
+// return who is attacking and defending
+playerT *partyAttacker(partyT *partyP)
+{
+	return partyP->attacker;
+}
+
+playerT *partyDefender(partyT *partyP)
+{
+	return partyP->defender;
+}
+
+
 /* not important right now
 // Shuffle player seats
 // Use something like this method:

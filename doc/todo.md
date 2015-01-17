@@ -33,12 +33,6 @@
 		- [x] playCard
 		- [x] takeCard
 - Tom
-	- [ ] Rules
-		- [ ] isTrump
-		- [ ] cardBeats
-		- [ ] cardFits
-		- [ ] roundOver // tells us when to switch player roles
-		- [ ] gameOver
 - Valentin
 	- [x] Party interface
 	- [x] Player interface
@@ -91,7 +85,12 @@
 	- [ ] Rules
 		- [x] deckCreate
 		- [x] handCards
-
+		- [x] isTrump
+		- [x] cardBeats
+		- [x] cardFits
+		- [x] attackStopped // all attackers stopped adding cards
+		- [x] roundOver
+		- [x] gameOver
 
 
 

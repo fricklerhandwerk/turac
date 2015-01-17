@@ -116,7 +116,7 @@ cardT *playCard(playerT *playerP, int numCard)
   {
     return(NULL);
   }
-  // get the needed hand on top of the stack
+  // get the needed card on top of the stack
   stackSwap(playerP->hand,numCard);
   // return top of stack
   return (stackPop(playerP->hand));
@@ -127,19 +127,3 @@ int takeCard(playerT *playerP, cardT *cardP)
 {
   return stackPush(playerP->hand,cardP);
 }
-
-/* this is now done by the table, which throws out its contents on some stack
-// Pick up all cards from the table
-void pickUpCards(playerT *playerP, tableT *tableP){
-  for (int i = 0; i < tableP.att.size; i++){
-    takeCard(playerP, tableP.att.cards);
-    tableP.att.cards = tableP.att.cards.next;
-  }
-  for (int i = 0; i < tableP.def.size; i++){
-    takeCard(playerP, tableP.def.cards);
-    tableP.def.cards = tableP.def.cards.next;
-  }
-  //destory table
-  //stack sort
-}
-*/
