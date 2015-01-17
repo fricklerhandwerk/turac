@@ -38,8 +38,8 @@ typedef struct playerT playerT;
 
 /* PLAYER FUNCTIONS */
 
-// Allocate memory for player with empty hand
-playerT *playerNew(char *name);
+// Allocate memory for player with given name and empty hand of given size
+playerT *playerNew(char *name, int sizeHand);
 
 // Free member and player memory
 void playerDestroy(playerT **playerP);

@@ -7,33 +7,49 @@
 playerT list = NULL;
 
 // Allocate memory for player with empty hand
-playerT *playerNew(char *name){
-
-  // allocate memory for array of player
-  playerT *player;
-  player = malloc(sizeof(playerT));
-
-  // handle allocation errors
-  if (player == NULL)
+playerT *playerNew(char *name, int sizeHand)
+{
+  // don't accept illegal values
+  if (name == NULL || sizeHand < 0)
   {
     return(NULL);
   }
 
-  player->name = name;
-  player->hand = NULL;
-  //player->currentF = 0;
-  player->stopF = 1;
-  player->doneF = 0;
-  player->next = list->next;
-  list->next = player;
+  // allocate memory for array of player
+  playerT *playerP;
+  playerP = malloc(sizeof(playerT));
 
-  return(player);
+  // allocate stack for player hand
+  playerP->hand = stackInit(int sizeHand);
+
+  // handle allocation errors
+  if (playerP == NULL || playerP->hand == NULL)
+  {
+    return(NULL);
+  }
+
+  // write values
+  playerP->name = name;
+  playerP->stopF = 0 ;
+  playerP->doneF = 0;
+  playerP->next = NULL;
+
+  return(playerP);
 }
 
 // Free member and player memory
-void playerDestroy(playerT **playerP){
-  playerT tmp = playerP->next;
-  playerP->next = playerP->next->next;
+void playerDestroy(playerT **playerP)
+{
+  // destroy name string
+  // NOTE: it's not intended to be used anywhere else
+  free((*playerP)->hand);
+  (*playerP)->hand = NULL;
+
+  // destroy hand
+  stackDestroy(&(*playerP)->hand);
+
+  (*playerP)->next = NULL;
+
   free(*playerP);
   *playerP = NULL;
 }
@@ -58,26 +74,41 @@ void playerAdd(playerT *partyP, playerT *playerP){
 */
 
 // Set player state
-void playerStart(playerT *playerP){
-  playerT.stopF = 0;
-  playerT.doneF = 0;
+void playerStart(playerT *playerP)
+{
+  playerT->stopF = 0;
+  playerT->doneF = 0;
 }
-void playerStop(playerT *playerP){
-  playerT.stopF = 1;
+
+void playerStop(playerT *playerP)
+{
+  playerT->stopF = 1;
 }
-void playerDone(playerT *playerP){
-  playerT.stopF = 1;
-  playerT.doneF = 1;
+void playerDone(playerT *playerP)
+{
+  playerT->stopF = 1;
+  playerT->doneF = 1;
 }
 
 // Play a given cards from a players hand
 // Where exactly it is put is decided by player status and table contents
-void playCard(playerT *playerP, int numCard, tableT *tableP){
+cardT *playCard(playerT *playerP, int numCard)
+{
+  // refuse to operate on illegal values
+  if (playerP == NULL || numCard < 0 || numCard > stackTop(playerP->hand))
+  {
+    return(NULL);
+  }
+  // get the needed hand on top of the stack
+  stackSwap(playerP->hand,numCard);
+  // return top of stack
+  return (stackPop(playerP->hand));
 }
 
 // Put given card in player's hand
-void takeCard(playerT *playerP, cardT *cardP){
-  stackPush(playerP.hand, cardP);
+void takeCard(playerT *playerP, cardT *cardP)
+{
+  stackPush(playerP->hand,cardP);
 }
 
 /* this is now done by the table, which throws out its contents on some stack
