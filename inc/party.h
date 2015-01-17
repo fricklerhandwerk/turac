@@ -7,18 +7,16 @@
 
 /* PARTY DATA TYPE
  *
- * Holds a circular linked list of players and its length.
- * The linked list points to the current player.
+ * Holds a circular linked list of players with its beginning and the current player
+ + as well as its length.
  */
 
-typedef struct partyT
+typedef struct
 {
-	// beginning of linked list
 	playerT *first;
-	// attacking player
 	playerT *current;
 	int numPlayers;
-};
+} partyT;
 
 // Allocate memory for an empty party
 partyT *partyInit(void);

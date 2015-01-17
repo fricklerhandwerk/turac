@@ -79,7 +79,7 @@
 		- [x] partyAddPlayer
 		- [x] partyNextPlayer
 	- [ ] Party tests
-	- [ ] Player tests
+	- [x] Player tests
 	- [x] Clumsy makefile (it's something)
 	- [x] Commandline view
 		- [x] Header file

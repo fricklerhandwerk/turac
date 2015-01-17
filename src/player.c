@@ -2,7 +2,6 @@
 
 #include <stdlib.h>
 
-#include "../inc/stack.h"
 #include "../inc/player.h"
 
 // Allocate memory for player with empty hand
@@ -92,7 +91,6 @@ void playerEndGame(playerT *playerP)
 {
   playerP->gameF = FALSE;
 }
-
 
 int playerInRound(playerT *playerP)
 {

@@ -1,6 +1,8 @@
 /* Players' party implementation */
 
-#include "player.h"
+#include <stdlib.h>
+
+#include "party.h"
 
 // Allocate memory for an empty party
 partyT *partyInit(void)
@@ -17,16 +19,24 @@ void partyDestroy(partyT **partyP)
 {
 	// destroy all remaining players
 	playerT *current = (*partyP)->first;
-	playerT *next = current->next;
+	playerT *next;
+	// walk through list and destroy each player
 	while (current != NULL)
 	{
+		// since the list is circular, we don't compare to a terminator
+		// but whether the last element points to the first
+		if (current->next != (*partyP)->first)
+		{
+			next = current->next;
+		}
+		else
+		{
+			// at the end, set break condition
+			next = NULL;
+		}
 		// if implemented correctly, should set currentPlayer pointer to NULL
 		playerDestroy(&current);
 		current = next;
-		if (next != NULL)
-		{
-			next = next->next;
-		}
 	}
 	free(*partyP);
 	*partyP = NULL;
@@ -51,10 +61,11 @@ int partyAddPlayer(partyT *partyP, playerT *playerP)
 		else
 		{
 			// otherwise make it the first (and current) player
-			playerP->next = playerP;
 			partyP->first = playerP;
-			partyP->current = playerP;
+			playerP->next = partyP->first;
+			partyP->current = partyP->first;
 		}
+		// increase number of players
 		partyP->numPlayers++;
 		return(EXIT_SUCCESS);
 	}
@@ -76,7 +87,6 @@ void partyNextPlayer(partyT *partyP)
 {
 	partyP->current = partyP->current->next;
 }
-
 /* not important right now
 // Shuffle player seats
 // Use something like this method:

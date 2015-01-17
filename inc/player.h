@@ -19,6 +19,9 @@
  * `gameF` denotes if a player is still in the game.
  */
 
+#include "stack.h"
+
+
  #define ATT 1
  #define DEF -1
  #define SPEC 0
