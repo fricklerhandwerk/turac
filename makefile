@@ -1,18 +1,14 @@
 CC = gcc
-COMPILER_FLAGS = -std=c99 -Wall -Wextra -I$(INCLUDE_DIR) 
 
-OBJS = turac.c
+INCLUDE_DIR = inc
+SOURCE_DIR = src
+BIN_DIR = bin
 
+COMPILER_FLAGS = -I$(INCLUDE_DIR) -std=c99 -Wall -Wextra 
 
-INCLUDE_DIR = src
+# dependencies
+_SRC = card.c stack.c player.c party.c table.c bot.c cmd_view.c rules.c game.c
+SRC = $(addprefix $(SOURCE_DIR)/,$(_SRC))
 
-_DEPS = card.c cmd_view.c
-DEPS = $(patsubst %,$(INCLUDE_DIR)/%,$(_DEPS))
-
-OBJ_NAME = turac
-
-all : $(OBJS)
-	$(CC) $(OBJS) $(DEPS) $(COMPILER_FLAGS) -o $(OBJ_NAME)
-
-run : $(OBJS)
-	$(CC) $(OBJS) $(DEPS) $(COMPILER_FLAGS) -o $(OBJ_NAME) && ./$(OBJ_NAME)
+turac: $(SRC) 
+	gcc -o $(BIN_DIR)/$@ $^ $(COMPILER_FLAGS) && $(BIN_DIR)/$@

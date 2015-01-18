@@ -10,6 +10,9 @@
 #define CUR_RT "\033[5C"
 #define CUR_LT "\033[5D"
 
+// clear screen
+#define CLEAR "\033[2J"
+
 void viewCard(cardT *cardP, const char **listRank, const char **listSuit)
 {
 	if (cardP->face)
@@ -89,8 +92,6 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit)
 	printf("\n");
 }
 
-
-
 void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit)
 {
 	// print attacking cards
@@ -166,4 +167,30 @@ void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit)
 	}
 	printf(CUR_LT);
 	printf("\n");
+}
+
+void viewPlayer(playerT *playerP, partyT *partyP, const char **listRank, const char **listSuit)
+{
+	char role;
+	if (playerP == partyP->attacker)
+	{
+		role = 'A';
+	}
+	else if (playerP == partyP->defender)
+	{
+		role = 'D';
+	}
+	printf("%s (%c)\n",playerP->name,role);
+	viewHandRow(playerP->hand,listRank,listSuit);
+}
+
+void viewGame(partyT *partyP, tableT *tableP, stackT *deckP, stackT *wasteP, const char **listRank, const char **listSuit)
+{
+	// clear screen first
+	printf(CLEAR);
+	viewDeck(deckP,listRank,listSuit);
+	viewPlayer(partyP->attacker,partyP,listRank,listSuit);
+	viewPlayer(partyP->defender,partyP,listRank,listSuit);
+	printf("Table:\n");
+	viewTableRow(tableP,listRank,listSuit);
 }

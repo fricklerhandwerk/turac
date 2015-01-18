@@ -5,8 +5,7 @@
 
 /* VIEW FUNCTIONS FOR COMMAND LINE */
 
-#include "card.h"
-#include "stack.h"
+#include "party.h"
 #include "table.h"
 
 
@@ -29,5 +28,11 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit);
 void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit);
 void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit);
 
+// Show player info and hand
+void viewPlayer(playerT *playerP, partyT *partyT, const char **listRank, const char **listSuit);
+
+// Show whole game
+// WARNING: currently only shows attacker and defender!
+void viewGame(partyT *partyP, tableT *tableP, stackT *deckP, stackT *wasteP, const char **listRank, const char **listSuit);
 
 #endif // CMD_VIEW_H
