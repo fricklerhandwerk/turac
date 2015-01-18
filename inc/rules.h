@@ -48,6 +48,11 @@ int roundOver(partyT *partyP, tableT *tableP);
 // Check if deck is empty && 1 or no player has cards on his hands
 int gameOver(partyT *partyP, stackT *deckP);
 
+// Determine who is the fool
+// Returns the durak
+// If it's a tie, returns NULL
+playerT *durak(partyT *partyP);
+
 // Put back all the cards from player hands, table and waste, reshuffle deck and hand again
 void gameReset(partyT *partyP, stackT *deckP, stackT *wasteP, tableT *tableP, int handSize,const char **listRank, const char **listSuit, int *trumpSuit);
 

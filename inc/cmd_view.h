@@ -24,6 +24,9 @@ void viewHandCol(stackT *handP, const char **listRank, const char **listSuit);
 // this is quite game specific, but in durak the flipped trump is part of the deck, not the table
 void viewDeck(stackT *deckP, const char **listRank, const char **listSuit);
 
+// View waste stack
+void viewWaste(stackT *wasteP);
+
 // Show table
 void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit);
 void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit);

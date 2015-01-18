@@ -87,9 +87,33 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit)
 	{
 		viewCardLn(down,listRank,listSuit);
 	}
+	else
+	{
+		printf("\n");
+	}
+	cardDestroy(&down);
+}
 
+void viewWaste(stackT *wasteP)
+{	
+	int top = stackSize(wasteP);
+	printf("%d ",top);
+	for (int i = 0; i < top-1; ++i)
+	{
+		printf("[");
+	}
 
-	printf("\n");
+	// print card face down
+	cardT *down = cardNew(0,0,0);
+	if (top > 0)
+	{
+		viewCardLn(down,NULL,NULL);
+	}
+	else
+	{
+		printf("\n");
+	}
+	cardDestroy(&down);
 }
 
 void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit)
@@ -188,9 +212,14 @@ void viewGame(partyT *partyP, tableT *tableP, stackT *deckP, stackT *wasteP, con
 {
 	// clear screen first
 	printf(CLEAR);
+	printf("\n\n");
+	printf("Deck:\n");
 	viewDeck(deckP,listRank,listSuit);
-	viewPlayer(partyP->attacker,partyP,listRank,listSuit);
-	viewPlayer(partyP->defender,partyP,listRank,listSuit);
+	printf("Waste:\n");
+	viewWaste(wasteP);
+	viewPlayer(partyP->first,partyP,listRank,listSuit);
+	viewPlayer(partyP->first->next,partyP,listRank,listSuit);
+	printf("\n");
 	printf("Table:\n");
 	viewTableRow(tableP,listRank,listSuit);
 }
