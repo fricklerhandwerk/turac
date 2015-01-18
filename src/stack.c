@@ -47,7 +47,8 @@ void stackDestroy(stackT **stackP)
 
 int stackPush(stackT *stackP, cardT *cardP)
 {
-	if (stackFull(stackP))
+	// don't push on full stacks and don't push empty cards
+	if (stackFull(stackP) || cardP == NULL)
 	{
 		return(EXIT_FAILURE);
 	}

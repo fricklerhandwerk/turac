@@ -94,6 +94,10 @@
 		- [x] gameOver
 	- [x] Rules tests
 	- [ ] Game loop
+	- [ ] Bot
+		- [ ] botStatus
+		- [ ] botAttack
+		- [ ] botDefend
 
 
 
@@ -108,5 +112,4 @@
 	- [ ] moveCursor // cursor to choose card from hand
 	- [ ] putCard // puts card on table
 	- [ ] setDone // take cards or stop attacking
-- [ ] Bot
-	- [ ] 
+
