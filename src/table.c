@@ -109,22 +109,15 @@ int tableBeaten(tableT *tableP)
 int tableClean(tableT *tableP, stackT *destP)
 {
 	// clean attack stack
-	while (!stackEmpty(tableP->att))
+	if (stackClean(tableP->att,destP) == EXIT_FAILURE)
 	{
-		// take care of memory errors, just in case
-		if (stackPush(destP,stackPop(tableP->att)) == EXIT_FAILURE)
-		{
-			return(EXIT_FAILURE);
-		}
+		return(EXIT_FAILURE);
 	}
 	
 	// clean defend stack
-	while (!stackEmpty(tableP->def))
+	if (stackClean(tableP->def,destP) == EXIT_FAILURE)
 	{
-		if (stackPush(destP,stackPop(tableP->def)) == EXIT_FAILURE)
-		{
-			return(EXIT_FAILURE);
-		}
+		return(EXIT_FAILURE);
 	}
 
 	// reset `beats` array

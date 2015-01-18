@@ -34,8 +34,8 @@ cardT *cardNew(int rank, int suit, int face);
 // Free memory reserved for card struct
 void cardDestroy(cardT **cardP);
 
-// Set card facing
-void cardSetFace(cardT *cardP, int face);
+// Set card facing, return card pointer
+cardT *cardSetFace(cardT *cardP, int face);
 
 // Compare two cards by rank/suit
 // Return values: a == b : 0; a > b : 1; a < b : -1;

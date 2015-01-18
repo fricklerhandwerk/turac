@@ -34,10 +34,11 @@ void cardDestroy(cardT **cardP)
 }
 
 // Set card facing
-void cardSetFace(cardT *cardP, int face)
+cardT *cardSetFace(cardT *cardP, int face)
 {
 	// NOTE: rule-agnostic - sets whatever value it gets!
 	cardP->face = face;
+	return cardP;
 }
 
 // Compare two cards by rank/suit

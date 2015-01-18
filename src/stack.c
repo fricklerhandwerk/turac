@@ -74,6 +74,11 @@ int stackSize(stackT *stackP)
 	return stackP->top+1;
 }
 
+int stackMaxSize(stackT *stackP)
+{
+	return stackP->size;
+}
+
 int stackSwap(stackT *stackP, int pos)
 {
 	// refuse to work on illegal positions
@@ -140,3 +145,25 @@ void stackSortSuit(stackT *stackP)
 {
 	qsort(stackP->cards,stackP->top+1,sizeof(cardT),&cardCompareSuit);
 }
+
+int stackClean(stackT *sourceP, stackT *destP)
+{
+	// check if there is enough space at destination
+	if (stackSize(sourceP) > (stackMaxSize(destP) - stackSize(destP)))
+	{
+		return(EXIT_FAILURE);
+	}
+
+	// move stack elements
+	while (!stackEmpty(sourceP))
+	{
+		// take care of memory errors, if anything breaks on the way
+		if (stackPush(destP,stackPop(sourceP)) == EXIT_FAILURE)
+		{
+			return(EXIT_FAILURE);
+		}
+	}
+	
+	return(EXIT_SUCCESS);
+}
+
