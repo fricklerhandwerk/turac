@@ -37,6 +37,7 @@ int partyRemovePlayer(partyT *partyP, playerT *playerP);
 
 // Switch player roles such that the last defender attacks
 // Check if next player is still in the game and skip accordingly
+// Reset player status
 void nextPlayer(partyT *partyP);
 
 // Switch to next player, skipping defender

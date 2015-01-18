@@ -94,18 +94,22 @@ int partyRemovePlayer(partyT *partyP, playerT *playerP)
 
 // Switch player roles such that the last defender attacks
 // Check if next player is still in the game and skip accordingly
+// Reset player status
 void nextPlayer(partyT *partyP)
 {
 	partyP->attacker = partyP->defender;
-	playerT *current = partyP->defender;
+	playerStartRound(partyP->attacker);
+
 	// look for next defender until either an active player is found
 	// or we hit the defender again
+	playerT *current = partyP->defender;
 	while(1)
 	{
 		current = current->next;
 		if (playerInGame(current) || current == partyP->defender)
 		{
 			partyP->defender = current;
+			playerStartRound(partyP->defender);
 			return;
 		}
 	}
@@ -125,6 +129,7 @@ void nextPlayerSkip(partyT *partyP)
 		if (playerInGame(current) || current == partyP->defender)
 		{
 			partyP->attacker = current;
+			playerStartRound(partyP->attacker);
 			break;
 		}
 	}
@@ -135,6 +140,7 @@ void nextPlayerSkip(partyT *partyP)
 		if (playerInGame(current) || current == partyP->defender)
 		{
 			partyP->defender = current;
+			playerStartRound(partyP->defender);
 			return;
 		}
 	}

@@ -103,7 +103,7 @@ int tableFull(tableT *tableP)
 // Check if all attacking cards on the table are beaten
 int tableBeaten(tableT *tableP)
 {
-	return (stackFull(tableP->def));
+	return (stackSize(tableP->att) == stackSize(tableP->def));
 }
 
 int tableClean(tableT *tableP, stackT *destP)

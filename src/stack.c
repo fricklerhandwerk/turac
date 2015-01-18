@@ -158,12 +158,15 @@ int stackClean(stackT *sourceP, stackT *destP)
 	while (!stackEmpty(sourceP))
 	{
 		// take care of memory errors, if anything breaks on the way
-		if (stackPush(destP,stackPop(sourceP)) == EXIT_FAILURE)
+		cardT *pop = stackPop(sourceP);
+		if (stackPush(destP,pop) == EXIT_FAILURE)
 		{
+			// put back refused card
+			stackPush(sourceP,pop);
 			return(EXIT_FAILURE);
 		}
 	}
-	
+
 	return(EXIT_SUCCESS);
 }
 
