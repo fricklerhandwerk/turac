@@ -21,11 +21,6 @@
 
 #include "stack.h"
 
-
- #define ATT 1
- #define DEF -1
- #define SPEC 0
-
  #define TRUE 1
  #define FALSE 0
 

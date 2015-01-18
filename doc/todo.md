@@ -15,8 +15,8 @@
 
 ##Week 3
 - [ ] Implement more stuff (in any barely working way)
-	- [ ] Players
-	- [ ] Rules
+	- [x] Players
+	- [x] Rules
 	- [ ] Cmd view
 	- [ ] Cmd control
 	- [ ] Game loop
@@ -90,22 +90,23 @@
 		- [x] cardFits
 		- [x] attackStopped // all attackers stopped adding cards
 		- [x] roundOver
-		- [ ] gameStart
+		- [ ] gameStart // currently expanded before game loop
 		- [x] gameOver
-	- [ ] Rules tests
+	- [x] Rules tests
+	- [ ] Game loop
+
 
 
 
 ## Pile of stuff
-- [ ] Party
-	- [ ] partyRemovePlayer // only necessary for multiplayer
 - [ ] Commandline view
+	- [ ] change view functions to plot to screen instead of linewise
+	- [ ] global screenRefresh function which shows all game objects at once
+	- [ ] necessary subfunctions
 - [ ] Commandline control
 	- [ ] Header file
 	- [ ] moveCursor // cursor to choose card from hand
 	- [ ] putCard // puts card on table
 	- [ ] setDone // take cards or stop attacking
-- [ ] Game loop
-	- [ ] Header file
 - [ ] Bot
-	- [ ]
+	- [ ] 
