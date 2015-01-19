@@ -17,10 +17,12 @@
 - [ ] Implement more stuff (in any barely working way)
 	- [x] Players
 	- [x] Rules
-	- [ ] Cmd view
+	- [x] Cmd view
 	- [ ] Cmd control
+	- [ ] Cmd view with control
 	- [ ] Game loop
-	- [ ] Bot
+	- [x] Bot
+	- [x] Botmatch
   
 
 - Vincent
@@ -93,11 +95,11 @@
 		- [ ] gameStart // currently expanded before game loop
 		- [x] gameOver
 	- [x] Rules tests
-	- [ ] Game loop
-	- [ ] Bot
-		- [ ] botStatus
-		- [ ] botAttack
-		- [ ] botDefend
+	- [x] Game loop (botmatch)
+	- [x] Bot
+		- [x] botSortHand
+		- [x] botAttack
+		- [x] botDefend
 
 
 
