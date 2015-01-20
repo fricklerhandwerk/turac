@@ -11,9 +11,9 @@
 
 void PlayerSortHand(playerT *playerP, int trumpSuit);
 
-void input_player1(playerT *playerP, int *position, int trumpSuit);
+void input_player1(playerT *playerP,tableT *tableP, int *pos, int trumpSuit);
 
-void input_twoplayers(playerT *playerPone, playerT *playerPtwo, int *position_one, int *position_two, int trumpSuit);
+void input_twoplayers(playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int trumpSuit);
 
 
 #endif

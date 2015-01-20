@@ -19,10 +19,11 @@ void PlayerSortHand(playerT *playerP, int trumpSuit)
 	}
 }
 
-void input_player1(playerT *playerP, int *position, int trumpSuit)//maybe but active players in here?
+void input_player1(playerT *playerP,tableT *tableP, int *pos, int trumpSuit)//maybe but active players in here?
 {
 	int handsize = stackSize(playerP->hand);
 	char input_c;
+	int position = (int) pos;
 
 	//setting input to raw input
 	system ("/bin/stty raw");
@@ -40,24 +41,37 @@ void input_player1(playerT *playerP, int *position, int trumpSuit)//maybe but ac
 			//draw
 		}
 	} else if (input_c == 'e'){
-		//player 1 play selected card
+		if (cardFits(&playerP->hand->cards[position],tableP))
+		{
+			tablePutAtt(tableP,playCard(playerP,position));
+			// don't attack any more if no cards left
+			if (stackSize(playerP->hand) == 0)
+			{
+				playerEndRound(playerP);
+			}
+		}
 	} else if (input_c == 'd'){
-		//player 1 stop
+		playerEndRound(playerP);
 	} else if (input_c == 'q'){
 		PlayerSortHand(playerP, trumpSuit);
 	} else {
 		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
 	}
 
+	pos = (int *) position;
+
 	//setting input to cooked input
 	system ("/bin/stty cooked");
 }
 
-void input_twoplayers(playerT *playerPone, playerT *playerPtwo, int *position_one, int *position_two, int trumpSuit)//maybe but active players in here?
+void input_twoplayers(playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int trumpSuit)//maybe but active players in here?
 {
 	int handsize1 = stackSize(playerPone->hand);
 	int handsize2 = stackSize(playerPtwo->hand);
 	char input_c;
+
+	int position_one = (int) pos_one;
+	int position_two = (int) pos_two;
 
 	//setting input to raw input
 	system ("/bin/stty raw");
@@ -75,9 +89,17 @@ void input_twoplayers(playerT *playerPone, playerT *playerPtwo, int *position_on
 			//draw
 		}
 	} else if (input_c == 'e'){
-		//player 1 play selected card
+		if (cardFits(&playerPone->hand->cards[position_one], tableP))
+		{
+			tablePutAtt(tableP,playCard(playerPone, position_one));
+			// don't attack any more if no cards left
+			if (stackSize(playerPone->hand) == 0)
+			{
+				playerEndRound(playerPone);
+			}
+		}
 	} else if (input_c == 'd'){
-		//player 1 stop
+		playerEndRound(playerPone);
 	} else if (input_c == 'q'){
 		PlayerSortHand(playerPone, trumpSuit);
 	}
@@ -92,14 +114,25 @@ void input_twoplayers(playerT *playerPone, playerT *playerPtwo, int *position_on
 			//draw
 		}
 	} else if (input_c == 'i'){
-		//player 2 play selected card
+		if (cardFits(&playerPtwo->hand->cards[position_two], tableP))
+		{
+			tablePutAtt(tableP,playCard(playerPtwo, position_two));
+			// don't attack any more if no cards left
+			if (stackSize(playerPtwo->hand) == 0)
+			{
+				playerEndRound(playerPtwo);
+			}
+		}
 	} else if (input_c == 'k'){
-		//player 2 stop
+		playerEndRound(playerPtwo);
 	} else if (input_c == 'p'){
 		PlayerSortHand(playerPtwo, trumpSuit);
 	} else {
 		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
 	}
+
+	pos_one = (int *) position_one;
+	pos_two = (int *) position_two;
 
 	//setting input to cooked input
 	system ("/bin/stty cooked");
