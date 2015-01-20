@@ -59,17 +59,29 @@ void input_twoplayers(playerT *PlayerPone, playerT *playerPtwo, int* position_on
 	input_c = getchar();
 
 	if(input_c == 'w'){
-		//player 1 selcet up
+		if (position_one > 0){
+			position_one = position_one - 1;
+			//draw
+		}
 	} else if (input_c == 's'){
-		//player 1 select down
+		if (position_one < handsize1){
+			position_one = position_one + 1;
+			//draw
+		}
 	} else if (input_c == 'e'){
 		//player 1 play selected card
 	} else if (input_c == 'd'){
 		//player 1 stop
-	} else if (input_c == 'o'){
-		//player 2 select up
+	}
+	else if (input_c == 'o'){
+		if (position_two > 0){
+			position_two = position_two - 1;
+			//draw
+		}
 	} else if (input_c == 'l'){
-		//player 2 select down
+		if (position_two < handsize2){
+			position_two = position_two + 1;
+		}
 	} else if (input_c == 'i'){
 		//player 2 play selected card
 	} else if (input_c == 'k'){
