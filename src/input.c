@@ -1,3 +1,6 @@
+
+#include <../inc/input.h>
+
 void PlayerSortHand(playerT *playerP, int trumpSuit)
 {
 	// take all trumps from hand
@@ -14,8 +17,9 @@ void PlayerSortHand(playerT *playerP, int trumpSuit)
 			stackPush(trumps,playCard(playerP,i));
 		}
 	}
+}
 
-void input_player1(playerT *playerP, int* position)//maybe but active players in here?
+void input_player1(playerT *playerP, int *position, int trumpSuit)//maybe but active players in here?
 {
 	int handsize = stackSize(playerP->hand);
 	char input_c;
@@ -39,6 +43,8 @@ void input_player1(playerT *playerP, int* position)//maybe but active players in
 		//player 1 play selected card
 	} else if (input_c == 'd'){
 		//player 1 stop
+	} else if (input_c == 'q'){
+		PlayerSortHand(playerP, trumpSuit);
 	} else {
 		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
 	}
@@ -47,7 +53,7 @@ void input_player1(playerT *playerP, int* position)//maybe but active players in
 	system ("/bin/stty cooked");
 }
 
-void input_twoplayers(playerT *PlayerPone, playerT *playerPtwo, int* position_one, int* position_two)//maybe but active players in here?
+void input_twoplayers(playerT *playerPone, playerT *playerPtwo, int *position_one, int *position_two, int trumpSuit)//maybe but active players in here?
 {
 	int handsize1 = stackSize(playerPone->hand);
 	int handsize2 = stackSize(playerPtwo->hand);
@@ -72,6 +78,8 @@ void input_twoplayers(playerT *PlayerPone, playerT *playerPtwo, int* position_on
 		//player 1 play selected card
 	} else if (input_c == 'd'){
 		//player 1 stop
+	} else if (input_c == 'q'){
+		PlayerSortHand(playerPone, trumpSuit);
 	}
 	else if (input_c == 'o'){
 		if (position_two > 0){
@@ -81,11 +89,14 @@ void input_twoplayers(playerT *PlayerPone, playerT *playerPtwo, int* position_on
 	} else if (input_c == 'l'){
 		if (position_two < handsize2){
 			position_two = position_two + 1;
+			//draw
 		}
 	} else if (input_c == 'i'){
 		//player 2 play selected card
 	} else if (input_c == 'k'){
 		//player 2 stop
+	} else if (input_c == 'p'){
+		PlayerSortHand(playerPtwo, trumpSuit);
 	} else {
 		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
 	}
