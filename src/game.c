@@ -13,6 +13,8 @@
 // game speed
 #define SPEED (10*1000) // ms * 1000 = ns
 
+int position = 0;
+
 int main()
 {
 	// Game variables
@@ -56,7 +58,6 @@ int main()
 		// ROUND LOOP
 		while(!roundOver(party,table))
 		{
-			int position = 0;
 			// wait for attacker to play
 			usleep(SPEED);
 			//botPlay(party->attacker,party,table,trump);
