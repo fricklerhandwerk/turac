@@ -13,16 +13,21 @@
 // game speed
 #define SPEED (10*1000) // ms * 1000 = ns
 
-int position = 0;
 
 int main()
 {
 	// Game variables
+	int humans = 2;
 	int trump = -1;
+	int quit = FALSE;
 	tableT *table;
 	stackT *deck, *waste;
 	partyT *party;
-	playerT *player1, *player2, *durakP;
+	playerT *bot1, *bot2, *player1, *player2, *durakP;
+
+	// cursor position for player 1
+	int position1 = 0, position2 = 0;
+
 
 	// Initialize game objects
 	table = tableInit(HAND_SIZE);
@@ -30,11 +35,30 @@ int main()
 	waste = stackInit(stackSize(deck));
 
 	party = partyInit();
+	bot1 = playerNew("Bot1",stackSize(deck));
+	bot2 = playerNew("Bot2",stackSize(deck));
 	player1 = playerNew("Player1",stackSize(deck));
 	player2 = playerNew("Player2",stackSize(deck));
 
-	addPlayer(party,player1);
-	addPlayer(party,player2);
+
+	switch(humans)
+	{
+		case 0:
+			position1 = -1;
+			position2 = -1;
+			addPlayer(party,bot1);
+			addPlayer(party,bot2);
+			break;
+		case 1:
+			position2 = -1;
+			addPlayer(party,player1);
+			addPlayer(party,bot1);
+			break;
+		default:
+			addPlayer(party,player1);
+			addPlayer(party,player2);
+			break;
+	}
 
 
 	// start game by handing cards
@@ -50,7 +74,7 @@ int main()
 	}
 
 	// update view
-	viewGame(party,table,deck,waste,listRank,listSuit);
+	viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 
 	// GAME LOOP
 	while(!gameOver(party,deck))
@@ -58,16 +82,65 @@ int main()
 		// ROUND LOOP
 		while(!roundOver(party,table))
 		{
+			// if defender wants to take cards, check if attacker can still add any
+			// if not, set attacker done
+			if (!playerInRound(party->defender))
+			{
+				int done = 1;
+				for (int i = 0; i < stackSize(party->attacker->hand); ++i)
+				{
+					if (cardFits(&party->attacker->hand->cards[i],table))
+						{
+							done = 0;
+							break;
+						}
+				}
+				if (done)
+				{
+					playerEndRound(party->attacker);
+					viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
+					continue;
+				}
+			}
+	
+			// else, let attacker play
+
+			input_twoplayers(party, player1, player2, table, &position1, &position2, &quit, trump);
+			viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
+			
+			/*
 			// wait for attacker to play
-			usleep(SPEED);
-			//botPlay(party->attacker,party,table,trump);
-			input_player1(party->attacker, table, position, trump);
-			viewGame(party,table,deck,waste,listRank,listSuit);
+			if (party->attacker == bot1 || party->attacker == bot2)
+			{
+				usleep(SPEED);
+				botPlay(party->attacker,party,table,trump);
+			}
+			else if (party->attacker == player1)
+			{
+				input_player1(party,party->attacker, table, &position1, &quit, trump);
+			}
+			viewGame(party,table,deck,waste,position1,listRank,listSuit);
+
+
 
 			// wait for defender to play
-			usleep(SPEED);
-			botPlay(party->defender,party,table,trump);
-			viewGame(party,table,deck,waste,listRank,listSuit);
+			if (party->defender == bot1 || party->defender == bot2)
+			{
+				usleep(SPEED);
+				botPlay(party->defender,party,table,trump);
+			}
+			else if (party->defender == player1)
+			{
+				input_player1(party,party->defender, table, &position1, &quit, trump);
+			}
+			viewGame(party,table,deck,waste,position1,listRank,listSuit);
+			*/
+
+
+			if (quit == TRUE)
+			{
+				exit(EXIT_SUCCESS);
+			}
 		}
 
 		// AFTER EACH ROUND
@@ -89,14 +162,15 @@ int main()
 		}
 
 		usleep(SPEED);
-		viewGame(party,table,deck,waste,listRank,listSuit);
+		viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 
 		// hand cards if any left
 		if (stackSize(deck) > 0)
 		{
 			handCardsRound(party,deck,HAND_SIZE);
 			usleep(SPEED);
-			viewGame(party,table,deck,waste,listRank,listSuit);
+			viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
+
 		}
 
 		// switch to next player
@@ -112,9 +186,9 @@ int main()
 		}
 
 		usleep(SPEED);
-		viewGame(party,table,deck,waste,listRank,listSuit);
+		viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 	}
-	viewGame(party,table,deck,waste,listRank,listSuit);
+	viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 	printf("Game Over!\n");
 	durakP = durak(party);
 	if (durakP != NULL)

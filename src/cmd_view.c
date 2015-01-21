@@ -1,6 +1,7 @@
 /* Commandline view implementation */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "../inc/cmd_view.h"
 
@@ -193,22 +194,33 @@ void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit)
 	printf("\n");
 }
 
-void viewPlayer(playerT *playerP, partyT *partyP, const char **listRank, const char **listSuit)
+void viewPlayer(playerT *playerP, partyT *partyP, int position, const char **listRank, const char **listSuit)
 {
-	char role;
+	char role[20];
 	if (playerP == partyP->attacker)
 	{
-		role = 'A';
+		strcpy(role,"\033[0;31mA\033[0;30m");
 	}
 	else if (playerP == partyP->defender)
 	{
-		role = 'D';
+		strcpy(role,"\033[0;32mD\033[0;30m");
 	}
-	printf("%s (%c)\n",playerP->name,role);
+	printf("%s (%s)\n",playerP->name,role);
 	viewHandRow(playerP->hand,listRank,listSuit);
+
+
+	if (position >= 0)
+	{
+		for (int i = 0; i < position; ++i)
+		{
+			printf(CUR_RT);
+		}
+		printf("  *\n");
+	}
+
 }
 
-void viewGame(partyT *partyP, tableT *tableP, stackT *deckP, stackT *wasteP, const char **listRank, const char **listSuit)
+void viewGame(partyT *partyP, tableT *tableP, stackT *deckP, stackT *wasteP, int position1, int position2, const char **listRank, const char **listSuit)
 {
 	// clear screen first
 	printf(CLEAR);
@@ -217,8 +229,9 @@ void viewGame(partyT *partyP, tableT *tableP, stackT *deckP, stackT *wasteP, con
 	viewDeck(deckP,listRank,listSuit);
 	printf("Waste:\n");
 	viewWaste(wasteP);
-	viewPlayer(partyP->first,partyP,listRank,listSuit);
-	viewPlayer(partyP->first->next,partyP,listRank,listSuit);
+	// WARNING: assumes exactly two players!!!
+	viewPlayer(partyP->first,partyP,position1,listRank,listSuit);
+	viewPlayer(partyP->first->next,partyP,position2,listRank,listSuit);
 	printf("\n");
 	printf("Table:\n");
 	viewTableRow(tableP,listRank,listSuit);

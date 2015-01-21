@@ -5,45 +5,10 @@
 
 #include <../inc/bot.h>
 
-void botSortHand(playerT *botP, int trumpSuit)
-{
-	// take all trumps from hand
-	stackT *trumps = stackInit(stackMaxSize(botP->hand));
-	// this one is a bit tricky...
-	// move trough stack until last element
-	for (int i = 0; i < stackSize(botP->hand); ++i)
-	{
-		// but since playCard() currently swaps the chosen card with top,
-		// the new card at this position might also come in question
-		while (i < stackSize(botP->hand) && isTrump(&botP->hand->cards[i],trumpSuit))
-		{
-			// put the trump card onto trumps stack
-			stackPush(trumps,playCard(botP,i));
-		}
-	}
-
-
-	// sort remaining cards by rank
-	stackSortRank(botP->hand);
-
-	// now, if we push the trumps back after sorting, they will be in wrong order
-	// so instead, for now, we just exchange first and last, pop the top
-	// sort it again and repeat until no cards are left in trumps
-	// terribly inefficient, a simple stackReverse function would be nice...
-	while (!stackEmpty(trumps))
-	{
-		stackSortRank(trumps);
-		stackSwap(trumps,0);
-		takeCard(botP,stackPop(trumps));
-	}
-	// we don't need the trumps stack any more
-	stackDestroy(&trumps);
-}
-
 void botAttack(playerT *botP, tableT *tableP, int trumpSuit)
 {
 	// sort cards by value
-	botSortHand(botP,trumpSuit);
+	playerSortHand(botP,trumpSuit);
 
 	// look for the first card that would fit on the table
 	for (int i = 0; i < stackSize(botP->hand); ++i)
@@ -68,7 +33,7 @@ void botAttack(playerT *botP, tableT *tableP, int trumpSuit)
 void botDefend(playerT *botP, tableT *tableP, int trumpSuit)
 {
 	// sort cards by value
-	botSortHand(botP,trumpSuit);
+	playerSortHand(botP,trumpSuit);
 
 	// for each card to beat, look for the lowest possible solution
 	for (int k = 0; k < stackSize(botP->hand); ++k)

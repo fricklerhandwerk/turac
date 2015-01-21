@@ -9,11 +9,28 @@
 #include <stdio.h>
 #include <player.h>
 
-void PlayerSortHand(playerT *playerP, int trumpSuit);
+// player keys
+#define P1_LT 'a'
+#define P1_RT 'd'
+#define P1_AC 'w'
+#define P1_EN 'e'
+#define P1_ST 'q'
 
-void input_player1(playerT *playerP,tableT *tableP, int *pos, int trumpSuit);
+#define P2_LT 'j'
+#define P2_RT 'l'
+#define P2_AC 'i'
+#define P2_EN 'o'
+#define P2_ST 'u'
 
-void input_twoplayers(playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int trumpSuit);
+#define QUIT '.'
+
+
+
+void playerSortHand(playerT *playerP, int trumpSuit);
+
+void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit);
+
+void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int *quit, int trumpSuit);
 
 
 #endif

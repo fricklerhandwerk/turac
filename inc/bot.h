@@ -6,6 +6,7 @@
 #include <party.h>
 #include <table.h>
 #include <rules.h>
+#include <input.h>
 
 /* BOT FUNCTIONS
  *
@@ -40,9 +41,6 @@
  * Once all attacking cards are beaten, exit routine.
  * If no beating card is found for any, set roundF = FALSE to take cards and exit.
  */
-
-// sort bot's cards by actual game value, so he can work with it
-void botSortHand(playerT *botP, int trumpSuit);
 
 // attack, duh.
 void botAttack(playerT *botP, tableT *tableP, int trumpSuit);

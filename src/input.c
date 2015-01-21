@@ -1,7 +1,7 @@
 
 #include <../inc/input.h>
 
-void PlayerSortHand(playerT *playerP, int trumpSuit)
+void playerSortHand(playerT *playerP, int trumpSuit)
 {
 	// take all trumps from hand
 	stackT *trumps = stackInit(stackMaxSize(playerP->hand));
@@ -17,122 +17,277 @@ void PlayerSortHand(playerT *playerP, int trumpSuit)
 			stackPush(trumps,playCard(playerP,i));
 		}
 	}
+
+
+	// sort remaining cards by rank
+	stackSortRank(playerP->hand);
+
+	// now, if we push the trumps back after sorting, they will be in wrong order
+	// so instead, for now, we just exchange first and last, pop the top
+	// sort it again and repeat until no cards are left in trumps
+	// terribly inefficient, a simple stackReverse function would be nice...
+	while (!stackEmpty(trumps))
+	{
+		stackSortRank(trumps);
+		stackSwap(trumps,0);
+		takeCard(playerP,stackPop(trumps));
+	}
+	// we don't need the trumps stack any more
+	stackDestroy(&trumps);
 }
 
-void input_player1(playerT *playerP,tableT *tableP, int *pos, int trumpSuit)//maybe but active players in here?
+void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit)//maybe but active players in here?
 {
-	int handsize = stackSize(playerP->hand);
+	int handsize = stackSize(playerP->hand)-1;
+	while (*pos > handsize)
+	{
+		(*pos)--;
+	}	
+
 	char input_c;
-	int position = (int) pos;
 
 	//setting input to raw input
 	system ("/bin/stty raw");
 
 	input_c = getchar();
 
-	if(input_c == 'w'){
-		if (position > 0){
-			position = position - 1;
-			//draw
-		}
-	} else if (input_c == 's'){
-		if (position < handsize){
-			position = position + 1;
-			//draw
-		}
-	} else if (input_c == 'e'){
-		if (cardFits(&playerP->hand->cards[position],tableP))
+	if (input_c == QUIT)
+	{
+
+		(*quit) = TRUE;
+	}
+	else if(input_c == P1_LT)
+	{
+		if (*pos > 0)
 		{
-			tablePutAtt(tableP,playCard(playerP,position));
-			// don't attack any more if no cards left
-			if (stackSize(playerP->hand) == 0)
-			{
-				playerEndRound(playerP);
-			}
+			(*pos)--;
+			//draw
 		}
-	} else if (input_c == 'd'){
-		playerEndRound(playerP);
-	} else if (input_c == 'q'){
-		PlayerSortHand(playerP, trumpSuit);
+		else
+		{
+			(*pos) = handsize;
+		}
+	}
+	else if (input_c == P1_RT)
+	{
+
+		if (*pos < handsize)
+		{
+			(*pos)++;
+			//draw
+		}
+		else
+		{
+			(*pos) = 0;
+		}
+	}
+	else if (input_c == P1_AC)
+	{
+		if (partyP->defender == playerP)
+		{
+			for (int i = 0; i < stackSize(tableP->att); ++i)
+			{
+				if (cardBeats(&playerP->hand->cards[*pos],&tableP->att->cards[i],trumpSuit))
+				{
+					tablePutDef(tableP,playCard(playerP,*pos),i);
+					break;
+				}
+			}
+
+		}
+		else
+		{
+			if (cardFits(&playerP->hand->cards[*pos],tableP))
+			{
+				tablePutAtt(tableP,playCard(playerP,*pos));
+				// don't attack any more if no cards left
+				if (stackSize(playerP->hand) == 0)
+				{
+					playerEndRound(playerP);
+				}
+			}	
+		}
+
+	}
+	else if (input_c == P1_EN)
+	{
+		if (!(playerP == partyP->attacker && stackSize(tableP->att) == 0))
+		{
+			playerEndRound(playerP);
+		}
+
+	}
+	else if (input_c == P1_ST){
+		playerSortHand(playerP, trumpSuit);
 	} else {
 		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
 	}
-
-	pos = (int *) position;
 
 	//setting input to cooked input
 	system ("/bin/stty cooked");
 }
 
-void input_twoplayers(playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int trumpSuit)//maybe but active players in here?
+void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int *quit, int trumpSuit)//maybe but active players in here?
 {
-	int handsize1 = stackSize(playerPone->hand);
-	int handsize2 = stackSize(playerPtwo->hand);
-	char input_c;
+	int handsize1 = stackSize(playerPone->hand)-1;
+	int handsize2 = stackSize(playerPtwo->hand)-1;
 
-	int position_one = (int) pos_one;
-	int position_two = (int) pos_two;
+	// reset cursors to valid positions
+	while (*pos_one > handsize1)
+	{
+		(*pos_one)--;
+	}	
+	while (*pos_two > handsize2)
+	{
+		(*pos_two)--;
+	}	
+
 
 	//setting input to raw input
 	system ("/bin/stty raw");
 
+	char input_c;
 	input_c = getchar();
 
-	if(input_c == 'w'){
-		if (position_one > 0){
-			position_one = position_one - 1;
-			//draw
-		}
-	} else if (input_c == 's'){
-		if (position_one < handsize1){
-			position_one = position_one + 1;
-			//draw
-		}
-	} else if (input_c == 'e'){
-		if (cardFits(&playerPone->hand->cards[position_one], tableP))
-		{
-			tablePutAtt(tableP,playCard(playerPone, position_one));
-			// don't attack any more if no cards left
-			if (stackSize(playerPone->hand) == 0)
-			{
-				playerEndRound(playerPone);
-			}
-		}
-	} else if (input_c == 'd'){
-		playerEndRound(playerPone);
-	} else if (input_c == 'q'){
-		PlayerSortHand(playerPone, trumpSuit);
+	
+	if (input_c == QUIT)
+	{
+
+		(*quit) = TRUE;
 	}
-	else if (input_c == 'o'){
-		if (position_two > 0){
-			position_two = position_two - 1;
-			//draw
-		}
-	} else if (input_c == 'l'){
-		if (position_two < handsize2){
-			position_two = position_two + 1;
-			//draw
-		}
-	} else if (input_c == 'i'){
-		if (cardFits(&playerPtwo->hand->cards[position_two], tableP))
+	else if(input_c == P1_LT)
+	{
+		if (*pos_one > 0)
 		{
-			tablePutAtt(tableP,playCard(playerPtwo, position_two));
-			// don't attack any more if no cards left
-			if (stackSize(playerPtwo->hand) == 0)
-			{
-				playerEndRound(playerPtwo);
-			}
+			(*pos_one)--;
+			//draw
 		}
-	} else if (input_c == 'k'){
-		playerEndRound(playerPtwo);
-	} else if (input_c == 'p'){
-		PlayerSortHand(playerPtwo, trumpSuit);
-	} else {
-		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
+		else
+		{
+			(*pos_one) = handsize1;
+		}
+	}
+	else if (input_c == P1_RT)
+	{
+
+		if (*pos_one < handsize1)
+		{
+			(*pos_one)++;
+			//draw
+		}
+		else
+		{
+			(*pos_one) = 0;
+		}
+	}
+	else if (input_c == P1_AC)
+	{
+		if (partyP->defender == playerPone)
+		{
+			for (int i = 0; i < stackSize(tableP->att); ++i)
+			{
+				if (cardBeats(&playerPone->hand->cards[*pos_one],&tableP->att->cards[i],trumpSuit))
+				{
+					tablePutDef(tableP,playCard(playerPone,*pos_one),i);
+					break;
+				}
+			}
+
+		}
+		else
+		{
+			if (cardFits(&playerPone->hand->cards[*pos_one],tableP))
+			{
+				tablePutAtt(tableP,playCard(playerPone,*pos_one));
+				// don't attack any more if no cards left
+				if (stackSize(playerPone->hand) == 0)
+				{
+					playerEndRound(playerPone);
+				}
+			}	
+		}
+
+	}
+	else if (input_c == P1_EN)
+	{
+		if (!(playerPone == partyP->attacker && stackSize(tableP->att) == 0))
+		{
+			playerEndRound(playerPone);
+		}
+	}
+	else if (input_c == P1_ST)
+	{
+		playerSortHand(playerPone, trumpSuit);
 	}
 
-	pos_one = (int *) position_one;
-	pos_two = (int *) position_two;
+
+
+
+
+	else if (input_c == P2_LT)
+	{
+		if (*pos_two > 0)
+		{
+			(*pos_two)--;
+			//draw
+		}
+		else
+		{
+			(*pos_two) = handsize2;
+		}
+	}
+	else if (input_c == P2_RT)
+	{
+
+		if (*pos_two < handsize2)
+		{
+			(*pos_two)++;
+			//draw
+		}
+		else
+		{
+			(*pos_two) = 0;
+		}
+	}
+	else if (input_c == P2_AC)
+	{
+		if (partyP->defender == playerPtwo)
+		{
+			for (int i = 0; i < stackSize(tableP->att); ++i)
+			{
+				if (cardBeats(&playerPtwo->hand->cards[*pos_two],&tableP->att->cards[i],trumpSuit))
+				{
+					tablePutDef(tableP,playCard(playerPtwo,*pos_two),i);
+					break;
+				}
+			}
+
+		}
+		else
+		{
+			if (cardFits(&playerPtwo->hand->cards[*pos_two],tableP))
+			{
+				tablePutAtt(tableP,playCard(playerPtwo,*pos_two));
+				// don't attack any more if no cards left
+				if (stackSize(playerPtwo->hand) == 0)
+				{
+					playerEndRound(playerPtwo);
+				}
+			}	
+		}
+
+	}
+	else if (input_c == P2_EN)
+	{
+		if (!(playerPtwo == partyP->attacker && stackSize(tableP->att) == 0))
+		{
+			playerEndRound(playerPtwo);
+		}
+	}
+	else if (input_c == P2_ST)
+	{
+		playerSortHand(playerPtwo, trumpSuit);
+	}
 
 	//setting input to cooked input
 	system ("/bin/stty cooked");
