@@ -8,9 +8,12 @@
 #include "../inc/bot.h"
 #include "../inc/constants.h"
 #include "../inc/cmd_view.h"
+#include "../inc/input.h"
 
 // game speed
 #define SPEED (10*1000) // ms * 1000 = ns
+
+int position = 0;
 
 int main()
 {
@@ -29,7 +32,7 @@ int main()
 	party = partyInit();
 	player1 = playerNew("Player1",stackSize(deck));
 	player2 = playerNew("Player2",stackSize(deck));
-	
+
 	addPlayer(party,player1);
 	addPlayer(party,player2);
 
@@ -55,10 +58,10 @@ int main()
 		// ROUND LOOP
 		while(!roundOver(party,table))
 		{
-
 			// wait for attacker to play
 			usleep(SPEED);
-			botPlay(party->attacker,party,table,trump);
+			//botPlay(party->attacker,party,table,trump);
+			input_player1(party->attacker, table, position, trump);
 			viewGame(party,table,deck,waste,listRank,listSuit);
 
 			// wait for defender to play
