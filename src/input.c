@@ -85,15 +85,32 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 	{
 		if (partyP->defender == playerP)
 		{
+			// look at each card on attack stack
 			for (int i = 0; i < stackSize(tableP->att); ++i)
 			{
+				// check if it's been beaten already by some other card on defend stack
+				int beaten = FALSE;
+				for (int j = 0; j < stackSize(tableP->def); ++j)
+				{
+					if (tableP->beats[j] == i)
+					{
+						beaten = TRUE;
+						break;
+					}
+				}
+				// if so, work on next attacking card
+				if (beaten) {continue;}
+
 				if (cardBeats(&playerP->hand->cards[*pos],&tableP->att->cards[i],trumpSuit))
 				{
 					tablePutDef(tableP,playCard(playerP,*pos),i);
 					break;
 				}
+				else
+				{
+					continue;
+				}
 			}
-
 		}
 		else
 		{
@@ -184,15 +201,32 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	{
 		if (partyP->defender == playerPone)
 		{
+			// look at each card on attack stack
 			for (int i = 0; i < stackSize(tableP->att); ++i)
 			{
+				// check if it's been beaten already by some other card on defend stack
+				int beaten = FALSE;
+				for (int j = 0; j < stackSize(tableP->def); ++j)
+				{
+					if (tableP->beats[j] == i)
+					{
+						beaten = TRUE;
+						break;
+					}
+				}
+				// if so, work on next attacking card
+				if (beaten) {continue;}
+
 				if (cardBeats(&playerPone->hand->cards[*pos_one],&tableP->att->cards[i],trumpSuit))
 				{
 					tablePutDef(tableP,playCard(playerPone,*pos_one),i);
 					break;
 				}
+				else
+				{
+					continue;
+				}
 			}
-
 		}
 		else
 		{
@@ -253,15 +287,32 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	{
 		if (partyP->defender == playerPtwo)
 		{
+			// look at each card on attack stack
 			for (int i = 0; i < stackSize(tableP->att); ++i)
 			{
+				// check if it's been beaten already by some other card on defend stack
+				int beaten = FALSE;
+				for (int j = 0; j < stackSize(tableP->def); ++j)
+				{
+					if (tableP->beats[j] == i)
+					{
+						beaten = TRUE;
+						break;
+					}
+				}
+				// if so, work on next attacking card
+				if (beaten) {continue;}
+
 				if (cardBeats(&playerPtwo->hand->cards[*pos_two],&tableP->att->cards[i],trumpSuit))
 				{
 					tablePutDef(tableP,playCard(playerPtwo,*pos_two),i);
 					break;
 				}
+				else
+				{
+					continue;
+				}
 			}
-
 		}
 		else
 		{

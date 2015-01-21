@@ -35,6 +35,8 @@ void botDefend(playerT *botP, tableT *tableP, int trumpSuit)
 	// sort cards by value
 	playerSortHand(botP,trumpSuit);
 
+	/* WARNING: REALLY IMPORTANT HACK TO CHECK WHETHER A CARD BEATS ANOTHER ONE */
+
 	// for each card to beat, look for the lowest possible solution
 	for (int k = 0; k < stackSize(botP->hand); ++k)
 	{
