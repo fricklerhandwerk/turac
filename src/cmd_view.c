@@ -193,7 +193,7 @@ void viewTableCol(tableT *tableP, const char **listRank, const char **listSuit)
 	printf("\n");
 }
 
-void viewPlayer(playerT *playerP, partyT *partyP, const char **listRank, const char **listSuit)
+void viewPlayer(playerT *playerP, partyT *partyP, int cursor, const char **listRank, const char **listSuit)
 {
 	char role;
 	if (playerP == partyP->attacker)

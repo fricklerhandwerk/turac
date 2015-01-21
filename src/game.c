@@ -10,7 +10,7 @@
 #include "../inc/cmd_view.h"
 
 // game speed
-#define SPEED (10*1000) // ms * 1000 = ns
+#define SPEED (1000*1000) // ms * 1000 = ns
 
 int main()
 {
@@ -29,9 +29,28 @@ int main()
 	party = partyInit();
 	player1 = playerNew("Player1",stackSize(deck));
 	player2 = playerNew("Player2",stackSize(deck));
+	bot1 = playerNew("Bot1",stackSize(deck));
+	bot2 = playerNew("Bot2",stackSize(deck));
 	
-	addPlayer(party,player1);
-	addPlayer(party,player2);
+	if ($user_input)
+	{
+		addPlayer(party,player1);
+		addPlayer(party,player2);
+	}
+	else if 
+
+	{
+		addPlayer(party,player1);
+		addPlayer(party,bot1);
+	}
+	else if 
+
+	{
+		addPlayer(party,bot1);
+		addPlayer(party,bot2);
+	}
+
+	
 
 
 	// start game by handing cards
@@ -58,12 +77,41 @@ int main()
 
 			// wait for attacker to play
 			usleep(SPEED);
-			botPlay(party->attacker,party,table,trump);
+			if (party->attacker == bot)
+			{
+				botPlay(party->attacker,party,table,trump);
+
+			}
+			else if (party->attacker == player1)
+			{
+				twoPlayerPlay(party->attacker,party->defender,table,trump);
+			}
+			else if (party->attacker == player2)
+			{
+				player2Play(...);
+			}
 			viewGame(party,table,deck,waste,listRank,listSuit);
+
+
 
 			// wait for defender to play
 			usleep(SPEED);
-			botPlay(party->defender,party,table,trump);
+			if (party->defender == bot)
+			{
+				botPlay(party->defender,party,table,trump);
+
+			}
+			else if (party->defender == player1)
+			{
+				player1Play(...);
+			}
+			else if (party->defender == player2)
+			{
+				player2Play(...);
+			}
+
+
+
 			viewGame(party,table,deck,waste,listRank,listSuit);
 		}
 
