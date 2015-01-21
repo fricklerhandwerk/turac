@@ -14,16 +14,33 @@
 - [x] Implement some stuff
 
 ##Week 3
-- [ ] Implement more stuff (in any barely working way)
+- [x] Implement more stuff (in any barely working way)
 	- [x] Players
 	- [x] Rules
 	- [x] Cmd view
-	- [ ] Cmd control
-	- [ ] Cmd view with control
-	- [ ] Game loop
 	- [x] Bot
 	- [x] Botmatch
   
+ ##Week 4
+ - [x] Make it work
+ 	- [x] Cmd control
+	- [x] Cmd view with control
+	- [x] Game loop
+	- [x] Bugfixes
+
+
+##Wishlist
+- [ ] Encapsule game start (game.c) // currently expanded before game loop
+- [ ] Get number of human players and their names as program argument (game.c)
+- [ ] Ask and start new game after finished (game.c)
+- [ ] Set attacker and defender in next games according to who lost before (rules.h)
+- [ ] Keep cards in order after playing (playCard in player.h)
+- [ ] Set cursor to valid position after playing, not before (input.c)
+- [ ] Change cardBeats such that it checks a card on the table, and takes into account if it has already been beaten (rules.h)
+- [ ] Abstract away player actions (input.h)
+- [ ] Abstract away input model (input.c) // all players have the same actions, just pass them their keys
+- [ ] Re-Implement commandline view and control using curses
+- [ ] Re-Implement stacks/lists using glib to have less maintenance (evil amout of work)
 
 - Vincent
 	- [x] Player
@@ -34,7 +51,15 @@
 		- [x] playerDone
 		- [x] playCard
 		- [x] takeCard
+	- [x] Commandline control
+		- [x] Header file
+		- [x] Move cursor
+		- [x] Put card
+		- [x] Set Done
+		- [x] Quit
 - Tom
+ - [x] Cursor view
+ - [x] Fix 
 - Valentin
 	- [x] Party interface
 	- [x] Player interface
@@ -92,26 +117,12 @@
 		- [x] cardFits
 		- [x] attackStopped // all attackers stopped adding cards
 		- [x] roundOver
-		- [ ] gameStart // currently expanded before game loop
 		- [x] gameOver
 	- [x] Rules tests
-	- [x] Game loop (botmatch)
+	- [x] Game loop
+	 - [x] Cases for players/bots
+	 - [x] Hand action to next player/bot
 	- [x] Bot
 		- [x] botSortHand
 		- [x] botAttack
 		- [x] botDefend
-
-
-
-
-## Pile of stuff
-- [ ] Commandline view
-	- [ ] change view functions to plot to screen instead of linewise
-	- [ ] global screenRefresh function which shows all game objects at once
-	- [ ] necessary subfunctions
-- [ ] Commandline control
-	- [ ] Header file
-	- [ ] moveCursor // cursor to choose card from hand
-	- [ ] putCard // puts card on table
-	- [ ] setDone // take cards or stop attacking
-
