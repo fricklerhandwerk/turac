@@ -14,6 +14,11 @@
 // clear screen
 #define CLEAR "\033[2J"
 
+// colors
+#define KNRM "\x1B[0m"
+#define KRED "\x1B[31m"
+#define KGRN "\x1B[32m"
+
 void viewCard(cardT *cardP, const char **listRank, const char **listSuit)
 {
 	if (cardP->face)
@@ -199,11 +204,11 @@ void viewPlayer(playerT *playerP, partyT *partyP, int position, const char **lis
 	char role[20];
 	if (playerP == partyP->attacker)
 	{
-		strcpy(role,"\033[0;31mA\033[0;30m");
+		strcpy(role,KRED"A"KNRM);
 	}
 	else if (playerP == partyP->defender)
 	{
-		strcpy(role,"\033[0;32mD\033[0;30m");
+		strcpy(role,KGRN"D"KNRM);
 	}
 	printf("%s (%s)\n",playerP->name,role);
 	viewHandRow(playerP->hand,listRank,listSuit);
