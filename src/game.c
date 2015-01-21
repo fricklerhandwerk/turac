@@ -12,9 +12,10 @@
 
 // game speed
 #define SPEED (10*1000) // ms * 1000 = ns
+#define VIEW_SPEED (500*1000)
 
 
-int main()
+int main(void)
 {
 	// Game variables
 	int humans = 2;
@@ -69,7 +70,8 @@ int main()
 	while (party->attacker == NULL)
 	{
 		printf("No trumps handed, game reset...\n");
-		usleep(SPEED);
+		// wait a second for new random seed
+		sleep(1);
 		gameReset(party,deck,waste,table,HAND_SIZE,listRank,listSuit,&trump);
 	}
 
@@ -84,7 +86,7 @@ int main()
 		{
 			// if defender wants to take cards, check if attacker can still add any
 			// if not, set attacker done
-			if (!playerInRound(party->defender))
+			if (!playerInRound(party->defender) || tableBeaten(table))
 			{
 				int done = 1;
 				for (int i = 0; i < stackSize(party->attacker->hand); ++i)
@@ -98,6 +100,8 @@ int main()
 				if (done)
 				{
 					playerEndRound(party->attacker);
+					// wait a second to denote that something happens for a reason
+					usleep(VIEW_SPEED);
 					viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 					continue;
 				}
@@ -145,23 +149,23 @@ int main()
 
 		// AFTER EACH ROUND
 
-		printf("Round over.\n");
+		//printf("Round over.\n");
 		// clean table
 		if (playerInRound(party->defender))
 		{
-			printf("%s defended successfully.\n",party->defender->name);
+			//printf("%s defended successfully.\n",party->defender->name);
 			// if defender won, table to waste
 			tableClean(table,waste);
 		}
 		else
 		{
-			printf("%s takes cards.\n",party->defender->name);
+			//printf("%s takes cards.\n",party->defender->name);
 			// otherwise defender takes cards
 			tableClean(table,party->defender->hand);
 
 		}
 
-		usleep(SPEED);
+		usleep(VIEW_SPEED);
 		viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 
 		// hand cards if any left

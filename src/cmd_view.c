@@ -210,7 +210,16 @@ void viewPlayer(playerT *playerP, partyT *partyP, int position, const char **lis
 	{
 		strcpy(role,KGRN"D"KNRM);
 	}
-	printf("%s (%s)\n",playerP->name,role);
+	char done[3];
+	if (!playerP->roundF)
+	{
+		strcpy(done," *");
+	}
+	else
+	{
+		strcpy(done,"");
+	}
+	printf("%s (%s) %s\n",playerP->name,role,done);
 	viewHandRow(playerP->hand,listRank,listSuit);
 
 

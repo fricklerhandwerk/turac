@@ -128,7 +128,7 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 	}
 	else if (input_c == P1_EN)
 	{
-		if (!(playerP == partyP->attacker && stackSize(tableP->att) == 0))
+		if (!(playerP == partyP->attacker && stackSize(tableP->att) == 0) && !(playerP == partyP->defender && tableBeaten(tableP)))
 		{
 			playerEndRound(playerP);
 		}
@@ -244,7 +244,7 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	}
 	else if (input_c == P1_EN)
 	{
-		if (!(playerPone == partyP->attacker && stackSize(tableP->att) == 0))
+		if (!(playerPone == partyP->attacker && stackSize(tableP->att) == 0) && !(playerPone == partyP->defender && tableBeaten(tableP)))
 		{
 			playerEndRound(playerPone);
 		}
@@ -330,7 +330,7 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	}
 	else if (input_c == P2_EN)
 	{
-		if (!(playerPtwo == partyP->attacker && stackSize(tableP->att) == 0))
+		if (!(playerPtwo == partyP->attacker && stackSize(tableP->att) == 0) && !(playerPtwo == partyP->defender && tableBeaten(tableP)))
 		{
 			playerEndRound(playerPtwo);
 		}
