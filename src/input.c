@@ -24,7 +24,7 @@ void input()//maybe but active players in here?
 		} else if (input_c == 'k'){
 			//player 2 stop
 		} else {
-			printf("\n--------------------\nBitte gib etwas anderes ein!\n------------------\n");
+			printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
 		}
 
 	}
