@@ -95,6 +95,28 @@ int stackSwap(stackT *stackP, int pos)
 	return(EXIT_SUCCESS);
 }
 
+int stackMoveTop(stackT *stackP, int pos)
+{
+	// refuse to work on illegal positions
+	if (pos < 0 || pos > stackP->top)
+	{
+		return(EXIT_FAILURE);
+	}
+	// remember the card at pos
+	cardT temp = stackP->cards[pos];
+	int i = pos;
+	// shift all others one position back
+	for (; i < stackP->top; ++i)
+	{
+		 //printf("card: %d\n",i);
+		 stackP->cards[i] = stackP->cards[i+1]; 
+	}
+	// put temp on top
+	stackP->cards[i] = temp;
+	return(EXIT_SUCCESS);
+
+}
+
 int stackEmpty(stackT *stackP)
 {
 	return stackP->top < 0;

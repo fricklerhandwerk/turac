@@ -98,7 +98,7 @@ cardT *playCard(playerT *playerP, int numCard)
     return(NULL);
   }
   // get the needed card on top of the stack
-  stackSwap(playerP->hand,numCard);
+  stackMoveTop(playerP->hand,numCard);
   // return top of stack
   return (stackPop(playerP->hand));
 }
