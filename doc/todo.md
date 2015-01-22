@@ -34,7 +34,6 @@
 - [ ] Get number of human players and their names as program argument (game.c)
 - [ ] Ask and start new game after finished (game.c)
 - [ ] Set attacker and defender in next games according to who lost before (rules.h)
-- [ ] Keep cards in order after playing (playCard in player.h)
 - [ ] Set cursor to valid position after playing, not before (input.c)
 - [ ] Change cardBeats such that it checks a card on the table, and takes into account if it has already been beaten (rules.h)
 - [ ] Abstract away player actions (input.h)
@@ -126,3 +125,5 @@
 		- [x] botSortHand
 		- [x] botAttack
 		- [x] botDefend
+	- [x] Keep cards in order after playing
+
