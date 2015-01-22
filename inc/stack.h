@@ -47,6 +47,10 @@ int stackFull(stackT *stackP);
 // Swap element at given position with top element
 int stackSwap(stackT *stackP, int pos);
 
+// Move element at given position to top of the stack
+// Shift all others appropriately
+int stackMoveTop(stackT *stackP, int pos);
+
 // Shuffle stack
 void stackShuffle(stackT *stackP);
 
