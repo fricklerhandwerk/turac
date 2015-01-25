@@ -28,8 +28,8 @@ void setFirstRound(partyT *partyP, int trumpSuit);
 // Determine if a card has trump suit
 int isTrump(cardT *cardP, int trumpSuit);
 
-// Determine if card `a` beats card `b` using trump suit
-int cardBeats(cardT *aP, cardT *bP, int trumpSuit);
+// Determine if a chosen card beats a specific card on the table, using trump suit
+int cardBeats(cardT *cardP, tableT *tableP, int position, int trumpSuit);
 
 // Determine if a chosen card can be added to the table for the defender to beat
 int cardFits(cardT *cardP, tableT *tableP);

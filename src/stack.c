@@ -161,12 +161,12 @@ void stackShuffle(stackT *stackP)
 // Sort stack by rank/siut
 void stackSortRank(stackT *stackP)
 {
-	qsort(stackP->cards,stackP->top+1,sizeof(cardT),&cardCompareRank);
+	qsort(stackP->cards,stackSize(stackP),sizeof(cardT),&cardCompareRank);
 }
 
 void stackSortSuit(stackT *stackP)
 {
-	qsort(stackP->cards,stackP->top+1,sizeof(cardT),&cardCompareSuit);
+	qsort(stackP->cards,stackSize(stackP),sizeof(cardT),&cardCompareSuit);
 }
 
 int stackClean(stackT *sourceP, stackT *destP)

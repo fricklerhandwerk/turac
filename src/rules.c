@@ -141,19 +141,38 @@ int isTrump(cardT *cardP, int trumpSuit)
 	return (cardP->suit == trumpSuit);
 }
 
-// Determine if card `a` beats card `b` using trump suit
-int cardBeats(cardT *aP, cardT *bP, int trumpSuit)
+// Determine if a chosen card beats a specific card on the table, using trump suit
+int cardBeats(cardT *cardP, tableT *tableP, int position, int trumpSuit)
 {
-	// if both have the same suit
-	if (aP->suit == bP->suit)
+	// exclude invalid positions
+	if (position < 0 || position >= stackSize(tableP->att))
 	{
-		// then `a` wins with higher rank
-		return (cardCompareRank((const void *) aP,(const void *) bP) > 0);
+		return(FALSE);
+	}
+
+	// NOTE: this is an 'implicit' rule which is too common sense for human players
+	// to be mentioned in explaining the game, but computer needs it very much.
+
+	// check if it's been beaten already by some other card on defend stack
+	for (int i = 0; i < stackSize(tableP->def); ++i)
+	{
+		if (tableP->beats[i] == position)
+		{
+			return(FALSE);
+		}
+	}
+
+	// here come the actual rules
+	// if both have the same suit
+	if (cardP->suit == tableP->att->cards[position].suit)
+	{
+		// then given card wins with higher rank
+		return (cardCompareRank(cardP,&tableP->att->cards[position]) > 0);
 	}
 	else
 	{
-		// otherwise `a` only wins if it's trump
-		return isTrump(aP,trumpSuit);
+		// otherwise given card only wins if it's trump
+		return isTrump(cardP,trumpSuit);
 	}
 }
 
@@ -162,9 +181,8 @@ int cardFits(cardT *cardP, tableT *tableP)
 {
 	// check if there is any card on the table that has the same rank
 
-	// get number of attacking/defending cards
+	// get number of attacking cards
 	int att = stackSize(tableP->att);
-	int def = stackSize(tableP->def);
 
 	// if it's the first card, of course it fits
 	if (att == 0)
@@ -172,7 +190,11 @@ int cardFits(cardT *cardP, tableT *tableP)
 		return TRUE;
 	}
 
+	// get number of defending cards
+	int def = stackSize(tableP->def);
+
 	// otherwise walk through both attacking and defending arrays
+	// it fits as soon as we find some card with the same rank
 	for (int i = 0; i < def; i++)
 	{
 		if (cardP->rank == tableP->def->cards[i].rank)
