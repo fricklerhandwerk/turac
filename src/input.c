@@ -265,14 +265,10 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 			// look at each card on attack stack
 			for (int i = 0; i < stackSize(tableP->att); ++i)
 			{
-				if (cardBeats(&playerPtwo->hand->cards[*pos_two],&tableP->att->cards[i],trumpSuit))
+				if (cardBeats(&playerPtwo->hand->cards[*pos_two],tableP,i,trumpSuit))
 				{
 					tablePutDef(tableP,playCard(playerPtwo,*pos_two),i);
 					break;
-				}
-				else
-				{
-					continue;
 				}
 			}
 		}
