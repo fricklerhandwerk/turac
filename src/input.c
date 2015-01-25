@@ -289,7 +289,7 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	}
 	else if (input_c == P2_EN)
 	{
-		if (!(playerPtwo == partyP->attacker && stackSize(tableP->att) == 0) && !(playerPtwo == partyP->defender && tableBeaten(tableP)))
+		if (!(playerPtwo == partyP->attacker && stackEmpty(tableP->att)) && !(playerPtwo == partyP->defender && tableBeaten(tableP)))
 		{
 			playerEndRound(playerPtwo);
 		}

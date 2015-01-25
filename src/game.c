@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 	player1 = playerNew(argv[2],stackSize(deck));
 	player2 = playerNew(argv[3],stackSize(deck));
 
-
+	// add players to party according to settings
 	switch(humans)
 	{
 		case 0:
@@ -87,12 +87,13 @@ int main(int argc, char *argv[])
 			break;
 	}
 
-
 	// start game by handing cards
 	handCardsGame(party,deck,HAND_SIZE);
 
 	// set first round attacker/defender
 	setFirstRound(party,trump);
+
+	// if no trumps have been handed, try everything again...
 	while (party->attacker == NULL)
 	{
 		printf("No trumps handed, game reset...\n");
@@ -114,25 +115,22 @@ int main(int argc, char *argv[])
 			// if not, set attacker done
 			if (!playerInRound(party->defender) || tableBeaten(table))
 			{
-				int done = 1;
 				for (int i = 0; i < stackSize(party->attacker->hand); ++i)
 				{
 					if (cardFits(&party->attacker->hand->cards[i],table))
 						{
-							done = 0;
-							break;
+							goto play;
 						}
 				}
-				if (done)
-				{
-					playerEndRound(party->attacker);
-					// wait a second to denote that something happens for a reason
-					usleep(VIEW_SPEED);
-					viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
-					continue;
-				}
+				playerEndRound(party->attacker);
+				// wait a second to denote that something happens for a reason
+				usleep(VIEW_SPEED);
+				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
+				// skip to next move since otherwise we have to wait for player action
+				continue;
 			}
 			
+			play:
 			// decide on player controls
 			if (humans == 2)
 			{
@@ -222,7 +220,6 @@ int main(int argc, char *argv[])
 
 	// after game ended
 	viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
-	printf("Game Over!\n");
 
 	// find durak
 	durakP = durak(party);

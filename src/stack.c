@@ -102,19 +102,22 @@ int stackMoveTop(stackT *stackP, int pos)
 	{
 		return(EXIT_FAILURE);
 	}
+
 	// remember the card at pos
 	cardT temp = stackP->cards[pos];
 	int i = pos;
+
 	// shift all others one position back
 	for (; i < stackP->top; ++i)
 	{
 		 //printf("card: %d\n",i);
 		 stackP->cards[i] = stackP->cards[i+1]; 
 	}
+
 	// put temp on top
 	stackP->cards[i] = temp;
-	return(EXIT_SUCCESS);
 
+	return(EXIT_SUCCESS);
 }
 
 int stackEmpty(stackT *stackP)
@@ -130,18 +133,17 @@ int stackFull(stackT *stackP)
 // Shuffle stack
 void stackShuffle(stackT *stackP)
 {
+	// save top position locally
+	int top = stackP->top;
+
+	// base case
+	if (top < 1) {return;}
+
 	// throw dice
 	srand(time(NULL));
 
-	// base case
-	if (stackP->top <= 1)
-	{
-		return;
-	}
-	
 	// swap entries in positions top and some random r
 	// 0 <= r < top
-	int top = stackP->top;
 	int r = rand () % top;
 	
 	cardT temp = stackP->cards[top];
@@ -158,7 +160,7 @@ void stackShuffle(stackT *stackP)
 	return;
 }
 
-// Sort stack by rank/siut
+// Sort stack by rank/suit
 void stackSortRank(stackT *stackP)
 {
 	qsort(stackP->cards,stackSize(stackP),sizeof(cardT),&cardCompareRank);
@@ -180,8 +182,9 @@ int stackClean(stackT *sourceP, stackT *destP)
 	// move stack elements
 	while (!stackEmpty(sourceP))
 	{
-		// take care of memory errors, if anything breaks on the way
 		cardT *pop = stackPop(sourceP);
+
+		// take care of memory errors, in case anything breaks on the way
 		if (stackPush(destP,pop) == EXIT_FAILURE)
 		{
 			// put back refused card
@@ -192,4 +195,3 @@ int stackClean(stackT *sourceP, stackT *destP)
 
 	return(EXIT_SUCCESS);
 }
-

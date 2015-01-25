@@ -59,19 +59,17 @@ void botPlay(playerT *botP, partyT *partyP, tableT *tableP, int trumpSuit)
 	if (botP == partyP->defender)
 	{
 		// check if table is already beaten or already taken cards
-		if (tableBeaten(tableP) || !playerInRound(botP))
+		if (playerInRound(botP) && !tableBeaten(tableP))
 		{
-			return;
+			botDefend(botP,tableP,trumpSuit);
 		}
-		botDefend(botP,tableP,trumpSuit);
 	}
 	else
 	{
-		// check if last round we already set to done
-		if (!playerInRound(botP))
+		// only attack if not done
+		if (playerInRound(botP))
 		{
-			return;
+			botAttack(botP,tableP,trumpSuit);
 		}
-		botAttack(botP,tableP,trumpSuit);
 	}
 }
