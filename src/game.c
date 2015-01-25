@@ -11,7 +11,7 @@
 #include "../inc/input.h"
 
 // game speed
-#define SPEED (10*1000) // ms * 1000 = ns
+#define SPEED (100*1000) // ms * 1000 = ns
 #define VIEW_SPEED (500*1000)
 
 
@@ -219,9 +219,14 @@ int main(int argc, char *argv[])
 		usleep(SPEED);
 		viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 	}
+
+	// after game ended
 	viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 	printf("Game Over!\n");
+
+	// find durak
 	durakP = durak(party);
+
 	if (durakP != NULL)
 	{
 		printf("%s is the fool!\n",durakP->name);
@@ -230,5 +235,6 @@ int main(int argc, char *argv[])
 	{
 		printf("It's a tie!\n");
 	}
+	
 	return(0);
 }

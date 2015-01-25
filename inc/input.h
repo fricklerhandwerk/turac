@@ -8,6 +8,8 @@
 #include <rules.h>
 #include <stdio.h>
 #include <player.h>
+#include <stdlib.h>
+
 
 // player keys
 #define P1_LT 'a'

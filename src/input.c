@@ -39,10 +39,13 @@ void playerSortHand(playerT *playerP, int trumpSuit)
 void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit)//maybe but active players in here?
 {
 	int handsize = stackSize(playerP->hand)-1;
+
+	/* assuming we get a valid cursor position to begin with
 	while (*pos > handsize)
 	{
 		(*pos)--;
-	}	
+	}
+	*/
 
 	char input_c;
 
@@ -61,7 +64,6 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 		if (*pos > 0)
 		{
 			(*pos)--;
-			//draw
 		}
 		else
 		{
@@ -74,7 +76,6 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 		if (*pos < handsize)
 		{
 			(*pos)++;
-			//draw
 		}
 		else
 		{
@@ -136,8 +137,13 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 	}
 	else if (input_c == P1_ST){
 		playerSortHand(playerP, trumpSuit);
-	} else {
-		printf("\n--------------------\nBitte gebe etwas anderes ein!\n------------------\n");
+	}
+
+	// reset cursor to valid position
+	handsize = stackSize(playerP->hand)-1;
+	while (*pos > handsize)
+	{
+		(*pos)--;
 	}
 
 	//setting input to cooked input
@@ -149,6 +155,7 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	int handsize1 = stackSize(playerPone->hand)-1;
 	int handsize2 = stackSize(playerPtwo->hand)-1;
 
+	/* assuming we get a valid position to start with
 	// reset cursors to valid positions
 	while (*pos_one > handsize1)
 	{
@@ -157,8 +164,8 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	while (*pos_two > handsize2)
 	{
 		(*pos_two)--;
-	}	
-
+	}
+	*/
 
 	//setting input to raw input
 	system ("/bin/stty raw");
@@ -172,12 +179,13 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 
 		(*quit) = TRUE;
 	}
+
+	// Player 1 commands
 	else if(input_c == P1_LT)
 	{
 		if (*pos_one > 0)
 		{
 			(*pos_one)--;
-			//draw
 		}
 		else
 		{
@@ -257,13 +265,12 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 
 
 
-
+	// Player 2 commands
 	else if (input_c == P2_LT)
 	{
 		if (*pos_two > 0)
 		{
 			(*pos_two)--;
-			//draw
 		}
 		else
 		{
@@ -276,7 +283,6 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 		if (*pos_two < handsize2)
 		{
 			(*pos_two)++;
-			//draw
 		}
 		else
 		{
@@ -339,6 +345,19 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	{
 		playerSortHand(playerPtwo, trumpSuit);
 	}
+
+
+	// reset cursors to valid positions
+	handsize1 = stackSize(playerPone->hand)-1;
+	handsize2 = stackSize(playerPtwo->hand)-1;
+	while (*pos_one > handsize1)
+	{
+		(*pos_one)--;
+	}	
+	while (*pos_two > handsize2)
+	{
+		(*pos_two)--;
+	}	
 
 	//setting input to cooked input
 	system ("/bin/stty cooked");

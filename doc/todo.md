@@ -31,7 +31,6 @@
 
 ##Wishlist
 - [ ] Encapsule game start (game.c) // currently expanded before game loop
-- [ ] Get number of human players and their names as program argument (game.c)
 - [ ] Ask and start new game after finished (game.c)
 - [ ] Set attacker and defender in next games according to who lost before (rules.h)
 - [ ] Set cursor to valid position after playing, not before (input.c)
@@ -126,4 +125,6 @@
 		- [x] botAttack
 		- [x] botDefend
 	- [x] Keep cards in order after playing
+	- [x] Get number of human players and their names as program argument
+
 
