@@ -11,4 +11,4 @@ _SRC = card.c stack.c player.c party.c table.c bot.c cmd_view.c rules.c input.c 
 SRC = $(addprefix $(SOURCE_DIR)/,$(_SRC))
 
 turac: $(SRC) 
-	gcc -o $(BIN_DIR)/$@ $^ $(COMPILER_FLAGS) && $(BIN_DIR)/$@
+	gcc -o $(BIN_DIR)/$@ $^ $(COMPILER_FLAGS) #&& $(BIN_DIR)/$@

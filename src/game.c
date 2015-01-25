@@ -15,10 +15,37 @@
 #define VIEW_SPEED (500*1000)
 
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	int humans = 0;
+
+	// if no player number given, stop
+	if (argc < 2)
+	{
+		printf("Usage: <i = number of human players> <player name (i)>\n");
+		return(EXIT_FAILURE);
+	}
+	else
+	{
+		// get number of human players
+		sscanf(argv[1],"%d",&humans);
+
+		// check if number of players makes sense
+		// WARNING: 2 is hardcoded here since there is no support for more than two players now
+		if (humans < 0 || humans > 2)
+		{
+			printf("Only two human players possible!\n");
+			return(EXIT_FAILURE);
+		}		
+		// check if all human players have names
+		else if (argc != humans+2)
+		{
+			printf("Please give each human player a name!\n");
+			return(EXIT_FAILURE);
+		}
+	}
+
 	// Game variables
-	int humans = 2;
 	int trump = -1;
 	int quit = FALSE;
 	tableT *table;
@@ -26,9 +53,8 @@ int main(void)
 	partyT *party;
 	playerT *bot1, *bot2, *player1, *player2, *durakP;
 
-	// cursor position for player 1
+	// initial cursor positions
 	int position1 = 0, position2 = 0;
-
 
 	// Initialize game objects
 	table = tableInit(HAND_SIZE);
@@ -38,8 +64,8 @@ int main(void)
 	party = partyInit();
 	bot1 = playerNew("Bot1",stackSize(deck));
 	bot2 = playerNew("Bot2",stackSize(deck));
-	player1 = playerNew("Player1",stackSize(deck));
-	player2 = playerNew("Player2",stackSize(deck));
+	player1 = playerNew(argv[2],stackSize(deck));
+	player2 = playerNew(argv[3],stackSize(deck));
 
 
 	switch(humans)
@@ -106,40 +132,41 @@ int main(void)
 					continue;
 				}
 			}
-	
-			// else, let attacker play
-
-			input_twoplayers(party, player1, player2, table, &position1, &position2, &quit, trump);
-			viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 			
-			/*
-			// wait for attacker to play
-			if (party->attacker == bot1 || party->attacker == bot2)
+			// decide on player controls
+			if (humans == 2)
 			{
-				usleep(SPEED);
-				botPlay(party->attacker,party,table,trump);
+		
+				// else, let attacker play normally
+				input_twoplayers(party, player1, player2, table, &position1, &position2, &quit, trump);
+				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 			}
-			else if (party->attacker == player1)
+			else
 			{
-				input_player1(party,party->attacker, table, &position1, &quit, trump);
+				// wait for attacker to play
+				if (party->attacker == bot1 || party->attacker == bot2)
+				{
+					usleep(SPEED);
+					botPlay(party->attacker,party,table,trump);
+				}
+				else if (party->attacker == player1)
+				{
+					input_player1(party,party->attacker, table, &position1, &quit, trump);
+				}
+				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
+
+				// wait for defender to play
+				if (party->defender == bot1 || party->defender == bot2)
+				{
+					usleep(SPEED);
+					botPlay(party->defender,party,table,trump);
+				}
+				else if (party->defender == player1)
+				{
+					input_player1(party,party->defender, table, &position1, &quit, trump);
+				}
+				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 			}
-			viewGame(party,table,deck,waste,position1,listRank,listSuit);
-
-
-
-			// wait for defender to play
-			if (party->defender == bot1 || party->defender == bot2)
-			{
-				usleep(SPEED);
-				botPlay(party->defender,party,table,trump);
-			}
-			else if (party->defender == player1)
-			{
-				input_player1(party,party->defender, table, &position1, &quit, trump);
-			}
-			viewGame(party,table,deck,waste,position1,listRank,listSuit);
-			*/
-
 
 			if (quit == TRUE)
 			{
