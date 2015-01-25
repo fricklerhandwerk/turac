@@ -5,7 +5,7 @@
 
 #include <../inc/bot.h>
 
-void botAttack(playerT *botP, tableT *tableP, int trumpSuit)
+void botAttack(playerT *botP, partyT *partyP, tableT *tableP, int trumpSuit)
 {
 	// sort cards by value
 	playerSortHand(botP,trumpSuit);
@@ -14,7 +14,7 @@ void botAttack(playerT *botP, tableT *tableP, int trumpSuit)
 	for (int i = 0; i < stackSize(botP->hand); ++i)
 	{
 		// when found, put it on the table and exit
-		if (cardFits(&botP->hand->cards[i],tableP))
+		if (stackSize(partyP->defender->hand) > (stackSize(tableP->att)-stackSize(tableP->def)) && cardFits(&botP->hand->cards[i],tableP))
 		{
 			tablePutAtt(tableP,playCard(botP,i));
 			// don't attack any more if no cards left
@@ -69,7 +69,7 @@ void botPlay(playerT *botP, partyT *partyP, tableT *tableP, int trumpSuit)
 		// only attack if not done
 		if (playerInRound(botP))
 		{
-			botAttack(botP,tableP,trumpSuit);
+			botAttack(botP,partyP,tableP,trumpSuit);
 		}
 	}
 }

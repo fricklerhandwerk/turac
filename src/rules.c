@@ -185,13 +185,20 @@ int cardFits(cardT *cardP, tableT *tableP)
 	int att = stackSize(tableP->att);
 
 	// if it's the first card, of course it fits
-	if (att == 0)
+	if (stackEmpty(tableP->att))
 	{
 		return TRUE;
+	}
+	// if the table is full, it doesn't
+	else if (stackFull(tableP->att))
+	{
+		return FALSE;
 	}
 
 	// get number of defending cards
 	int def = stackSize(tableP->def);
+
+
 
 	// otherwise walk through both attacking and defending arrays
 	// it fits as soon as we find some card with the same rank

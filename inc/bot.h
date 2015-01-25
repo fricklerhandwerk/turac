@@ -43,7 +43,7 @@
  */
 
 // attack, duh.
-void botAttack(playerT *botP, tableT *tableP, int trumpSuit);
+void botAttack(playerT *botP, partyT *partyP, tableT *tableP, int trumpSuit);
 
 // defend
 void botDefend(playerT *botP, tableT *tableP, int trumpSuit);

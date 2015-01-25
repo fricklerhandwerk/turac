@@ -113,13 +113,14 @@ int main(int argc, char *argv[])
 		{
 			// if defender wants to take cards, check if attacker can still add any
 			// if not, set attacker done
+			// WARNING: hardcoded for two players!
 			if (!playerInRound(party->defender) || tableBeaten(table))
 			{
 				for (int i = 0; i < stackSize(party->attacker->hand); ++i)
 				{
 					if (cardFits(&party->attacker->hand->cards[i],table))
 						{
-							goto play;
+							goto attack;
 						}
 				}
 				playerEndRound(party->attacker);
@@ -129,8 +130,33 @@ int main(int argc, char *argv[])
 				// skip to next move since otherwise we have to wait for player action
 				continue;
 			}
-			
-			play:
+			attack:
+
+
+			// check if defender can beat any cards
+			// if not, let him take cards automatically
+			if (playerInRound(party->defender) && !tableBeaten(table) && stackSize(table->att) != 0)
+			{
+				for (int i = 0; i < stackSize(party->defender->hand); ++i)
+				{
+					for (int k = 0; k < stackSize(table->att); ++k)
+					{
+						if (cardBeats(&party->defender->hand->cards[i],table,k,trump))
+						{
+							goto defend;
+						}
+					}
+				}
+				// if no card could beat any attacking cards, mark that bot will take cards
+				playerEndRound(party->defender);
+				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
+				usleep(VIEW_SPEED);
+					continue;
+
+			}
+
+
+			defend:
 			// decide on player controls
 			if (humans == 2)
 			{

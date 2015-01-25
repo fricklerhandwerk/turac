@@ -36,91 +36,79 @@ void playerSortHand(playerT *playerP, int trumpSuit)
 	stackDestroy(&trumps);
 }
 
-void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit)//maybe but active players in here?
+void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit)
 {
 	int handsize = stackSize(playerP->hand)-1;
-
-	/* assuming we get a valid cursor position to begin with
-	while (*pos > handsize)
-	{
-		(*pos)--;
-	}
-	*/
-
-	char input_c;
 
 	//setting input to raw input
 	system ("/bin/stty raw");
 
+	char input_c;
 	input_c = getchar();
 
-	if (input_c == QUIT)
+	switch(input_c)
 	{
-
-		(*quit) = TRUE;
-	}
-	else if(input_c == P1_LT)
-	{
-		if (*pos > 0)
-		{
-			(*pos)--;
-		}
-		else
-		{
-			(*pos) = handsize;
-		}
-	}
-	else if (input_c == P1_RT)
-	{
-
-		if (*pos < handsize)
-		{
-			(*pos)++;
-		}
-		else
-		{
-			(*pos) = 0;
-		}
-	}
-	else if (input_c == P1_AC)
-	{
-		if (partyP->defender == playerP)
-		{
-			// beat the first card possible
-			// otherwise do nothing
-			for (int i = 0; i < stackSize(tableP->att); ++i)
+		case QUIT:
+			(*quit) = TRUE;
+			break;
+		case P1_LT:
+			if (*pos > 0)
 			{
-				if (cardBeats(&playerP->hand->cards[*pos],tableP,i,trumpSuit))
+				(*pos)--;
+			}
+			else
+			{
+				(*pos) = handsize;
+			}
+			break;
+		case P1_RT:
+			if (*pos < handsize)
+			{
+				(*pos)++;
+			}
+			else
+			{
+				(*pos) = 0;
+			}
+			break;
+		case P1_AC:
+			if (partyP->defender == playerP)
+			{
+				// beat the first card possible
+				// otherwise do nothing
+				for (int i = 0; i < stackSize(tableP->att); ++i)
 				{
-					tablePutDef(tableP,playCard(playerP,*pos),i);
-					break;
+					if (cardBeats(&playerP->hand->cards[*pos],tableP,i,trumpSuit))
+					{
+						tablePutDef(tableP,playCard(playerP,*pos),i);
+						break;
+					}
 				}
 			}
-		}
-		else
-		{
-			if (cardFits(&playerP->hand->cards[*pos],tableP))
+			else
 			{
-				tablePutAtt(tableP,playCard(playerP,*pos));
-				// stop attack if no cards left afterwards
-				if (stackSize(playerP->hand) == 0)
+				if (stackSize(partyP->defender->hand) > (stackSize(tableP->att)-stackSize(tableP->def)) && cardFits(&playerP->hand->cards[*pos],tableP))
 				{
-					playerEndRound(playerP);
-				}
-			}	
-		}
-
-	}
-	else if (input_c == P1_EN)
-	{
-		if (!(playerP == partyP->attacker && stackSize(tableP->att) == 0) && !(playerP == partyP->defender && tableBeaten(tableP)))
-		{
-			playerEndRound(playerP);
-		}
-
-	}
-	else if (input_c == P1_ST){
-		playerSortHand(playerP, trumpSuit);
+					tablePutAtt(tableP,playCard(playerP,*pos));
+					// stop attack if no cards left afterwards
+					if (stackEmpty(playerP->hand))
+					{
+						playerEndRound(playerP);
+					}
+				}	
+			}
+			break;
+		case P1_EN:
+			if (!(playerP == partyP->attacker && stackEmpty(tableP->att)) && !(playerP == partyP->defender && tableBeaten(tableP)))
+			{
+				playerEndRound(playerP);
+			}
+			break;
+		case P1_ST:
+			playerSortHand(playerP, trumpSuit);
+			break;
+		default:
+			break;
 	}
 
 	// reset cursor to valid position
@@ -134,22 +122,10 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 	system ("/bin/stty cooked");
 }
 
-void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int *quit, int trumpSuit)//maybe but active players in here?
+void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int *quit, int trumpSuit)
 {
 	int handsize1 = stackSize(playerPone->hand)-1;
 	int handsize2 = stackSize(playerPtwo->hand)-1;
-
-	/* assuming we get a valid position to start with
-	// reset cursors to valid positions
-	while (*pos_one > handsize1)
-	{
-		(*pos_one)--;
-	}	
-	while (*pos_two > handsize2)
-	{
-		(*pos_two)--;
-	}
-	*/
 
 	//setting input to raw input
 	system ("/bin/stty raw");
@@ -158,147 +134,130 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	input_c = getchar();
 
 	
-	if (input_c == QUIT)
+	switch(input_c)
 	{
-
-		(*quit) = TRUE;
-	}
-
-	// Player 1 commands
-	else if(input_c == P1_LT)
-	{
-		if (*pos_one > 0)
-		{
-			(*pos_one)--;
-		}
-		else
-		{
-			(*pos_one) = handsize1;
-		}
-	}
-	else if (input_c == P1_RT)
-	{
-
-		if (*pos_one < handsize1)
-		{
-			(*pos_one)++;
-			//draw
-		}
-		else
-		{
-			(*pos_one) = 0;
-		}
-	}
-	else if (input_c == P1_AC)
-	{
-		if (partyP->defender == playerPone)
-		{
-			// beat the first card possible
-			// otherwise do nothing
-			for (int i = 0; i < stackSize(tableP->att); ++i)
+		case QUIT:
+			(*quit) = TRUE;
+			break;
+		// Player 1 commands
+		case P1_LT:
+			if (*pos_one > 0)
 			{
-				if (cardBeats(&playerPone->hand->cards[*pos_one],tableP,i,trumpSuit))
+				(*pos_one)--;
+			}
+			else
+			{
+				(*pos_one) = handsize1;
+			}
+			break;
+		case P1_RT:
+			if (*pos_one < handsize1)
+			{
+				(*pos_one)++;
+				//draw
+			}
+			else
+			{
+				(*pos_one) = 0;
+			}
+			break;
+		case P1_AC:
+			if (partyP->defender == playerPone)
+			{
+				// beat the first card possible
+				// otherwise do nothing
+				for (int i = 0; i < stackSize(tableP->att); ++i)
 				{
-					tablePutDef(tableP,playCard(playerPone,*pos_one),i);
-					break;
+					if (cardBeats(&playerPone->hand->cards[*pos_one],tableP,i,trumpSuit))
+					{
+						tablePutDef(tableP,playCard(playerPone,*pos_one),i);
+						break;
+					}
 				}
 			}
-		}
-		else
-		{
-			if (cardFits(&playerPone->hand->cards[*pos_one],tableP))
+			else
 			{
-				tablePutAtt(tableP,playCard(playerPone,*pos_one));
-
-				// stop attack any if no cards left afterwards
-				if (stackSize(playerPone->hand) == 0)
+				if (stackSize(partyP->defender->hand) > (stackSize(tableP->att)-stackSize(tableP->def)) && cardFits(&playerPone->hand->cards[*pos_one],tableP))
 				{
-					playerEndRound(playerPone);
-				}
-			}	
-		}
+					tablePutAtt(tableP,playCard(playerPone,*pos_one));
 
-	}
-	else if (input_c == P1_EN)
-	{
-		if (!(playerPone == partyP->attacker && stackSize(tableP->att) == 0) && !(playerPone == partyP->defender && tableBeaten(tableP)))
-		{
-			playerEndRound(playerPone);
-		}
-	}
-	else if (input_c == P1_ST)
-	{
-		playerSortHand(playerPone, trumpSuit);
-	}
-
-
-
-
-	// Player 2 commands
-	else if (input_c == P2_LT)
-	{
-		if (*pos_two > 0)
-		{
-			(*pos_two)--;
-		}
-		else
-		{
-			(*pos_two) = handsize2;
-		}
-	}
-	else if (input_c == P2_RT)
-	{
-
-		if (*pos_two < handsize2)
-		{
-			(*pos_two)++;
-		}
-		else
-		{
-			(*pos_two) = 0;
-		}
-	}
-	else if (input_c == P2_AC)
-	{
-		if (partyP->defender == playerPtwo)
-		{
-			// look at each card on attack stack
-			for (int i = 0; i < stackSize(tableP->att); ++i)
+					// stop attack any if no cards left afterwards
+					if (stackSize(playerPone->hand) == 0)
+					{
+						playerEndRound(playerPone);
+					}
+				}	
+			}
+			break;
+		case P1_EN:
+			if (!(playerPone == partyP->attacker && stackSize(tableP->att) == 0) && !(playerPone == partyP->defender && tableBeaten(tableP)))
 			{
-				if (cardBeats(&playerPtwo->hand->cards[*pos_two],tableP,i,trumpSuit))
+				playerEndRound(playerPone);
+			}
+			break;
+		case P1_ST:
+			playerSortHand(playerPone, trumpSuit);
+			break;
+		// Player 2 commands
+		case P2_LT:
+			if (*pos_two > 0)
+			{
+				(*pos_two)--;
+			}
+			else
+			{
+				(*pos_two) = handsize2;
+			}
+			break;
+		case P2_RT:
+			if (*pos_two < handsize2)
+			{
+				(*pos_two)++;
+			}
+			else
+			{
+				(*pos_two) = 0;
+			}
+			break;
+		case P2_AC:
+			if (partyP->defender == playerPtwo)
+			{
+				// look at each card on attack stack
+				for (int i = 0; i < stackSize(tableP->att); ++i)
 				{
-					tablePutDef(tableP,playCard(playerPtwo,*pos_two),i);
-					break;
+					if (cardBeats(&playerPtwo->hand->cards[*pos_two],tableP,i,trumpSuit))
+					{
+						tablePutDef(tableP,playCard(playerPtwo,*pos_two),i);
+						break;
+					}
 				}
 			}
-		}
-		else
-		{
-			if (cardFits(&playerPtwo->hand->cards[*pos_two],tableP))
+			else
 			{
-				tablePutAtt(tableP,playCard(playerPtwo,*pos_two));
-				
-				// stop attack if no cards left afterwards
-				if (stackSize(playerPtwo->hand) == 0)
+				if (stackSize(partyP->defender->hand) > (stackSize(tableP->att)-stackSize(tableP->def)) && cardFits(&playerPtwo->hand->cards[*pos_two],tableP))
 				{
-					playerEndRound(playerPtwo);
-				}
-			}	
-		}
-
+					tablePutAtt(tableP,playCard(playerPtwo,*pos_two));
+					
+					// stop attack if no cards left afterwards
+					if (stackSize(playerPtwo->hand) == 0)
+					{
+						playerEndRound(playerPtwo);
+					}
+				}	
+			}
+			break;
+		case P2_EN:
+			if (!(playerPtwo == partyP->attacker && stackEmpty(tableP->att)) && !(playerPtwo == partyP->defender && tableBeaten(tableP)))
+			{
+				playerEndRound(playerPtwo);
+			}
+			break;
+		case P2_ST:
+			playerSortHand(playerPtwo, trumpSuit);
+			break;
+		default:
+			break;
 	}
-	else if (input_c == P2_EN)
-	{
-		if (!(playerPtwo == partyP->attacker && stackEmpty(tableP->att)) && !(playerPtwo == partyP->defender && tableBeaten(tableP)))
-		{
-			playerEndRound(playerPtwo);
-		}
-	}
-	else if (input_c == P2_ST)
-	{
-		playerSortHand(playerPtwo, trumpSuit);
-	}
-
 
 	// reset cursors to valid positions
 	handsize1 = stackSize(playerPone->hand)-1;
