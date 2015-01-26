@@ -33,7 +33,6 @@
 - [ ] Encapsule game start (game.c) // currently expanded before game loop
 - [ ] Ask and start new game after finished (game.c)
 - [ ] Set attacker and defender in next games according to who lost before (rules.h)
-- [ ] Set cursor to valid position after playing, not before (input.c)
 - [ ] Abstract away player actions (input.h)
 - [ ] Abstract away input model (input.c) // all players have the same actions, just pass them their keys
 - [ ] Re-Implement commandline view and control using curses
@@ -125,6 +124,7 @@
 		- [x] botDefend
 	- [x] Keep cards in order after playing
 	- [x] Get number of human players and their names as program argument
+	- [x] Set cursor to valid position after playing, not before
 	- [x] Let cardBeats also check if an attacking card has already been beaten by some other card
 
 
