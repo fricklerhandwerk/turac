@@ -1,5 +1,5 @@
 
-#include <../inc/input.h>
+#include <../inc/cmd_input.h>
 
 void playerSortHand(playerT *playerP, int trumpSuit)
 {
@@ -21,15 +21,14 @@ void playerSortHand(playerT *playerP, int trumpSuit)
 
 	// sort remaining cards by rank
 	stackSortRank(playerP->hand);
+	stackSortRank(trumps);
 
 	// now, if we push the trumps back after sorting, they will be in wrong order
-	// so instead, for now, we just exchange first and last, pop the top
-	// sort it again and repeat until no cards are left in trumps
+	// so instead, we move the first element to top and pop it away
 	// terribly inefficient, a simple stackReverse function would be nice...
 	while (!stackEmpty(trumps))
 	{
-		stackSortRank(trumps);
-		stackSwap(trumps,0);
+		stackMoveTop(trumps,0);
 		takeCard(playerP,stackPop(trumps));
 	}
 	// we don't need the trumps stack any more
@@ -154,7 +153,6 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 			if (*pos_one < handsize1)
 			{
 				(*pos_one)++;
-				//draw
 			}
 			else
 			{

@@ -8,7 +8,7 @@
 #include "../inc/bot.h"
 #include "../inc/constants.h"
 #include "../inc/cmd_view.h"
-#include "../inc/input.h"
+#include "../inc/cmd_input.h"
 
 // game speed
 #define SPEED (100*1000) // ms * 1000 = ns

@@ -30,6 +30,7 @@
 
 
 ##Wishlist
+- [ ] Move playerSortHand() to an appropriate place (currently in cmd_input)
 - [ ] Encapsule game start (game.c) // currently expanded before game loop
 - [ ] Ask and start new game after finished (game.c)
 - [ ] Set attacker and defender in next games according to who lost before (rules.h)

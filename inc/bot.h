@@ -6,7 +6,7 @@
 #include <party.h>
 #include <table.h>
 #include <rules.h>
-#include <input.h>
+#include <cmd_input.h>
 
 /* BOT FUNCTIONS
  *
