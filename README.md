@@ -31,18 +31,18 @@ $ bin/turac <number> [<names>]
 #Controls
 
 ##Player 1
-Cursor left: `A`
-Cursor right: `D`
-Play card: `W`
-End round: `E` (take cards or stop attacking)
+Cursor left: `A` 
+Cursor right: `D` 
+Play card: `W` 
+End round: `E` (take cards or stop attacking) 
 Sort hand: `Q` (sorts by rank, trumps sorted separately)
 
 ## Player 2
-Cursor left: `J`
-Cursor right: `L`
-Play card: `I`
-End round: `O`
-Sort hand: `U`
+Cursor left: `J` 
+Cursor right: `L` 
+Play card: `I` 
+End round: `O` 
+Sort hand: `U` 
 
 Quit game: `.`
 
