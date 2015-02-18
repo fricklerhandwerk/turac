@@ -10,41 +10,40 @@ Since it is just a simple demonstration, it runs in command line and you see bot
 Prerequisites: `git`,`make`,`gcc`
 
 1. Clone the source into a `<directory>` of your choice. In a terminal, type or paste:
-```
-$ git clone https://github.com/frickler01/turac.git <directory>
-```
+
+	$ git clone https://github.com/frickler01/turac.git <directory>
+
 
 2. Change into `<directory>` and run `make`:
-```
-$ cd <directory>
-$ make turac
-```
+
+	$ cd <directory>
+	$ make turac
+
 
 This will create a `bin` directory, where the executable is located. 
 
 3. Start the game by providing the desired `<number>` of human players (0-2) and their `names` separated by blanks:
 
-```
-$ bin/turac <number> [<names>]
-```
+	$ bin/turac <number> [<names>]
+
 
 #Controls
 
 ##Player 1
-	Cursor left: `A`
-	Cursor right: `D`
-	Play card: `W`
-	End round: `E` (take cards or stop attacking)
-	Sort hand: `Q` (sorts by rank, trumps sorted separately)
+Cursor left: `A`  
+Cursor right: `D`  
+Play card: `W`  
+End round: `E` (take cards or stop attacking)  
+Sort hand: `Q` (sorts by rank, trumps sorted separately)  
 
 ## Player 2
-	Cursor left: `J`
-	Cursor right: `L`
-	Play card: `I`
-	End round: `O`
-	Sort hand: `U`
+Cursor left: `J`  
+Cursor right: `L`   
+Play card: `I`  
+End round: `O`  
+Sort hand: `U`  
 
-	Quit game: `.`
+Quit game: `.`
 
 You can change the controls by editing the file `inc/cmd_input.h`.
 
