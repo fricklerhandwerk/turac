@@ -20,10 +20,10 @@
 	- [x] Cmd view
 	- [x] Bot
 	- [x] Botmatch
-  
- ##Week 4
- - [x] Make it work
- 	- [x] Cmd control
+
+##Week 4
+- [x] Make it work
+	- [x] Cmd control
 	- [x] Cmd view with control
 	- [x] Game loop
 	- [x] Bugfixes
@@ -34,9 +34,6 @@
 - [ ] Encapsule game start (game.c) // currently expanded before game loop
 - [ ] Ask and start new game after finished (game.c)
 - [ ] Set attacker and defender in next games according to who lost before (rules.h)
-- [ ] Abstract away player actions (input.h)
-- [ ] Abstract away input model (input.c) // all players have the same actions, just pass them their keys
-- [ ] Re-Implement commandline view and control using curses
 - [ ] Re-Implement stacks/lists using glib to have less maintenance (evil amout of work)
 
 - Vincent
