@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
+#include "../inc/constants.h"
 #include "../inc/rules.h"
 #include "../inc/bot.h"
-#include "../inc/constants.h"
 #include "../inc/cmd_view.h"
 #include "../inc/cmd_input.h"
 

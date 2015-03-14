@@ -30,6 +30,8 @@
 
 
 ##Wishlist
+- [ ] There is currently no point where players leave the game (`gameF` flag unset). On the other hand, the player's game state is checked in the `nextPlayer` function. Players could be put out of game by checking after every handing cards whether the deck is empty and they have no cards on hand. Then `gameOver` could be reduced to counting the number of active players.
+- [ ] The card face flag is actually useless. At least in this game we can manage the facing in view logic elegantly and save work in game mechanics, since at no point is facing game-state-dependently mixed in a given collection of cards.
 - [ ] Move playerSortHand() to an appropriate place (currently in cmd_input)
 - [ ] Encapsule game start (game.c) // currently expanded before game loop
 - [ ] Ask and start new game after finished (game.c)

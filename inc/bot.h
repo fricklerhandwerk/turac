@@ -3,10 +3,10 @@
 #ifndef BOT_H
 #define BOT_H
 
-#include <party.h>
-#include <table.h>
-#include <rules.h>
-#include <cmd_input.h>
+#include "party.h"
+#include "table.h"
+#include "rules.h"
+#include "cmd_input.h"
 
 /* BOT FUNCTIONS
  *

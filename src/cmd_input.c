@@ -1,5 +1,5 @@
 
-#include <../inc/cmd_input.h>
+#include "../inc/cmd_input.h"
 
 void playerSortHand(playerT *playerP, int trumpSuit)
 {

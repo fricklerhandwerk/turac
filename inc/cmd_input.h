@@ -3,13 +3,12 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include <party.h>
-#include <table.h>
-#include <rules.h>
 #include <stdio.h>
-#include <player.h>
 #include <stdlib.h>
-
+#include "player.h"
+#include "party.h"
+#include "table.h"
+#include "rules.h"
 
 // player keys
 #define P1_LT 'a'
