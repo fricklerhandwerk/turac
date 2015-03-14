@@ -25,19 +25,15 @@ typedef struct
 {
 	int rank;
 	int suit;
-	int face;
 } cardT;
 
 /* BASIC CARD FUNCTIONS */
 
 // Create card with given rank and suit and facing
-cardT *cardNew(int rank, int suit, int face);
+cardT *cardNew(int rank, int suit);
 
 // Free memory reserved for card struct
 void cardDestroy(cardT **cardP);
-
-// Set card facing
-void cardSetFace(cardT *cardP, int face);
 
 // Compare two cards by rank/suit
 // Return values: a == b : 0; a > b : 1; a < b : -1;

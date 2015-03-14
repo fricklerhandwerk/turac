@@ -3,8 +3,6 @@
 #include <stdlib.h>
 
 #include "../inc/rules.h"
-#define UP 1
-#define DOWN 0
 
 stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit)
 {
@@ -29,7 +27,7 @@ stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit)
 		{
 			// create new card face down
 			// with current rank and suit
-			cardP = cardNew(r,s,0);
+			cardP = cardNew(r,s);
 			// add to deck
 			stackPush(deckP,cardP);
 			// free card memory again
@@ -41,7 +39,6 @@ stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit)
 
 	// uncover trump card (bottom card of the deck)
 	// write its suit into given variable
-	cardSetFace(&deckP->cards[0],UP);
 	*trumpSuit = deckP->cards[0].suit;
 	return(deckP);
 }

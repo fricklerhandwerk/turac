@@ -21,14 +21,7 @@
 
 void viewCard(cardT *cardP, const char **listRank, const char **listSuit)
 {
-	if (cardP->face)
-	{
-		printf("[%2s%s]",listRank[cardP->rank],listSuit[cardP->suit]);
-	}
-	else
-	{
-		printf("[xxx]");
-	}
+	printf("[%2s%s]",listRank[cardP->rank],listSuit[cardP->suit]);
 }
 
 void viewCardLn(cardT *cardP, const char **listRank, const char **listSuit)
@@ -66,60 +59,43 @@ void viewDeck(stackT *deckP, const char **listRank, const char **listSuit)
 	// print number of elements
 	printf("%d ",top);
 
-	// cards that face up
-	int up = 0;
+	if (top > 0)
 	{
-		for (int i = 0; i < top; ++i)
+		viewCardLn(&deckP->cards[0],listRank,listSuit);
+		if (top > 1)
 		{
-			// assuming only up/down binary
-			if(deckP->cards[i].face)
+			for (int i = 0; i < top-1; ++i)
 			{
-				viewCardLn(&deckP->cards[i],listRank,listSuit);
-				up++;
+				printf("[");
 			}
+			printf("[xxx]\n");
 		}
-	}
-
-
-	// stack cards
-	for (int i = 0; i < top-up; ++i)
-	{
-		printf("[");
-	}
-
-	// print card face down
-	cardT *down = cardNew(0,0,0);
-	if (top-up > 0 )
-	{
-		viewCardLn(down,listRank,listSuit);
 	}
 	else
 	{
-		printf("\n");
+		printf("\n\n");
 	}
-	cardDestroy(&down);
 }
 
 void viewWaste(stackT *wasteP)
 {	
 	int top = stackSize(wasteP);
 	printf("%d ",top);
-	for (int i = 0; i < top-1; ++i)
-	{
-		printf("[");
-	}
 
-	// print card face down
-	cardT *down = cardNew(0,0,0);
 	if (top > 0)
 	{
-		viewCardLn(down,NULL,NULL);
+		for (int i = 0; i < top-1; ++i)
+		{
+			printf("[");
+		}
+		// print card face down
+		printf("[xxx]\n");
+
 	}
 	else
 	{
 		printf("\n");
 	}
-	cardDestroy(&down);
 }
 
 void viewTableRow(tableT *tableP, const char **listRank, const char **listSuit)

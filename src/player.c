@@ -106,15 +106,5 @@ cardT *playCard(playerT *playerP, int numCard)
 // Put given card in player's hand
 int takeCard(playerT *playerP, cardT *cardP)
 {
-	if (stackPush(playerP->hand,cardP) == EXIT_SUCCESS)
-	{
-		// let card face up if accepted
-		// WARNING: It's a hack, use some function here!
-		playerP->hand->cards[playerP->hand->top].face = 1;
-		return EXIT_SUCCESS;
-	}
-	else
-	{
-		return EXIT_FAILURE;
-	}
+	return stackPush(playerP->hand,cardP);
 }

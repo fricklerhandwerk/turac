@@ -4,7 +4,7 @@
 
 #include "../inc/card.h"       
 
-cardT *cardNew(int rank, int suit, int face)
+cardT *cardNew(int rank, int suit)
 {
 	// allocate memory for card struct
 	cardT *cardP = malloc(sizeof(cardT));
@@ -18,7 +18,6 @@ cardT *cardNew(int rank, int suit, int face)
 	// write values
 	cardP->rank = rank;
 	cardP->suit = suit;
-	cardP->face = face;
 
 	return(cardP);
 }
@@ -30,12 +29,6 @@ void cardDestroy(cardT **cardP)
 
 	// reset pointer
 	*cardP = NULL;
-}
-
-void cardSetFace(cardT *cardP, int face)
-{
-	// NOTE: rule-agnostic - sets whatever value it gets!
-	cardP->face = face;
 }
 
 // Compare two cards by rank/suit
