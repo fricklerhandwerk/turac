@@ -61,4 +61,8 @@ cardT *playCard(playerT *playerP, int numCard);
 // Put given card in player's hand
 int takeCard(playerT *playerP, cardT *cardP);
 
+// Sort player hand such that trumps are separated
+// and all cards ordered by increasing rank
+void playerSortHand(playerT *playerP, int trumpSuit);
+
 #endif // PLAYER_H

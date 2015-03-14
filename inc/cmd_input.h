@@ -26,12 +26,8 @@
 #define QUIT '.'
 
 
-
-void playerSortHand(playerT *playerP, int trumpSuit);
-
 void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit);
 
 void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int *quit, int trumpSuit);
 
-
-#endif
+#endif // INPUT

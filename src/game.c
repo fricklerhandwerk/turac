@@ -58,12 +58,7 @@ int main(int argc, char *argv[])
 	table = tableInit(HAND_SIZE);
 	deck = deckInit(listRank,listSuit,&trump);
 	waste = stackInit(stackSize(deck));
-
 	party = partyInit();
-	bot1 = playerNew("Bot1",stackSize(deck));
-	bot2 = playerNew("Bot2",stackSize(deck));
-	player1 = playerNew(argv[2],stackSize(deck));
-	player2 = playerNew(argv[3],stackSize(deck));
 
 	// add players to party according to settings
 	switch(humans)
@@ -71,15 +66,21 @@ int main(int argc, char *argv[])
 		case 0:
 			position1 = -1;
 			position2 = -1;
+			bot1 = playerNew("Bot1",stackSize(deck));
+			bot2 = playerNew("Bot2",stackSize(deck));
 			addPlayer(party,bot1);
 			addPlayer(party,bot2);
 			break;
 		case 1:
 			position2 = -1;
+			player1 = playerNew(argv[2],stackSize(deck));
+			bot1 = playerNew("Bot1",stackSize(deck));
 			addPlayer(party,player1);
 			addPlayer(party,bot1);
 			break;
 		default:
+			player1 = playerNew(argv[2],stackSize(deck));
+			player2 = playerNew(argv[3],stackSize(deck));
 			addPlayer(party,player1);
 			addPlayer(party,player2);
 			break;
@@ -128,9 +129,9 @@ int main(int argc, char *argv[])
 				// skip to next move since otherwise we have to wait for player action
 				continue;
 			}
+
+
 			attack:
-
-
 			// check if defender can beat any cards
 			// if not, let him take cards automatically
 			if (playerInRound(party->defender) && !tableBeaten(table) && stackSize(table->att) != 0)
@@ -149,7 +150,7 @@ int main(int argc, char *argv[])
 				playerEndRound(party->defender);
 				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 				usleep(VIEW_SPEED);
-					continue;
+				continue;
 
 			}
 
@@ -166,24 +167,24 @@ int main(int argc, char *argv[])
 			else
 			{
 				// wait for attacker to play
-				if (party->attacker == bot1 || party->attacker == bot2)
+				if (party->attacker != player1)
 				{
 					usleep(SPEED);
 					botPlay(party->attacker,party,table,trump);
 				}
-				else if (party->attacker == player1)
+				else
 				{
 					input_player1(party,party->attacker, table, &position1, &quit, trump);
 				}
 				viewGame(party,table,deck,waste,position1,position2,listRank,listSuit);
 
 				// wait for defender to play
-				if (party->defender == bot1 || party->defender == bot2)
+				if (party->defender != player1)
 				{
 					usleep(SPEED);
 					botPlay(party->defender,party,table,trump);
 				}
-				else if (party->defender == player1)
+				else
 				{
 					input_player1(party,party->defender, table, &position1, &quit, trump);
 				}
@@ -211,7 +212,6 @@ int main(int argc, char *argv[])
 			//printf("%s takes cards.\n",party->defender->name);
 			// otherwise defender takes cards
 			tableClean(table,party->defender->hand);
-
 		}
 
 		usleep(VIEW_SPEED);

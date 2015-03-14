@@ -1,40 +1,6 @@
 
 #include "../inc/cmd_input.h"
 
-void playerSortHand(playerT *playerP, int trumpSuit)
-{
-	// take all trumps from hand
-	stackT *trumps = stackInit(stackMaxSize(playerP->hand));
-	// this one is a bit tricky...
-	// move trough stack until last element
-	for (int i = 0; i < stackSize(playerP->hand); ++i)
-	{
-		// but since playCard() currently swaps the chosen card with top,
-		// the new card at this position might also come in question
-		while (i < stackSize(playerP->hand) && isTrump(&playerP->hand->cards[i],trumpSuit))
-		{
-			// put the trump card onto trumps stack
-			stackPush(trumps,playCard(playerP,i));
-		}
-	}
-
-
-	// sort remaining cards by rank
-	stackSortRank(playerP->hand);
-	stackSortRank(trumps);
-
-	// now, if we push the trumps back after sorting, they will be in wrong order
-	// so instead, we move the first element to top and pop it away
-	// terribly inefficient, a simple stackReverse function would be nice...
-	while (!stackEmpty(trumps))
-	{
-		stackMoveTop(trumps,0);
-		takeCard(playerP,stackPop(trumps));
-	}
-	// we don't need the trumps stack any more
-	stackDestroy(&trumps);
-}
-
 void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, int *quit, int trumpSuit)
 {
 	int handsize = stackSize(playerP->hand)-1;
