@@ -41,8 +41,8 @@ stackT *deckInit(const char **listRank, const char **listSuit, int *trumpSuit)
 
 	// uncover trump card (bottom card of the deck)
 	// write its suit into given variable
-	*trumpSuit = cardSetFace(&deckP->cards[0],UP)->suit;
-
+	cardSetFace(&deckP->cards[0],UP);
+	*trumpSuit = deckP->cards[0].suit;
 	return(deckP);
 }
 
@@ -55,10 +55,10 @@ void handCardsPlayer(playerT *playerP, stackT *deckP, int handSize)
 	for (int i = handSize; i > 0 && stackSize(playerP->hand) < handSize && !stackEmpty(deckP); i--)
 	{
 		cardT *pop = stackPop(deckP);
-		if (takeCard(playerP,cardSetFace(pop,UP)) == EXIT_FAILURE)
+		if (takeCard(playerP,pop) == EXIT_FAILURE)
 		{
 			// put refused card back
-			stackPush(deckP,cardSetFace(pop,DOWN));
+			stackPush(deckP,pop);
 			break;
 		}
 	}
@@ -97,7 +97,8 @@ void handCardsRound(partyT *partyP, stackT *deckP, int handSize)
 
 void setFirstRound(partyT *partyP, int trumpSuit)
 {
-	int lowest = 99; // gnah... magic number
+	int lowest = 99; // WARNING: magic number
+	// TO DO: initialize lowest with highest rank available
 	playerT *first = NULL;
 
 	playerT *current = partyP->first;
@@ -130,7 +131,7 @@ void setFirstRound(partyT *partyP, int trumpSuit)
 		partyP->defender = partyP->attacker->next;
 	}
 
-	// if we haven't found any player with a trump,
+	// WARNING: if we haven't found any player with a trump,
 	// attacker is still set to NULL.
 	// the consequences must be evaluated by the calling function
 }
@@ -245,19 +246,17 @@ int attackStopped(partyT *partyP)
 // - table not full, but defending player has taken cards
 int roundOver(partyT *partyP, tableT *tableP)
 {
-	// has defender taken cards?
-	int defTaken = !playerInRound(partyP->defender);
-	// all others stopped attacking?
+	// pre-compute so we don't have to do it twice
 	int attStopped = attackStopped(partyP);
-
+	int tblBeaten = tableBeaten(tableP);
 	return
 	(
 		// defender has taken cards and attacker stopped
-		(defTaken && attStopped) ||
+		(!playerInRound(partyP->defender) && attStopped) ||
 		// attacker stopped and table is beaten
-		(attStopped && tableBeaten(tableP)) ||
+		(attStopped && tblBeaten) ||
 		// table is full and beaten
-		(tableFull(tableP) && tableBeaten(tableP))
+		(tableFull(tableP) && tblBeaten)
 	);
 }
 

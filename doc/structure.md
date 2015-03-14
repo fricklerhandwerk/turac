@@ -74,7 +74,7 @@ Not implemented:
 * SDL mouse control
 	* [Ideas for SDL view/control module] (https://github.com/ricoz/drac)
 
-[General hints for implementation] (http://www.bandgap.cs.rice.edu/workshops/oopd/sigcse2006/WebDocs/CardGame/assignment.html)
-[Suggestions for library functions] (http://www.brainjar.com/js/cards/)
+[General hints for implementation] (http://www.bandgap.cs.rice.edu/workshops/oopd/sigcse2006/WebDocs/CardGame/assignment.html)  
+[Suggestions for library functions] (http://www.brainjar.com/js/cards/)  
 [Durak German Wikipedia article] (http://de.wikipedia.org/wiki/Durak_%28Kartenspiel%29)
 

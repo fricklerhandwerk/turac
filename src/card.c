@@ -4,7 +4,6 @@
 
 #include "../inc/card.h"       
 
-// Create card with given rank and suit and facing
 cardT *cardNew(int rank, int suit, int face)
 {
 	// allocate memory for card struct
@@ -24,21 +23,19 @@ cardT *cardNew(int rank, int suit, int face)
 	return(cardP);
 }
 
-// Free memory reserved for card struct
 void cardDestroy(cardT **cardP)
 {
 	// free card memory
 	free(*cardP);
+
 	// reset pointer
 	*cardP = NULL;
 }
 
-// Set card facing
-cardT *cardSetFace(cardT *cardP, int face)
+void cardSetFace(cardT *cardP, int face)
 {
 	// NOTE: rule-agnostic - sets whatever value it gets!
 	cardP->face = face;
-	return cardP;
 }
 
 // Compare two cards by rank/suit
@@ -50,9 +47,9 @@ int cardCompareRank(const void *aP, const void *bP)
 	{
 		return(0);
 	}
+
 	// casting generic pointers to what we need here using this method
 	// http://www.anyexample.com/programming/c/qsort__sorting_array_of_strings__integers_and_structs.xml
-	
 	cardT const *a = (cardT const *)aP;
 	cardT const *b = (cardT const *)bP;
 	

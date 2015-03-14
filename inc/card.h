@@ -1,22 +1,24 @@
-/* Card interface */
-
 #ifndef CARD_H
 #define CARD_H
 
 /* CARD DATA TYPE
  *
  * PURPOSE
- * Holds all the rule-independent properties of a single French playing card.
+ * Holds the rule-independent properties of a single French playing card.
  * http://en.wikipedia.org/wiki/French_playing_cards
- *		
+ * All information is incoded numerically.
+
  * EXAMPLE
- * card someCard = {"Ace","Spades",UP};
+ * cardT someCard = {1,2,0};
  *
  * NOTE
- * While the binary encoding of the card's facing is more efficient,
- + it may make sense to encode it as a string (e.g. "up"/"down".
- + This would spare the macro name space of additional definitions
- + and keep the data structure more human-readble.
+ * I was thinking a lot (maybe too much) about how to encode this information
+ * in the nicest way possible. With strings it would be human-readable at the
+ * data level, but comparing is just too cumbersome and storing strings takes
+ * a lot of space.
+ * So we now rely on external char arrays for the semantics. The ordering
+ * of those is relevant for game mechanics. The card data type now only
+ * stores a numeric value which is evaluated/interpreted somewhere else.
 */
 
 typedef struct
@@ -34,8 +36,8 @@ cardT *cardNew(int rank, int suit, int face);
 // Free memory reserved for card struct
 void cardDestroy(cardT **cardP);
 
-// Set card facing, return card pointer
-cardT *cardSetFace(cardT *cardP, int face);
+// Set card facing
+void cardSetFace(cardT *cardP, int face);
 
 // Compare two cards by rank/suit
 // Return values: a == b : 0; a > b : 1; a < b : -1;

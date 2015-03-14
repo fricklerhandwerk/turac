@@ -14,7 +14,6 @@
 #define SPEED (100*1000) // ms * 1000 = ns
 #define VIEW_SPEED (500*1000)
 
-
 int main(int argc, char *argv[])
 {
 	int humans = 0;
