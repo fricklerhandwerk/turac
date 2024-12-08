@@ -6,7 +6,7 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 	int handsize = stackSize(playerP->hand)-1;
 
 	//setting input to raw input
-	system ("/bin/stty raw");
+	system ("stty raw");
 
 	char input_c;
 	input_c = getchar();
@@ -84,7 +84,7 @@ void input_player1(partyT *partyP, playerT *playerP,tableT *tableP, int *pos, in
 	}
 
 	//setting input to cooked input
-	system ("/bin/stty cooked");
+	system ("stty cooked");
 }
 
 void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, tableT *tableP, int *pos_one, int *pos_two, int *quit, int trumpSuit)
@@ -93,7 +93,7 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	int handsize2 = stackSize(playerPtwo->hand)-1;
 
 	//setting input to raw input
-	system ("/bin/stty raw");
+	system ("stty raw");
 
 	char input_c;
 	input_c = getchar();
@@ -236,5 +236,5 @@ void input_twoplayers(partyT *partyP, playerT *playerPone, playerT *playerPtwo, 
 	}	
 
 	//setting input to cooked input
-	system ("/bin/stty cooked");
+	system ("stty cooked");
 }
